@@ -30,12 +30,12 @@ export default function AnimatedText({
 
   return (
     <As className={clsx("font-bold", className)} ref={ref as any}>
-      {text.split(" ").map((word, wi) => (
-        <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
+      {text.split(" ").map((word, wi, arr) => (
+        <span key={`w-${wi}`} className="inline-block whitespace-nowrap align-baseline">
           {word.split("").map((char, ci) => (
             <span key={`c-${wi}-${ci}`} className="at-char inline-block will-change-transform">{char}</span>
           ))}
-          {/* keep real space between words */} {" "}
+          {wi !== arr.length - 1 ? <span aria-hidden className="inline-block w-[0.5em]" /> : null}
         </span>
       ))}
     </As>

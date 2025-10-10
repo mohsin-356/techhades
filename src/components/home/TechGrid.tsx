@@ -50,8 +50,9 @@ export default function TechGrid() {
   }
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="pt-14 sm:pt-20 pb-16 sm:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="pointer-events-none h-px bg-white/10 mb-10" />
         <h2 className="font-display text-2xl sm:text-4xl text-white mb-8">Technologies</h2>
         <div
           ref={containerRef}
