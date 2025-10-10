@@ -1,0 +1,12 @@
+{
+  "css.lint.unknownAtRules": "ignore",
+  "css.validate": true,
+  "tailwindCSS.experimental.classRegex": [],
+  "editor.inlineSuggest.enabled": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["/.vscode/settings.json"],
+      "url": "vscode://schemas/settings/folder"
+    }
+  ]
+}

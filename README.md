@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TechHades – Animated Tech Agency Website
 
-## Getting Started
+Theme: modern dark with neon indigo/purple/cyan accents. Fonts: Inter + Orbitron.
 
-First, run the development server:
+## Quick Start
 
+1) Install dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2) Configure environment (email via Nodemailer)
+Create a `.env.local` file at project root with:
+```
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587
+SMTP_USER=your-user
+SMTP_PASS=your-pass
+TO_EMAIL=destination@example.com
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3) Run dev server
+```bash
+npm run dev
+```
+Open http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+- `src/app/layout.tsx` – global metadata, fonts, `Navbar`, `Footer`, `PageTransition`
+- `src/app/page.tsx` – Home: `Hero`, `ServicesOverview`, `TechGrid`, `Testimonials`, `Cta`
+- `src/app/{services|projects|about|contact}/page.tsx` – core pages
+- `src/app/api/contact/route.ts` – POST endpoint using Nodemailer
+- `src/components/*` – UI components and shared pieces
+- `src/hooks/*` – `useInView` and `useAnime` helpers
+- `src/app/globals.css` – Tailwind v4 theme tokens, gradients, utilities
 
-To learn more about Next.js, take a look at the following resources:
+## Animations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Reusable text reveal: `components/shared/AnimatedText.tsx`
+- Page fade/slide transitions: `components/PageTransition.tsx`
+- Card reveal on mount: `components/shared/ServiceCard.tsx`
+- Floating particle backdrop in `Hero`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
+- Tailwind v4 uses `@theme inline` tokens (`--color-*`) that power classes like `text-brand`/`bg-brand-2`. CSS linters may warn on `@theme`/`@apply`, but build is correct.
+- Update `metadataBase` in `src/app/layout.tsx` to your production URL.
+- Replace placeholder social links in `Footer` and contact info on the `Contact` page.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Recommended: Vercel. Set the same environment variables in your Vercel project for email to work.
