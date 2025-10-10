@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${orbitron.variable} antialiased bg-gradient-to-b from-[#05060f] via-[#090a18] to-[#0a0b1c] text-white overflow-x-hidden`}
+        className={`${inter.variable} ${orbitron.variable} antialiased overflow-x-hidden`}
       >
         <Navbar />
         <PageTransition>

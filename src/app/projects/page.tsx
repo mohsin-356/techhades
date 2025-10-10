@@ -17,14 +17,14 @@ export default function ProjectsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <h1 className="text-3xl sm:text-5xl font-[family:var(--font-display)]">Projects</h1>
+      <h1 className="text-3xl sm:text-5xl font-[family:var(--font-display)] text-foreground">Projects</h1>
       <div className="mt-6 flex gap-2 flex-wrap">
         {categories.map((c) => (
           <button
             key={c}
             onClick={() => setFilter(c)}
-            className={`px-3 py-1.5 rounded-full text-sm border border-white/10 ${
-              filter === c ? "bg-white/15" : "bg-white/5 hover:bg-white/10"
+            className={`px-3 py-1.5 rounded-full text-sm border border-foreground/10 ${
+              filter === c ? "bg-foreground/15" : "bg-foreground/5 hover:bg-foreground/10"
             }`}
           >
             {c}
@@ -35,9 +35,9 @@ export default function ProjectsPage() {
         {projects.map((p) => (
           <div key={p.title} className="group glass rounded-xl p-5 overflow-hidden">
             <div className="aspect-video rounded-md bg-gradient-to-br from-brand/20 to-brand-2/10 mb-4 group-hover:scale-[1.02] transition-transform" />
-            <div className="text-white font-semibold">{p.title}</div>
-            <div className="text-xs text-zinc-400">{p.cat} • {p.stack.join(", ")}</div>
-            <p className="text-zinc-400 text-sm mt-2">{p.desc}</p>
+            <div className="text-foreground font-semibold">{p.title}</div>
+            <div className="text-xs text-foreground/60">{p.cat} • {p.stack.join(", ")}</div>
+            <p className="text-foreground/70 text-sm mt-2">{p.desc}</p>
           </div>
         ))}
       </div>

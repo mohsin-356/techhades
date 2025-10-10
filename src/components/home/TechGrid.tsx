@@ -13,6 +13,7 @@ type Tech = {
 const techs: Tech[] = [
   { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", glow: "rgba(255,255,255,0.35)" },
   { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", glow: "rgba(97,218,251,0.45)" },
+  { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", glow: "rgba(0,122,204,0.45)" },
   { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", glow: "rgba(140,200,75,0.45)" },
   { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", glow: "rgba(255,255,255,0.25)" },
   { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", glow: "rgba(76,175,80,0.45)" },
@@ -22,8 +23,12 @@ const techs: Tech[] = [
   { name: "Java", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", glow: "rgba(244,68,62,0.45)" },
   { name: "Spring", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg", glow: "rgba(76,175,80,0.45)" },
   { name: "Flutter", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", glow: "rgba(0,180,255,0.45)" },
+  { name: "TensorFlow", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", glow: "rgba(255,112,67,0.45)" },
+  { name: "Hugging Face", src: "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg", glow: "rgba(255,193,7,0.45)" },
+  { name: "Adobe Photoshop", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", glow: "rgba(0,145,255,0.45)" },
+  { name: "Canva", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg", glow: "rgba(0,145,255,0.45)" },
   { name: "LangChain", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", glow: "rgba(255,212,59,0.45)" },
-  { name: "n8n", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", glow: "rgba(0,122,204,0.45)" },
+  { name: "n8n", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/n8n/n8n-original.svg", glow: "rgba(236,72,153,0.45)" },
 ];
 
 export default function TechGrid() {
@@ -52,8 +57,8 @@ export default function TechGrid() {
   return (
     <section className="pt-14 sm:pt-20 pb-16 sm:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none h-px bg-white/10 mb-10" />
-        <h2 className="font-display text-2xl sm:text-4xl text-white mb-8">Technologies</h2>
+        <div className="pointer-events-none h-px bg-foreground/10 mb-10" />
+        <h2 className="font-display text-2xl sm:text-4xl text-foreground mb-8">Technologies</h2>
         <div
           ref={containerRef}
           onMouseMove={onMouseMove}
@@ -86,6 +91,7 @@ function Spotlight({ x, y }: { x: number; y: number }) {
 
 function TechTile({ tech }: { tech: Tech }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [imgSrc, setImgSrc] = useState(tech.src);
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = ref.current;
@@ -119,7 +125,7 @@ function TechTile({ tech }: { tech: Tech }) {
       className="relative group select-none will-change-transform"
       style={{ transformStyle: "preserve-3d" }}
     >
-      <div className="glass rounded-xl p-4 h-full flex flex-col items-center justify-center text-center border-white/10">
+      <div className="glass rounded-xl p-4 h-full flex flex-col items-center justify-center text-center border-foreground/10">
         <div
           className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
           style={{
@@ -128,16 +134,25 @@ function TechTile({ tech }: { tech: Tech }) {
           }}
         />
         <div className="relative z-10">
-          <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-white/5 flex items-center justify-center">
+          <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-foreground/5 flex items-center justify-center">
             <Image
-              src={tech.src}
+              src={imgSrc}
               alt={tech.name}
               width={32}
               height={32}
               className="object-contain"
+              onError={() => {
+                if (tech.name === "n8n") {
+                  if (imgSrc.includes("simple-icons")) {
+                    setImgSrc("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/n8n/n8n-original.svg");
+                  } else if (imgSrc.includes("devicons/devicon")) {
+                    setImgSrc("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg");
+                  }
+                }
+              }}
             />
           </div>
-          <div className="text-zinc-200 text-sm">{tech.name}</div>
+          <div className="text-foreground/80 text-sm">{tech.name}</div>
         </div>
       </div>
     </div>

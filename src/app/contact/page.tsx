@@ -34,23 +34,23 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <h1 className="text-3xl sm:text-5xl font-[family:var(--font-display)]">Contact</h1>
-      <p className="mt-4 text-zinc-400 max-w-2xl">
+      <h1 className="text-3xl sm:text-5xl font-[family:var(--font-display)] text-foreground">Contact</h1>
+      <p className="mt-4 text-foreground/70 max-w-2xl">
         Let's discuss your project. We typically reply within 24 hours.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-8 grid md:grid-cols-2 gap-4 glass p-6 rounded-xl">
         <div className="md:col-span-1">
-          <label className="text-sm text-zinc-300">Name</label>
-          <input name="name" className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-brand" required />
+          <label className="text-sm text-foreground/70">Name</label>
+          <input name="name" className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
         </div>
         <div className="md:col-span-1">
-          <label className="text-sm text-zinc-300">Email</label>
-          <input type="email" name="email" className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-brand" required />
+          <label className="text-sm text-foreground/70">Email</label>
+          <input type="email" name="email" className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
         </div>
         <div className="md:col-span-2">
-          <label className="text-sm text-zinc-300">Message</label>
-          <textarea name="message" rows={5} className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-brand" required />
+          <label className="text-sm text-foreground/70">Message</label>
+          <textarea name="message" rows={5} className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
         </div>
         <div className="md:col-span-2 flex items-center gap-3">
           <button
@@ -61,14 +61,14 @@ export default function ContactPage() {
             {status === "loading" ? "Sending..." : "Send Message"}
           </button>
           {message && (
-            <span className={`text-sm ${status === "success" ? "text-emerald-400" : "text-red-400"}`}>{message}</span>
+            <span className={`text-sm ${status === "success" ? "text-emerald-500" : "text-red-500"}`}>{message}</span>
           )}
         </div>
       </form>
 
       <div className="mt-12 grid md:grid-cols-2 gap-6">
         <div className="glass rounded-xl p-4">
-          <div className="text-sm text-zinc-400">Find us</div>
+          <div className="text-sm text-foreground/60">Find us</div>
           <iframe
             className="mt-3 w-full h-64 rounded-lg"
             loading="lazy"
@@ -78,8 +78,8 @@ export default function ContactPage() {
           />
         </div>
         <div className="glass rounded-xl p-4">
-          <div className="text-sm text-zinc-400">Connect</div>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-300">
+          <div className="text-sm text-foreground/60">Connect</div>
+          <ul className="mt-3 space-y-2 text-sm text-foreground/80">
             <li>Email: hello@example.com</li>
             <li>WhatsApp: +00 000 0000</li>
             <li>Instagram: @techhades</li>

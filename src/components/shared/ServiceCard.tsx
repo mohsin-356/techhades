@@ -72,8 +72,8 @@ export default function ServiceCard({
         }}
       />
       <div className="text-2xl mb-3">{icon}</div>
-      <h3 className="text-white text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-zinc-400 text-sm leading-relaxed">{desc}</p>
+      <h3 className="text-foreground text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-foreground/70 text-sm leading-relaxed">{desc}</p>
     </div>
   );
 }

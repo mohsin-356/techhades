@@ -67,13 +67,13 @@ export default function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28"
+      className="relative overflow-hidden pt-28 pb-20 sm:pt-20 sm:pb-20"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform" />
 
-      <div ref={contentRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative will-change-transform">
+      <div ref={contentRef} className="max-w-7xl mx-auto my-0 px-4 sm:px-6 lg:px-8 relative will-change-transform">
         <span className="inline-block mb-4 text-xs font-medium uppercase tracking-widest text-cyan-300/80">
           Futuristic • Animated • Premium
         </span>
@@ -86,18 +86,18 @@ export default function Hero() {
         <p className="mt-6 max-w-2xl text-zinc-300 text-base sm:text-lg">
           Websites, Mobile Apps, AI Agents, Automations, and Smart Dashboards for elite brands.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="my-5 flex flex-col sm:flex-row gap-3">
           <Link href="/services" className="px-5 py-3 rounded-md bg-brand hover:bg-brand-2 transition-colors text-white text-sm font-medium">
             Explore Our Services
           </Link>
           <Link
             href="/contact"
-            className="px-5 py-3 rounded-md bg-white/10 hover:bg-white/15 border border-white/10 transition-colors text-white text-sm font-medium"
+            className="px-5 py-3 rounded-md bg-foreground/10 hover:bg-foreground/15 border border-foreground/10 transition-colors text-foreground text-sm font-medium"
           >
             Get a Quote
           </Link>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-white/10" />
+        {/* <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-white/10" /> */}
       </div>
     </section>
   );

@@ -20,6 +20,17 @@
   --font-display: var(--font-display);
 }
 
+/* Explicit light theme tokens via attribute toggle */
+:root[data-theme="light"] {
+  --background: #f7f9ff;
+  --foreground: #0b1020;
+  /* keep brand colors consistent across themes */
+  --brand: #6d6aff;
+  --brand-2: #a855f7;
+  --accent: #22d3ee;
+  --muted: #475569; /* slate-ish for light */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #05060f;
@@ -39,8 +50,15 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui;
 }
 
+/* Light theme background override */
+html[data-theme="light"] body {
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(109, 106, 255, 0.1), transparent 60%),
+    radial-gradient(1000px 500px at 120% 10%, rgba(34, 211, 238, 0.12), transparent 60%),
+    linear-gradient(180deg, #f7f9ff 0%, #eef2ff 100%);
+}
+
 .glass {
-  @apply bg-white/5 backdrop-blur-md border border-white/10;
+  @apply bg-foreground/5 backdrop-blur-md border border-foreground/10;
 }
 
 .neon-text {
