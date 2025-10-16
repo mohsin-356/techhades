@@ -59,21 +59,33 @@ export default function ServiceCard({
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="relative group glass rounded-xl p-5 hover:shadow-[0_0_40px_rgba(109,106,255,0.15)] transition-shadow will-change-transform"
+      className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand/25 to-brand-2/25 hover:translate-y-[-2px] transition-[transform,box-shadow] duration-300 will-change-transform hover:shadow-[0_12px_40px_rgba(109,106,255,0.15)]"
       style={{ transformStyle: "preserve-3d" }}
     >
-      <div
-        ref={sheenRef}
-        className="pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{
-          background:
-            "linear-gradient(120deg, transparent 45%, rgba(255,255,255,0.08) 50%, transparent 55%)",
-          filter: "blur(2px)",
-        }}
-      />
-      <div className="text-2xl mb-3">{icon}</div>
-      <h3 className="text-foreground text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-foreground/70 text-sm leading-relaxed">{desc}</p>
+      <div className="relative rounded-2xl bg-foreground/5 border border-foreground/10 backdrop-blur-md overflow-hidden">
+        <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-brand/20 to-brand-2/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <div
+          ref={sheenRef}
+          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+          style={{
+            background:
+              "linear-gradient(120deg, transparent 45%, rgba(255,255,255,0.08) 50%, transparent 55%)",
+            filter: "blur(2px)",
+          }}
+        />
+
+        <div className="relative z-10 p-5">
+          <div className="mb-4">
+            <div className="w-12 h-12 rounded-xl border border-foreground/10 bg-gradient-to-br from-brand/20 to-brand-2/10 flex items-center justify-center text-2xl">
+              {icon}
+            </div>
+          </div>
+          <h3 className="text-foreground text-lg font-semibold tracking-tight">{title}</h3>
+          <p className="mt-1.5 text-foreground/70 text-sm leading-relaxed">{desc}</p>
+        </div>
+      </div>
     </div>
   );
 }
+
