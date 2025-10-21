@@ -12,10 +12,16 @@ export default function ServiceCard({
   title,
   desc,
   icon,
+  color = "from-indigo-500 to-violet-500",
+  tags = ["Modern", "Fast", "Scalable"],
+  stats = "New"
 }: {
   title: string;
   desc: string;
-  icon: string;
+  icon: React.ReactNode;
+  color?: string;
+  tags?: string[];
+  stats?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const sheenRef = useRef<HTMLDivElement>(null);
@@ -72,43 +78,64 @@ export default function ServiceCard({
       transition={{ duration: 0.6, delay: Math.random() * 0.2 }}
       whileHover={{ y: -8, scale: 1.02 }}
     >
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-foreground/5 to-foreground/10 backdrop-blur-xl hover-glow">
+      <Card className="relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl hover:border-violet-500/40 transition-all duration-300">
         {/* Animated background gradient */}
-        <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-brand/20 to-brand-2/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className={`absolute -inset-16 rounded-full bg-gradient-to-br ${color} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
         
-        {/* Sheen effect */}
-        <div
-          ref={sheenRef}
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{
-            background: "linear-gradient(120deg, transparent 45%, rgba(255,255,255,0.1) 50%, transparent 55%)",
-            filter: "blur(1px)",
-          }}
-        />
-        
-        {/* Animated border */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand/50 via-brand-2/50 to-accent/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+        {/* Enhanced border glow on hover */}
+        <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-indigo-500/30 via-violet-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500" 
              style={{ padding: '1px' }}>
-          <div className="h-full w-full rounded-xl bg-background" />
+          <div className="h-full w-full rounded-xl bg-slate-900/20 backdrop-blur-sm" />
+        </div>
+        
+        {/* Floating particles on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-violet-400 rounded-full"
+              style={{
+                left: `${20 + i * 25}%`,
+                top: `${15 + i * 20}%`,
+              }}
+              animate={{
+                y: [-2, 2, -2],
+                opacity: [0.3, 1, 0.3],
+                scale: [0.8, 1.1, 0.8],
+              }}
+              transition={{
+                duration: 1.5 + i * 0.2,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+            />
+          ))}
         </div>
 
         <CardContent className="relative z-10 p-6">
           <div className="flex items-start justify-between mb-4">
             <motion.div 
-              className="w-14 h-14 rounded-2xl border border-foreground/10 bg-gradient-to-br from-brand/20 to-brand-2/10 flex items-center justify-center text-2xl relative overflow-hidden"
+              className={`w-16 h-16 rounded-2xl border border-indigo-400/20 bg-gradient-to-br ${color} flex items-center justify-center relative overflow-hidden shadow-lg`}
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
-              <Sparkles className="absolute top-1 right-1 w-3 h-3 text-brand/60 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">{icon}</span>
+              <Sparkles className="absolute top-1 right-1 w-3 h-3 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10 text-white">
+                {icon}
+              </div>
             </motion.div>
             
-            <motion.div
-              className="opacity-0 group-hover:opacity-100 transition-opacity"
-              whileHover={{ scale: 1.1 }}
-            >
-              <AlienwareLogo className="w-6 h-6 text-brand" animated />
-            </motion.div>
+            <div className="flex flex-col items-end">
+              <Badge variant="glow" className="text-xs mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                {stats}
+              </Badge>
+              <motion.div
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
+                whileHover={{ scale: 1.1 }}
+              >
+                <AlienwareLogo className="w-5 h-5 text-indigo-400" animated />
+              </motion.div>
+            </div>
           </div>
           
           <div className="space-y-3">
@@ -122,15 +149,22 @@ export default function ServiceCard({
             <p className="text-foreground/70 text-sm leading-relaxed">{desc}</p>
             
             <motion.div 
-              className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="flex flex-wrap gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               initial={{ y: 10 }}
               whileInView={{ y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              {['Modern', 'Fast', 'Scalable'].map((tag, index) => (
-                <Badge key={tag} variant="glass" className="text-xs">
-                  {tag}
-                </Badge>
+              {tags.map((tag, index) => (
+                <motion.div
+                  key={tag}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <Badge variant="glass" className="text-xs hover:bg-indigo-500/20 transition-colors">
+                    {tag}
+                  </Badge>
+                </motion.div>
               ))}
             </motion.div>
           </div>

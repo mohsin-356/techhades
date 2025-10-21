@@ -8,33 +8,78 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MotionSection } from "@/components/ui/motion";
 import { Zap, Star } from "lucide-react";
-import { CrystalFormation, AlienSymbol } from "@/components/ui/alien-icons";
+import { CrystalFormation, AlienSymbol, AlienHead, UFO } from "@/components/ui/alien-icons";
 
 type Tech = {
   name: string;
   src: string;
-  glow: string; // rgba color for hover glow
+  glow: string;
+  category: 'development' | 'cms' | 'design' | 'animation';
 };
 
-const techs: Tech[] = [
-  { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", glow: "rgba(255,255,255,0.35)" },
-  { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", glow: "rgba(97,218,251,0.45)" },
-  { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", glow: "rgba(0,122,204,0.45)" },
-  { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", glow: "rgba(140,200,75,0.45)" },
-  { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", glow: "rgba(255,255,255,0.25)" },
-  { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", glow: "rgba(76,175,80,0.45)" },
-  { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", glow: "rgba(51,103,145,0.45)" },
-  { name: "Django", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg", glow: "rgba(1,80,57,0.45)" },
-  { name: ".NET", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", glow: "rgba(91,45,161,0.45)" },
-  { name: "Java", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", glow: "rgba(244,68,62,0.45)" },
-  { name: "Spring", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg", glow: "rgba(76,175,80,0.45)" },
-  { name: "Flutter", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", glow: "rgba(0,180,255,0.45)" },
-  { name: "TensorFlow", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", glow: "rgba(255,112,67,0.45)" },
-  { name: "Hugging Face", src: "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg", glow: "rgba(255,193,7,0.45)" },
-  { name: "Adobe Photoshop", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", glow: "rgba(0,145,255,0.45)" },
-  { name: "Canva", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg", glow: "rgba(0,145,255,0.45)" },
-  { name: "LangChain", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", glow: "rgba(255,212,59,0.45)" },
-  { name: "n8n", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/n8n/n8n-original.svg", glow: "rgba(236,72,153,0.45)" },
+type TechCategory = {
+  title: string;
+  icon: React.ReactNode;
+  color: string;
+  techs: Tech[];
+};
+
+const techCategories: TechCategory[] = [
+  {
+    title: "Development & Programming",
+    icon: <CrystalFormation className="w-5 h-5" />,
+    color: "from-indigo-500 to-violet-500",
+    techs: [
+      { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+      { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
+      { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", glow: "rgba(167,139,250,0.4)", category: 'development' },
+      { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+      { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
+      { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", glow: "rgba(167,139,250,0.4)", category: 'development' },
+      { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+      { name: "Django", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
+      { name: ".NET", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", glow: "rgba(167,139,250,0.4)", category: 'development' },
+      { name: "Java", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+      { name: "Spring", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
+      { name: "Flutter", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", glow: "rgba(167,139,250,0.4)", category: 'development' },
+      { name: "PHP", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+      { name: "Laravel", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
+      { name: "Angular", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", glow: "rgba(167,139,250,0.4)", category: 'development' },
+      { name: "Vue.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
+    ]
+  },
+  {
+    title: "CMS & E-commerce",
+    icon: <AlienHead className="w-5 h-5" />,
+    color: "from-violet-500 to-purple-500",
+    techs: [
+      { name: "WordPress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", glow: "rgba(139,92,246,0.4)", category: 'cms' },
+      { name: "Shopify", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/shopify/shopify-original.svg", glow: "rgba(167,139,250,0.4)", category: 'cms' },
+      { name: "Elementor", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", glow: "rgba(196,181,253,0.4)", category: 'cms' },
+    ]
+  },
+  {
+    title: "Design & Graphics",
+    icon: <UFO className="w-6 h-4" />,
+    color: "from-purple-500 to-pink-500",
+    techs: [
+      { name: "Adobe Photoshop", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", glow: "rgba(167,139,250,0.4)", category: 'design' },
+      { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", glow: "rgba(196,181,253,0.4)", category: 'design' },
+      { name: "Canva", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg", glow: "rgba(221,214,254,0.4)", category: 'design' },
+    ]
+  },
+  {
+    title: "Animation & AI",
+    icon: <AlienSymbol className="w-5 h-5" />,
+    color: "from-pink-500 to-indigo-500",
+    techs: [
+      { name: "CapCut", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg", glow: "rgba(196,181,253,0.4)", category: 'animation' },
+      { name: "TensorFlow", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", glow: "rgba(221,214,254,0.4)", category: 'animation' },
+      { name: "Hugging Face", src: "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg", glow: "rgba(167,139,250,0.4)", category: 'animation' },
+      { name: "LangChain", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", glow: "rgba(196,181,253,0.4)", category: 'animation' },
+      { name: "n8n", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/n8n/n8n-original.svg", glow: "rgba(221,214,254,0.4)", category: 'animation' },
+    ]
+  }
 ];
 
 export default function TechGrid() {
@@ -85,20 +130,49 @@ export default function TechGrid() {
           ref={containerRef}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
-          className="relative"
+          className="relative space-y-12"
         >
           <motion.div
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
-              background: `radial-gradient(600px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(109,106,255,0.15), transparent 40%)`
+              background: `radial-gradient(600px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(99,102,241,0.12), transparent 40%)`
             }}
           />
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {techs.map((tech, index) => (
-              <TechTile key={tech.name} tech={tech} index={index} />
-            ))}
-          </div>
+          {techCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: categoryIndex * 0.2 }}
+              className="space-y-6"
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-4 mb-6">
+                <motion.div
+                  className={`p-3 rounded-xl bg-gradient-to-r ${category.color} shadow-lg`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {category.icon}
+                </motion.div>
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground font-display">
+                    {category.title}
+                  </h3>
+                  <div className="h-0.5 bg-gradient-to-r from-indigo-500/50 to-transparent w-32 mt-1" />
+                </div>
+              </div>
+              
+              {/* Technology Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {category.techs.map((tech, index) => (
+                  <TechTile key={tech.name} tech={tech} index={index} />
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </MotionSection>
@@ -165,7 +239,7 @@ function TechTile({ tech, index }: { tech: Tech; index: number }) {
         transition: { duration: 0.2 }
       }}
     >
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-foreground/5 to-foreground/10 backdrop-blur-xl h-full flex flex-col items-center justify-center text-center p-4 hover-glow">
+      <Card className="group relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl h-full flex flex-col items-center justify-center text-center p-4 hover-glow transition-all duration-300">
         {/* Animated background glow */}
         <motion.div
           className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
@@ -178,21 +252,23 @@ function TechTile({ tech, index }: { tech: Tech; index: number }) {
           transition={{ duration: 0.3 }}
         />
         
-        {/* Pulse ring on hover */}
+        {/* Enhanced border glow on hover */}
         <motion.div
-          className="absolute inset-0 rounded-xl border-2 opacity-0 group-hover:opacity-100"
-          style={{ borderColor: tech.glow.replace('0.45', '0.6') }}
+          className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-indigo-500/30 via-violet-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100"
+          style={{ padding: '1px' }}
           initial={{ scale: 1 }}
           whileHover={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0, 0.6, 0]
+            scale: [1, 1.02, 1],
+            opacity: [0, 1, 0.7]
           }}
           transition={{ 
-            duration: 1.5, 
+            duration: 2, 
             repeat: Infinity,
-            ease: "easeOut"
+            ease: "easeInOut"
           }}
-        />
+        >
+          <div className="h-full w-full rounded-xl bg-slate-900/50 backdrop-blur-sm" />
+        </motion.div>
         
         <div className="relative z-10 space-y-3">
           <motion.div 

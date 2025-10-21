@@ -50,20 +50,13 @@ const guideSteps = [
 export function AlienGuide({ onComplete }: AlienGuideProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
-  const [hasSeenGuide, setHasSeenGuide] = useState(false)
 
   useEffect(() => {
-    // Check if user has seen the guide before
-    const seenGuide = localStorage.getItem("techhades-guide-seen")
-    if (!seenGuide) {
-      // Show guide after a short delay for new visitors
-      const timer = setTimeout(() => {
-        setIsVisible(true)
-      }, 2000)
-      return () => clearTimeout(timer)
-    } else {
-      setHasSeenGuide(true)
-    }
+    // Always show guide on page reload after a short delay
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 1500)
+    return () => clearTimeout(timer)
   }, [])
 
   const handleNext = () => {
@@ -76,7 +69,6 @@ export function AlienGuide({ onComplete }: AlienGuideProps) {
 
   const handleComplete = () => {
     setIsVisible(false)
-    localStorage.setItem("techhades-guide-seen", "true")
     onComplete?.()
   }
 
@@ -86,7 +78,7 @@ export function AlienGuide({ onComplete }: AlienGuideProps) {
 
   const currentGuide = guideSteps[currentStep]
 
-  if (hasSeenGuide || !isVisible) return null
+  if (!isVisible) return null
 
   return (
     <AnimatePresence>
@@ -99,6 +91,25 @@ export function AlienGuide({ onComplete }: AlienGuideProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
+
+          {/* Prominent Skip Button - Top Right */}
+          <motion.div
+            className="fixed top-6 right-6 z-50"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button
+              onClick={handleSkip}
+              variant="glow"
+              size="sm"
+              className="bg-red-500/90 hover:bg-red-600/90 text-white border-red-400/50 shadow-lg backdrop-blur-sm"
+            >
+              <X className="w-4 h-4 mr-1" />
+              Skip Tour
+            </Button>
+          </motion.div>
 
           {/* Alien Character - Always on right side */}
           <motion.div

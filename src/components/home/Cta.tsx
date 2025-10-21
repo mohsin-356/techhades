@@ -1,21 +1,261 @@
-import Link from "next/link";
+"use client";
 
-export default function Cta() {
+import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter, Mail, MapPin, Calendar } from "lucide-react";
+
+const teamMembers = [
+  {
+    name: "Alex Rodriguez",
+    role: "Full-Stack Developer & Founder",
+    bio: "Passionate about creating scalable web applications with modern technologies. 5+ years of experience in React, Node.js, and cloud architecture.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    skills: ["React", "Node.js", "AWS", "TypeScript"],
+    social: {
+      github: "https://github.com",
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com",
+      email: "alex@techhades.com"
+    },
+    location: "San Francisco, CA",
+    experience: "5+ Years"
+  },
+  {
+    name: "Sarah Chen",
+    role: "UI/UX Designer & Creative Director",
+    bio: "Specializing in user-centered design and brand identity. Creates beautiful, functional interfaces that users love to interact with.",
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
+    skills: ["Figma", "Adobe XD", "Branding", "Prototyping"],
+    social: {
+      github: "https://github.com",
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com",
+      email: "sarah@techhades.com"
+    },
+    location: "New York, NY",
+    experience: "4+ Years"
+  },
+  {
+    name: "Marcus Johnson",
+    role: "Mobile App Developer",
+    bio: "Expert in cross-platform mobile development with React Native and Flutter. Delivered 30+ apps with millions of downloads.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    skills: ["React Native", "Flutter", "iOS", "Android"],
+    social: {
+      github: "https://github.com",
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com",
+      email: "marcus@techhades.com"
+    },
+    location: "Austin, TX",
+    experience: "6+ Years"
+  },
+  {
+    name: "Emily Watson",
+    role: "AI/ML Engineer",
+    bio: "Pioneering AI solutions and automation workflows. Specializes in LangChain, TensorFlow, and intelligent chatbot development.",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    skills: ["Python", "TensorFlow", "LangChain", "OpenAI"],
+    social: {
+      github: "https://github.com",
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com",
+      email: "emily@techhades.com"
+    },
+    location: "Seattle, WA",
+    experience: "4+ Years"
+  }
+];
+
+export default function OurTeam() {
   return (
-    <section className="py-16 sm:py-24 section-gradient-5 breathing-gradient circuit-pattern morphing-bg">
+    <section className="relative py-16 sm:py-24 overflow-hidden">
+      {/* Enhanced Background with Multiple Layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-950/50 to-slate-900"></div>
+      
+      {/* Animated Background Orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-20 -right-20 w-60 h-60 bg-violet-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 -right-32 w-72 h-72 bg-indigo-400/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+      </div>
+      
+      {/* Matrix-Style Dot Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.08]" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(99,102,241,0.6) 2px, transparent 0)`,
+        backgroundSize: '60px 60px'
+      }}></div>
+      
+      {/* Secondary Matrix Grid */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(139,92,246,0.8) 1px, transparent 0)`,
+        backgroundSize: '30px 30px'
+      }}></div>
+      
+      {/* Matrix Rain Effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`matrix-${i}`}
+            className="absolute w-px bg-gradient-to-b from-transparent via-indigo-400/20 to-transparent"
+            style={{
+              left: `${(i * 7) % 100}%`,
+              height: '100%',
+            }}
+            animate={{
+              opacity: [0, 0.5, 0],
+              scaleY: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Floating Particles */}
+      <div className="absolute inset-0">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-indigo-400/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              opacity: [0.3, 1, 0.3],
+              scale: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="glass rounded-2xl p-10 text-center">
-          <h3 className="font-[family:var(--font-display)] text-2xl sm:text-3xl text-foreground mb-4">
-            Let’s Build Something Extraordinary
-          </h3>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
-            Bring your vision to life with elegant design, powerful engineering, and cinematic animations.
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-5xl font-display text-foreground mb-4">
+            Meet Our <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">Expert Team</span>
+          </h2>
+          <p className="text-foreground/70 text-lg max-w-3xl mx-auto leading-relaxed">
+            Passionate professionals dedicated to bringing your digital vision to life with cutting-edge technology and creative excellence
           </p>
-          <div className="mt-6">
-            <Link href="/contact" className="px-5 py-3 rounded-md bg-brand hover:bg-brand-2 transition-colors text-white text-sm font-medium">
-              Start Your Project
-            </Link>
-          </div>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group"
+            >
+              <div className="relative bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-6 hover:border-violet-500/40 transition-all duration-300">
+                {/* Enhanced border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500" 
+                     style={{ padding: '1px' }}>
+                  <div className="h-full w-full rounded-2xl bg-slate-900/20 backdrop-blur-sm" />
+                </div>
+
+                <div className="relative z-10">
+                  {/* Profile Image */}
+                  <div className="relative mb-4">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-indigo-400/30"
+                    >
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+
+                  {/* Member Info */}
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
+                    <p className="text-sm text-indigo-400 font-medium mb-2">{member.role}</p>
+                    <p className="text-xs text-foreground/70 leading-relaxed">{member.bio}</p>
+                  </div>
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-1 mb-4 justify-center">
+                    {member.skills.map((skill) => (
+                      <span 
+                        key={skill}
+                        className="px-2 py-1 text-xs bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/30"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Location & Experience */}
+                  <div className="flex items-center justify-between text-xs text-foreground/60 mb-4">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-3 h-3" />
+                      <span>{member.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>{member.experience}</span>
+                    </div>
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <motion.a
+                      href={member.social.github}
+                      whileHover={{ scale: 1.2 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a
+                      href={member.social.linkedin}
+                      whileHover={{ scale: 1.2 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a
+                      href={member.social.twitter}
+                      whileHover={{ scale: 1.2 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                    >
+                      <Twitter className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a
+                      href={`mailto:${member.social.email}`}
+                      whileHover={{ scale: 1.2 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                    >
+                      <Mail className="w-4 h-4" />
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

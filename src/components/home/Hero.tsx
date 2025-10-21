@@ -206,17 +206,66 @@ export default function Hero() {
           ].map((stat, index) => (
             <motion.div 
               key={stat.label}
-              className="text-center glass-card p-4 rounded-xl hover-lift relative overflow-hidden"
+              className="group text-center relative overflow-hidden rounded-xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-md p-6 hover-lift"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
+              whileHover={{ 
+                scale: 1.05,
+                borderColor: "rgba(139, 92, 246, 0.4)",
+                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)"
+              }}
             >
-              {/* Alien glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              {stat.icon}
-              <div className="text-2xl font-bold text-brand font-display">{stat.value}</div>
-              <div className="text-sm text-foreground/70">{stat.label}</div>
+              {/* Enhanced border glow on hover */}
+              <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-indigo-500/30 via-violet-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500" 
+                   style={{ padding: '1px' }}>
+                <div className="h-full w-full rounded-xl bg-slate-900/90 backdrop-blur-md" />
+              </div>
+              
+              {/* Animated background glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
+              
+              {/* Floating particles effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                {[...Array(3)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-violet-400 rounded-full"
+                    style={{
+                      left: `${20 + i * 30}%`,
+                      top: `${20 + i * 20}%`,
+                    }}
+                    animate={{
+                      y: [-5, 5, -5],
+                      opacity: [0.3, 1, 0.3],
+                      scale: [0.8, 1.2, 0.8],
+                    }}
+                    transition={{
+                      duration: 2 + i * 0.5,
+                      repeat: Infinity,
+                      delay: i * 0.3,
+                    }}
+                  />
+                ))}
+              </div>
+              
+              <div className="relative z-10">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {stat.icon}
+                </motion.div>
+                <motion.div 
+                  className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent font-display mt-2"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {stat.value}
+                </motion.div>
+                <div className="text-sm text-foreground/70 mt-1 group-hover:text-foreground/90 transition-colors">{stat.label}</div>
+              </div>
             </motion.div>
           ))}
         </MotionDiv>

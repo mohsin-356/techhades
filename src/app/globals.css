@@ -22,13 +22,13 @@
 
 /* Explicit light theme tokens via attribute toggle */
 :root[data-theme="light"] {
-  --background: #f7f9ff;
-  --foreground: #0b1020;
+  --background: #fafbff;
+  --foreground: #334155;
   /* keep brand colors consistent across themes */
-  --brand: #6d6aff;
-  --brand-2: #a855f7;
-  --accent: #22d3ee;
-  --muted: #475569; /* slate-ish for light */
+  --brand: #6366f1;
+  --brand-2: #8b5cf6;
+  --accent: #a78bfa;
+  --muted: #64748b; /* muted blue-grey for light */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,23 +42,31 @@ html, body {
   height: 100%;
 }
 
+html,
 body {
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(98, 0, 255, 0.4), transparent 60%),
-    radial-gradient(1000px 500px at 120% 10%, rgba(0, 255, 255, 0.25), transparent 60%),
-    linear-gradient(180deg, #05060f 0%, #0a0b1c 100%);
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(99, 102, 241, 0.3), transparent 60%),
+    radial-gradient(1000px 500px at 120% 10%, rgba(139, 92, 246, 0.2), transparent 60%),
+    linear-gradient(180deg, #05060f 0%, #0f0a1a 100%);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui;
+  
+  /* Performance Optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Light theme background override */
 html[data-theme="light"] body {
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(109, 106, 255, 0.1), transparent 60%),
-    radial-gradient(1000px 500px at 120% 10%, rgba(34, 211, 238, 0.12), transparent 60%),
-    linear-gradient(180deg, #f7f9ff 0%, #eef2ff 100%);
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(99, 102, 241, 0.08), transparent 60%),
+    radial-gradient(1000px 500px at 120% 10%, rgba(139, 92, 246, 0.06), transparent 60%),
+    linear-gradient(180deg, #fafbff 0%, #f1f5f9 100%);
 }
 
 .glass {
-  @apply bg-foreground/5 backdrop-blur-md border border-foreground/10;
+  @apply bg-indigo-500/8 backdrop-blur-md border border-indigo-400/15;
 }
 
 .neon-text {
@@ -76,11 +84,11 @@ html[data-theme="light"] body {
 
 /* Modern glass morphism effects */
 .glass-card {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+  @apply bg-indigo-500/6 backdrop-blur-xl border border-indigo-400/12 shadow-2xl;
 }
 
 .glass-strong {
-  @apply bg-white/10 backdrop-blur-2xl border border-white/20;
+  @apply bg-indigo-500/10 backdrop-blur-2xl border border-indigo-400/18;
 }
 
 /* Advanced gradient effects */
@@ -95,55 +103,55 @@ html[data-theme="light"] body {
 .section-gradient-1 {
   background: linear-gradient(135deg, 
     rgba(15, 23, 42, 1) 0%,
-    rgba(30, 58, 138, 0.95) 25%,
-    rgba(59, 130, 246, 0.2) 50%,
-    rgba(96, 165, 250, 0.15) 75%,
-    rgba(147, 197, 253, 0.1) 100%
+    rgba(30, 27, 75, 0.95) 25%,
+    rgba(99, 102, 241, 0.12) 50%,
+    rgba(139, 92, 246, 0.08) 75%,
+    rgba(167, 139, 250, 0.06) 100%
   );
 }
 
 .section-gradient-2 {
   background: linear-gradient(225deg,
-    rgba(88, 28, 135, 0.15) 0%,
-    rgba(109, 40, 217, 0.12) 25%,
-    rgba(147, 51, 234, 0.1) 50%,
-    rgba(168, 85, 247, 0.08) 75%,
-    rgba(196, 181, 253, 0.05) 100%
+    rgba(29, 78, 216, 0.15) 0%,
+    rgba(59, 130, 246, 0.12) 25%,
+    rgba(96, 165, 250, 0.1) 50%,
+    rgba(147, 197, 253, 0.08) 75%,
+    rgba(191, 219, 254, 0.05) 100%
   ),
-  linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(30, 41, 59, 0.95));
+  linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(30, 58, 138, 0.95));
 }
 
 .section-gradient-3 {
   background: linear-gradient(45deg,
-    rgba(6, 78, 59, 0.15) 0%,
-    rgba(5, 150, 105, 0.12) 25%,
-    rgba(16, 185, 129, 0.1) 50%,
-    rgba(52, 211, 153, 0.08) 75%,
-    rgba(110, 231, 183, 0.05) 100%
+    rgba(37, 99, 235, 0.15) 0%,
+    rgba(59, 130, 246, 0.12) 25%,
+    rgba(96, 165, 250, 0.1) 50%,
+    rgba(147, 197, 253, 0.08) 75%,
+    rgba(219, 234, 254, 0.05) 100%
   ),
-  linear-gradient(225deg, rgba(15, 23, 42, 1), rgba(30, 41, 59, 0.95));
+  linear-gradient(225deg, rgba(15, 23, 42, 1), rgba(30, 58, 138, 0.95));
 }
 
 .section-gradient-4 {
   background: linear-gradient(315deg,
-    rgba(109, 106, 255, 0.2) 0%,
-    rgba(124, 58, 237, 0.15) 25%,
-    rgba(139, 92, 246, 0.12) 50%,
-    rgba(168, 85, 247, 0.1) 75%,
-    rgba(196, 181, 253, 0.08) 100%
+    rgba(29, 78, 216, 0.2) 0%,
+    rgba(37, 99, 235, 0.15) 25%,
+    rgba(59, 130, 246, 0.12) 50%,
+    rgba(96, 165, 250, 0.1) 75%,
+    rgba(147, 197, 253, 0.08) 100%
   ),
-  linear-gradient(45deg, rgba(15, 23, 42, 1), rgba(30, 41, 59, 0.95));
+  linear-gradient(45deg, rgba(15, 23, 42, 1), rgba(30, 58, 138, 0.95));
 }
 
 .section-gradient-5 {
   background: linear-gradient(180deg,
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(96, 165, 250, 0.12) 25%,
-    rgba(147, 197, 253, 0.08) 50%,
-    rgba(191, 219, 254, 0.06) 75%,
-    rgba(219, 234, 254, 0.04) 100%
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(139, 92, 246, 0.08) 25%,
+    rgba(167, 139, 250, 0.06) 50%,
+    rgba(196, 181, 253, 0.04) 75%,
+    rgba(221, 214, 254, 0.02) 100%
   ),
-  linear-gradient(0deg, rgba(15, 23, 42, 1), rgba(30, 58, 138, 0.95));
+  linear-gradient(0deg, rgba(15, 23, 42, 1), rgba(30, 27, 75, 0.95));
 }
 
 /* Animated section transitions */
@@ -355,9 +363,9 @@ html[data-theme="light"] body {
 .morphing-bg {
   background: linear-gradient(-45deg, 
     rgba(15, 23, 42, 1), 
-    rgba(30, 41, 59, 0.95), 
-    rgba(51, 65, 85, 0.9), 
-    rgba(71, 85, 105, 0.85)
+    rgba(30, 58, 138, 0.95), 
+    rgba(37, 99, 235, 0.9), 
+    rgba(59, 130, 246, 0.85)
   );
   background-size: 400% 400%;
   animation: morphing-gradient 12s ease-in-out infinite;
@@ -367,4 +375,62 @@ html[data-theme="light"] body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* Performance Optimization Classes */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.smooth-rendering {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+.optimized-animation {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth Scrolling for All Sections */
+section {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Optimize Images */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+}
+
+/* Smooth Transitions */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Enable Hardware Acceleration for Animations */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin {
+    will-change: transform;
+    transform: translateZ(0);
+  }
 }
