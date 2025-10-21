@@ -92,14 +92,30 @@ export default function OurTeam() {
         backgroundSize: '30px 30px'
       }}></div>
       
-      {/* Matrix Rain Effect */}
+      {/* Matrix Rain Effect - Fixed timing for SSR */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(15)].map((_, i) => (
+        {[
+          { position: 7, duration: 3.2, delay: 0.5 },
+          { position: 14, duration: 4.1, delay: 1.2 },
+          { position: 21, duration: 2.8, delay: 0.3 },
+          { position: 28, duration: 3.7, delay: 1.8 },
+          { position: 35, duration: 4.5, delay: 0.8 },
+          { position: 42, duration: 3.1, delay: 1.5 },
+          { position: 49, duration: 4.2, delay: 0.2 },
+          { position: 56, duration: 2.9, delay: 1.1 },
+          { position: 63, duration: 3.8, delay: 0.7 },
+          { position: 70, duration: 4.3, delay: 1.6 },
+          { position: 77, duration: 3.4, delay: 0.4 },
+          { position: 84, duration: 4.0, delay: 1.3 },
+          { position: 91, duration: 3.6, delay: 0.9 },
+          { position: 98, duration: 2.7, delay: 1.7 },
+          { position: 5, duration: 4.4, delay: 0.6 }
+        ].map((line, i) => (
           <motion.div
             key={`matrix-${i}`}
             className="absolute w-px bg-gradient-to-b from-transparent via-indigo-400/20 to-transparent"
             style={{
-              left: `${(i * 7) % 100}%`,
+              left: `${line.position}%`,
               height: '100%',
             }}
             animate={{
@@ -107,23 +123,44 @@ export default function OurTeam() {
               scaleY: [0, 1, 0],
             }}
             transition={{
-              duration: 2 + Math.random() * 3,
+              duration: line.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: line.delay,
             }}
           />
         ))}
       </div>
       
-      {/* Floating Particles */}
+      {/* Floating Particles - Fixed positions for SSR */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[
+          { left: 15, top: 20, duration: 4, delay: 0 },
+          { left: 85, top: 30, duration: 3.5, delay: 0.5 },
+          { left: 25, top: 70, duration: 4.5, delay: 1 },
+          { left: 75, top: 15, duration: 3, delay: 1.5 },
+          { left: 45, top: 85, duration: 4, delay: 0.3 },
+          { left: 65, top: 45, duration: 3.8, delay: 0.8 },
+          { left: 10, top: 60, duration: 3.2, delay: 1.2 },
+          { left: 90, top: 75, duration: 4.2, delay: 0.2 },
+          { left: 35, top: 25, duration: 3.6, delay: 0.7 },
+          { left: 55, top: 90, duration: 4.8, delay: 1.8 },
+          { left: 20, top: 40, duration: 3.4, delay: 0.4 },
+          { left: 80, top: 55, duration: 4.6, delay: 1.4 },
+          { left: 50, top: 10, duration: 3.3, delay: 0.9 },
+          { left: 70, top: 80, duration: 4.1, delay: 1.6 },
+          { left: 30, top: 50, duration: 3.7, delay: 0.6 },
+          { left: 60, top: 35, duration: 4.3, delay: 1.1 },
+          { left: 40, top: 65, duration: 3.9, delay: 0.1 },
+          { left: 85, top: 20, duration: 4.4, delay: 1.3 },
+          { left: 15, top: 75, duration: 3.1, delay: 0.5 },
+          { left: 95, top: 45, duration: 4.7, delay: 1.7 }
+        ].map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-indigo-400/30 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               y: [-20, 20, -20],
@@ -131,9 +168,9 @@ export default function OurTeam() {
               scale: [0.5, 1, 0.5],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}
