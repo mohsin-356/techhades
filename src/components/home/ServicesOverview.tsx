@@ -13,7 +13,7 @@ const services = [
 
 export default function ServicesOverview() {
   return (
-    <section className="relative pt-10 sm:pt-10 pb-20 sm:pb-1">
+    <section className="relative pt-10 sm:pt-10 pb-20 sm:pb-1 section-gradient-3 section-transition grid-pattern">
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute left-1/2 -top-28 -translate-x-1/2 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-brand/20 to-brand-2/20 blur-3xl opacity-60" />
         <div className="absolute right-[-10%] top-1/3 h-[360px] w-[360px] rounded-full bg-accent/10 blur-3xl" />

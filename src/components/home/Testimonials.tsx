@@ -17,8 +17,8 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24 section-gradient-4 parallax-gradient">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="font-[family:var(--font-display)] text-2xl sm:text-4xl text-foreground mb-6">What Clients Say</h2>
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
           {items.map((t, i) => (

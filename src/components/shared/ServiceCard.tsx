@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import anime from "animejs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, Sparkles } from "lucide-react";
+import { AlienwareLogo } from "@/components/ui/alienware-logo";
 
 export default function ServiceCard({
   title,
@@ -55,37 +60,83 @@ export default function ServiceCard({
   }
 
   return (
-    <div
+    <motion.div
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand/25 to-brand-2/25 hover:translate-y-[-2px] transition-[transform,box-shadow] duration-300 will-change-transform hover:shadow-[0_12px_40px_rgba(109,106,255,0.15)]"
+      className="group relative will-change-transform"
       style={{ transformStyle: "preserve-3d" }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: Math.random() * 0.2 }}
+      whileHover={{ y: -8, scale: 1.02 }}
     >
-      <div className="relative rounded-2xl bg-foreground/5 border border-foreground/10 backdrop-blur-md overflow-hidden">
-        <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-brand/20 to-brand-2/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-foreground/5 to-foreground/10 backdrop-blur-xl hover-glow">
+        {/* Animated background gradient */}
+        <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-brand/20 to-brand-2/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        {/* Sheen effect */}
         <div
           ref={sheenRef}
-          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
-            background:
-              "linear-gradient(120deg, transparent 45%, rgba(255,255,255,0.08) 50%, transparent 55%)",
-            filter: "blur(2px)",
+            background: "linear-gradient(120deg, transparent 45%, rgba(255,255,255,0.1) 50%, transparent 55%)",
+            filter: "blur(1px)",
           }}
         />
-
-        <div className="relative z-10 p-5">
-          <div className="mb-4">
-            <div className="w-12 h-12 rounded-xl border border-foreground/10 bg-gradient-to-br from-brand/20 to-brand-2/10 flex items-center justify-center text-2xl">
-              {icon}
-            </div>
-          </div>
-          <h3 className="text-foreground text-lg font-semibold tracking-tight">{title}</h3>
-          <p className="mt-1.5 text-foreground/70 text-sm leading-relaxed">{desc}</p>
+        
+        {/* Animated border */}
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand/50 via-brand-2/50 to-accent/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+             style={{ padding: '1px' }}>
+          <div className="h-full w-full rounded-xl bg-background" />
         </div>
-      </div>
-    </div>
+
+        <CardContent className="relative z-10 p-6">
+          <div className="flex items-start justify-between mb-4">
+            <motion.div 
+              className="w-14 h-14 rounded-2xl border border-foreground/10 bg-gradient-to-br from-brand/20 to-brand-2/10 flex items-center justify-center text-2xl relative overflow-hidden"
+              whileHover={{ rotate: 5, scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Sparkles className="absolute top-1 right-1 w-3 h-3 text-brand/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="relative z-10">{icon}</span>
+            </motion.div>
+            
+            <motion.div
+              className="opacity-0 group-hover:opacity-100 transition-opacity"
+              whileHover={{ scale: 1.1 }}
+            >
+              <AlienwareLogo className="w-6 h-6 text-brand" animated />
+            </motion.div>
+          </div>
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <h3 className="text-foreground text-lg font-semibold tracking-tight font-display">{title}</h3>
+              <Badge variant="glow" className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                New
+              </Badge>
+            </div>
+            
+            <p className="text-foreground/70 text-sm leading-relaxed">{desc}</p>
+            
+            <motion.div 
+              className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              initial={{ y: 10 }}
+              whileInView={{ y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {['Modern', 'Fast', 'Scalable'].map((tag, index) => (
+                <Badge key={tag} variant="glass" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </motion.div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
 

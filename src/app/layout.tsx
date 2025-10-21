@@ -4,6 +4,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import { Toaster } from "@/components/ui/toaster";
+import { CinematicAliens } from "@/components/ui/cinematic-aliens";
+import { AlienGuide } from "@/components/ui/alien-guide";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -49,11 +52,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${orbitron.variable} antialiased overflow-x-hidden`}
       >
+        <CinematicAliens />
         <Navbar />
         <PageTransition>
-          <main className="min-h-dvh pt-20">{children}</main>
+          <main className="min-h-dvh pt-20 relative z-10">{children}</main>
         </PageTransition>
         <Footer />
+        <Toaster />
+        <AlienGuide />
       </body>
     </html>
   );

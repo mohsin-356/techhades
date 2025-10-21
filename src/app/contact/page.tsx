@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { MotionSection, MotionDiv } from "@/components/ui/motion";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -24,68 +31,174 @@ export default function ContactPage() {
     if (res.ok) {
       setStatus("success");
       setMessage("Thank you! We'll get back to you shortly.");
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you within 24 hours."
+      });
       form.reset();
     } else {
       setStatus("error");
       const { error } = await res.json().catch(() => ({ error: "Something went wrong." }));
       setMessage(error || "Something went wrong.");
+      toast.error("Failed to send message", {
+        description: error || "Please try again later."
+      });
     }
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <h1 className="text-3xl sm:text-5xl font-[family:var(--font-display)] text-foreground">Contact</h1>
-      <p className="mt-4 text-foreground/70 max-w-2xl">
-        Let's discuss your project. We typically reply within 24 hours.
-      </p>
+    <MotionSection className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <MotionDiv variant="fadeInUp" className="text-center mb-12">
+        <Badge variant="glow" className="mb-4">
+          <Mail className="w-3 h-3 mr-1" />
+          Get In Touch
+        </Badge>
+        <h1 className="text-3xl sm:text-5xl font-display text-foreground mb-4">Contact Us</h1>
+        <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
+          Let's discuss your project. We typically reply within 24 hours.
+        </p>
+      </MotionDiv>
 
-      <form onSubmit={handleSubmit} className="mt-8 grid md:grid-cols-2 gap-4 glass p-6 rounded-xl">
-        <div className="md:col-span-1">
-          <label className="text-sm text-foreground/70">Name</label>
-          <input name="name" className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
-        </div>
-        <div className="md:col-span-1">
-          <label className="text-sm text-foreground/70">Email</label>
-          <input type="email" name="email" className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
-        </div>
-        <div className="md:col-span-2">
-          <label className="text-sm text-foreground/70">Message</label>
-          <textarea name="message" rows={5} className="mt-1 w-full rounded-md bg-foreground/5 border border-foreground/10 px-3 py-2 outline-none focus:border-brand" required />
-        </div>
-        <div className="md:col-span-2 flex items-center gap-3">
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="px-5 py-3 rounded-md bg-brand hover:bg-brand-2 transition-colors text-white text-sm font-medium disabled:opacity-70"
-          >
-            {status === "loading" ? "Sending..." : "Send Message"}
-          </button>
-          {message && (
-            <span className={`text-sm ${status === "success" ? "text-emerald-500" : "text-red-500"}`}>{message}</span>
-          )}
-        </div>
-      </form>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Contact Form */}
+        <MotionDiv variant="fadeInLeft" className="lg:col-span-2">
+          <Card className="glass-card border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Send className="w-5 h-5 text-brand" />
+                Send us a message
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground/80">Name</label>
+                    <input 
+                      name="name" 
+                      className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all" 
+                      placeholder="Your full name"
+                      required 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground/80">Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all" 
+                      placeholder="your@email.com"
+                      required 
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground/80">Message</label>
+                  <textarea 
+                    name="message" 
+                    rows={6} 
+                    className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all resize-none" 
+                    placeholder="Tell us about your project..."
+                    required 
+                  />
+                </div>
+                <div className="flex items-center gap-4">
+                  <Button
+                    type="submit"
+                    disabled={status === "loading"}
+                    variant="glow"
+                    size="lg"
+                    className="min-w-[140px]"
+                  >
+                    {status === "loading" ? (
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                      />
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                  {message && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className={`flex items-center gap-2 text-sm ${
+                        status === "success" ? "text-emerald-500" : "text-red-500"
+                      }`}
+                    >
+                      {status === "success" ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : (
+                        <AlertCircle className="w-4 h-4" />
+                      )}
+                      {message}
+                    </motion.div>
+                  )}
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </MotionDiv>
 
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <div className="glass rounded-xl p-4">
-          <div className="text-sm text-foreground/60">Find us</div>
-          <iframe
-            className="mt-3 w-full h-64 rounded-lg"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509393!2d144.9537363155047!3d-37.81627974201071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAyLjYiUyAxNDTCsDU3JzE0LjQiRQ!5e0!3m2!1sen!2s!4v1689989999999"
-            allowFullScreen
-          />
-        </div>
-        <div className="glass rounded-xl p-4">
-          <div className="text-sm text-foreground/60">Connect</div>
-          <ul className="mt-3 space-y-2 text-sm text-foreground/80">
-            <li>Email: hello@example.com</li>
-            <li>WhatsApp: +00 000 0000</li>
-            <li>Instagram: @techhades</li>
-          </ul>
-        </div>
+        {/* Contact Info */}
+        <MotionDiv variant="fadeInRight" className="space-y-6">
+          <Card className="glass-card border-0">
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Phone className="w-4 h-4 text-brand" />
+                Contact Info
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
+                  <Mail className="w-5 h-5 text-brand" />
+                  <div>
+                    <div className="text-sm font-medium">Email</div>
+                    <div className="text-sm text-foreground/70">hello@techhades.com</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
+                  <Phone className="w-5 h-5 text-brand" />
+                  <div>
+                    <div className="text-sm font-medium">WhatsApp</div>
+                    <div className="text-sm text-foreground/70">+00 000 0000</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
+                  <MapPin className="w-5 h-5 text-brand" />
+                  <div>
+                    <div className="text-sm font-medium">Location</div>
+                    <div className="text-sm text-foreground/70">Global Remote Team</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-0">
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-foreground mb-4">Response Time</h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-foreground/70">Email</span>
+                  <Badge variant="glass">&lt; 24h</Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-foreground/70">WhatsApp</span>
+                  <Badge variant="glass">&lt; 2h</Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-foreground/70">Project Call</span>
+                  <Badge variant="glow">Same Day</Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </MotionDiv>
       </div>
-    </div>
+    </MotionSection>
   );
 }

@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Cta() {
   return (
-    <section className="py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24 section-gradient-5 breathing-gradient circuit-pattern morphing-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="glass rounded-2xl p-10 text-center">
           <h3 className="font-[family:var(--font-display)] text-2xl sm:text-3xl text-foreground mb-4">
             Let’s Build Something Extraordinary
