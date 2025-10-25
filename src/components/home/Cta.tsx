@@ -5,63 +5,67 @@ import { Github, Linkedin, Twitter, Mail, MapPin, Calendar } from "lucide-react"
 
 const teamMembers = [
   {
-    name: "Alex Rodriguez",
-    role: "Full-Stack Developer & Founder",
-    bio: "Passionate about creating scalable web applications with modern technologies. 5+ years of experience in React, Node.js, and cloud architecture.",
+    name: "Muhammad Mohsin Saeed",
+    role: "Chief Executive Officer",
+    department: "Development Department",
+    bio: "Leading the development vision and technical strategy. Expert in full-stack development with extensive experience in modern web technologies and team leadership.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-    skills: ["React", "Node.js", "AWS", "TypeScript"],
+    skills: ["Leadership", "Full-Stack", "Strategy", "Innovation"],
     social: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "alex@techhades.com"
+      github: "https://github.com/mohsin",
+      linkedin: "https://linkedin.com/in/mohsin",
+      twitter: "https://twitter.com/mohsin",
+      email: "mohsin@techhades.com"
     },
-    location: "San Francisco, CA",
-    experience: "5+ Years"
+    location: "Pakistan",
+    experience: "8+ Years"
   },
   {
-    name: "Sarah Chen",
-    role: "UI/UX Designer & Creative Director",
-    bio: "Specializing in user-centered design and brand identity. Creates beautiful, functional interfaces that users love to interact with.",
+    name: "Munteeq Manzoor",
+    role: "Chief Business Officer",
+    department: "Marketing Department",
+    bio: "Driving business growth and marketing strategies. Specializes in digital marketing, brand development, and client relationship management.",
     image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-    skills: ["Figma", "Adobe XD", "Branding", "Prototyping"],
+    skills: ["Marketing", "Strategy", "Branding", "Growth"],
     social: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "sarah@techhades.com"
+      github: "https://github.com/munteeq",
+      linkedin: "https://linkedin.com/in/munteeq",
+      twitter: "https://twitter.com/munteeq",
+      email: "munteeq@techhades.com"
     },
-    location: "New York, NY",
-    experience: "4+ Years"
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Mobile App Developer",
-    bio: "Expert in cross-platform mobile development with React Native and Flutter. Delivered 30+ apps with millions of downloads.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    skills: ["React Native", "Flutter", "iOS", "Android"],
-    social: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "marcus@techhades.com"
-    },
-    location: "Austin, TX",
+    location: "Pakistan",
     experience: "6+ Years"
   },
   {
-    name: "Emily Watson",
-    role: "AI/ML Engineer",
-    bio: "Pioneering AI solutions and automation workflows. Specializes in LangChain, TensorFlow, and intelligent chatbot development.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-    skills: ["Python", "TensorFlow", "LangChain", "OpenAI"],
+    name: "Hassan Mughal",
+    role: "Project Manager",
+    department: "Designing Department",
+    bio: "Managing design projects and creative workflows. Expert in UI/UX design, project coordination, and delivering exceptional user experiences.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    skills: ["Project Management", "UI/UX", "Design", "Coordination"],
     social: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "emily@techhades.com"
+      github: "https://github.com/hassan",
+      linkedin: "https://linkedin.com/in/hassan",
+      twitter: "https://twitter.com/hassan",
+      email: "hassan@techhades.com"
     },
-    location: "Seattle, WA",
+    location: "Pakistan",
+    experience: "5+ Years"
+  },
+  {
+    name: "Syed Ali Humza",
+    role: "Project Manager",
+    department: "AI Department",
+    bio: "Leading AI initiatives and machine learning projects. Specializes in artificial intelligence, automation, and innovative AI-driven solutions.",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    skills: ["AI/ML", "Project Management", "Automation", "Innovation"],
+    social: {
+      github: "https://github.com/hamza",
+      linkedin: "https://linkedin.com/in/hamza",
+      twitter: "https://twitter.com/hamza",
+      email: "hamza@techhades.com"
+    },
+    location: "Pakistan",
     experience: "4+ Years"
   }
 ];
@@ -199,10 +203,10 @@ export default function OurTeam() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
               className="group"
             >
-              <div className="relative bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-6 hover:border-violet-500/40 transition-all duration-300">
+              <div className="relative bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-6 hover:border-violet-500/40 transition-all duration-200">
                 {/* Enhanced border glow on hover */}
                 <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500" 
                      style={{ padding: '1px' }}>
@@ -214,6 +218,7 @@ export default function OurTeam() {
                   <div className="relative mb-4">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
                       className="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-indigo-400/30"
                     >
                       <img 
@@ -230,7 +235,8 @@ export default function OurTeam() {
                   {/* Member Info */}
                   <div className="text-center mb-4">
                     <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
-                    <p className="text-sm text-indigo-400 font-medium mb-2">{member.role}</p>
+                    <p className="text-sm text-indigo-400 font-medium mb-1">{member.role}</p>
+                    <p className="text-xs text-violet-300 font-medium mb-2">{member.department}</p>
                     <p className="text-xs text-foreground/70 leading-relaxed">{member.bio}</p>
                   </div>
 
@@ -259,32 +265,36 @@ export default function OurTeam() {
                   </div>
 
                   {/* Social Links */}
-                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <motion.a
                       href={member.social.github}
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                      transition={{ duration: 0.15 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
                     >
                       <Github className="w-4 h-4" />
                     </motion.a>
                     <motion.a
                       href={member.social.linkedin}
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                      transition={{ duration: 0.15 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
                     >
                       <Linkedin className="w-4 h-4" />
                     </motion.a>
                     <motion.a
                       href={member.social.twitter}
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                      transition={{ duration: 0.15 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
                     >
                       <Twitter className="w-4 h-4" />
                     </motion.a>
                     <motion.a
                       href={`mailto:${member.social.email}`}
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                      transition={{ duration: 0.15 }}
+                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
                     >
                       <Mail className="w-4 h-4" />
                     </motion.a>

@@ -57,18 +57,18 @@ export default function ProjectsPage() {
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {projects.map((p) => (
-          <div key={p.title} className="group glass rounded-xl p-5 overflow-hidden hover:border-violet-500/40 transition-all duration-300">
+          <div key={p.title} className="group glass rounded-xl p-5 overflow-hidden hover:border-violet-500/40 transition-all duration-200">
             <div className="aspect-video rounded-md mb-4 overflow-hidden relative">
               <img 
                 src={p.image} 
                 alt={p.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </div>
-            <div className="text-foreground font-semibold group-hover:text-indigo-300 transition-colors">{p.title}</div>
+            <div className="text-foreground font-semibold group-hover:text-indigo-300 transition-colors duration-200">{p.title}</div>
             <div className="text-xs text-foreground/60">{p.cat} • {p.stack.join(", ")}</div>
-            <p className="text-foreground/70 text-sm mt-2 group-hover:text-foreground/90 transition-colors">{p.desc}</p>
+            <p className="text-foreground/70 text-sm mt-2 group-hover:text-foreground/90 transition-colors duration-200">{p.desc}</p>
           </div>
         ))}
       </div>
