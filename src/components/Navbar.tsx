@@ -6,44 +6,16 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, X, Sun, Moon, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { AlienHead, UFO } from "@/components/ui/alien-icons";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const pathname = usePathname();
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = window.localStorage.getItem("theme");
-    const system = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    const initial = (saved === "light" || saved === "dark") ? (saved as "light" | "dark") : system;
-    setTheme(initial);
-  }, []);
-
-  // Apply theme attribute to <html>
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const root = document.documentElement;
-    if (theme === "light") {
-      root.setAttribute("data-theme", "light");
-    } else {
-      root.removeAttribute("data-theme");
-    }
-    try {
-      window.localStorage.setItem("theme", theme);
-    } catch {}
-  }, [theme]);
-
-  function toggleTheme() {
-    setTheme((t) => (t === "light" ? "dark" : "light"));
-  }
 
   return (
     <motion.header 
@@ -68,45 +40,12 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8 text-sm text-foreground/80">
           <NavLink href="/services" label="Services" />
           <NavLink href="/projects" label="Projects" />
+          <NavLink href="/blog" label="Blog" />
           <NavLink href="/about" label="About" />
           <NavLink href="/contact" label="Contact" />
         </nav>
         
         <div className="hidden md:flex items-center gap-3">
-          <motion.button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            aria-pressed={theme === "light"}
-            className="inline-flex items-center justify-center w-10 h-10 rounded-lg glass hover:bg-foreground/10 transition-all duration-200"
-            title={theme === "light" ? "Switch to dark" : "Switch to light"}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AnimatePresence mode="wait">
-              {theme === "light" ? (
-                <motion.div
-                  key="moon"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Moon className="w-4 h-4" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="sun"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Sun className="w-4 h-4" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-          
           <Button asChild variant="glow" size="sm">
             <Link href="/contact">
               Get a Quote
@@ -159,18 +98,9 @@ export default function Navbar() {
             <div className="px-4 py-4 space-y-3">
               <MobileLink href="/services" label="Services" />
               <MobileLink href="/projects" label="Projects" />
+              <MobileLink href="/blog" label="Blog" />
               <MobileLink href="/about" label="About" />
               <MobileLink href="/contact" label="Contact" />
-              
-              <motion.button
-                onClick={toggleTheme}
-                className="w-full flex items-center justify-center gap-2 rounded-lg glass py-3 text-sm text-foreground"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                {theme === "light" ? "Switch to Dark" : "Switch to Light"}
-              </motion.button>
               
               <Button asChild variant="glow" className="w-full">
                 <Link href="/contact">

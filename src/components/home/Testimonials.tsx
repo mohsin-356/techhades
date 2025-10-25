@@ -100,9 +100,9 @@ export default function Testimonials() {
       rating: 5
     },
     {
-      quote: "The blockchain-based supply chain solution they developed is cutting-edge. It provides complete transparency and traceability for our manufacturing process. Our clients love the real-time visibility.",
+      quote: "TechHades built our e-commerce platform from scratch with advanced inventory management and multi-currency support. The system handles thousands of orders daily without any issues. Exceptional development quality!",
       name: "Hiroshi Tanaka",
-      title: "Supply Chain Manager, Tokyo Manufacturing",
+      title: "E-commerce Director, Tokyo Digital",
       country: "Japan",
       flag: "🇯🇵",
       rating: 5

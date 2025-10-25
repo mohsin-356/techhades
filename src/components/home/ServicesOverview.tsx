@@ -2,80 +2,172 @@
 
 import ServiceCard from "@/components/shared/ServiceCard";
 import { motion } from "framer-motion";
-import { Code2, Smartphone, Bot, TrendingUp, Video, BarChart3, Palette, ShoppingCart, Zap, Globe } from "lucide-react";
+import { Code2, Smartphone, Bot, TrendingUp, Video, BarChart3, Palette, ShoppingCart, Zap, Globe, Monitor, Cpu, Brain, Rocket, Play, PieChart, Brush, Store } from "lucide-react";
+
+// Advanced Custom Icon Components with Animations
+const WebDevIcon = () => (
+  <div className="relative group">
+    <Monitor className="w-6 h-6 text-blue-100" />
+    <motion.div
+      className="absolute -bottom-1 -right-1"
+      animate={{ rotate: [0, 360] }}
+      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+    >
+      <Code2 className="w-3 h-3 text-blue-300" />
+    </motion.div>
+    <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+  </div>
+);
+
+const MobileIcon = () => (
+  <div className="relative group">
+    <Smartphone className="w-6 h-6 text-green-100" />
+    <motion.div
+      className="absolute inset-0 flex items-center justify-center"
+      animate={{ scale: [1, 1.2, 1] }}
+      transition={{ duration: 2, repeat: Infinity }}
+    >
+      <div className="w-2 h-2 bg-green-400 rounded-full" />
+    </motion.div>
+    <div className="absolute -inset-1 bg-green-400/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+  </div>
+);
+
+const AIIcon = () => (
+  <div className="relative group">
+    <Brain className="w-6 h-6 text-purple-100" />
+    <motion.div
+      className="absolute -top-1 -right-1"
+      animate={{ y: [-2, 2, -2] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    >
+      <Cpu className="w-3 h-3 text-purple-300" />
+    </motion.div>
+    <motion.div
+      className="absolute inset-0 bg-purple-400/20 rounded-full blur-md"
+      animate={{ opacity: [0.3, 0.7, 0.3] }}
+      transition={{ duration: 2, repeat: Infinity }}
+    />
+  </div>
+);
+
+const MarketingIcon = () => (
+  <div className="relative group">
+    <TrendingUp className="w-6 h-6 text-pink-100" />
+    <motion.div
+      className="absolute -bottom-1 -right-1"
+      animate={{ x: [-1, 1, -1], y: [-1, 1, -1] }}
+      transition={{ duration: 2.5, repeat: Infinity }}
+    >
+      <Rocket className="w-3 h-3 text-pink-300" />
+    </motion.div>
+    <div className="absolute -inset-1 bg-pink-400/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+  </div>
+);
+
+const VideoIcon = () => (
+  <div className="relative group">
+    <Play className="w-6 h-6 text-orange-100" />
+    <motion.div
+      className="absolute -top-1 -right-1"
+      animate={{ rotate: [0, 15, -15, 0] }}
+      transition={{ duration: 4, repeat: Infinity }}
+    >
+      <Video className="w-3 h-3 text-orange-300" />
+    </motion.div>
+    <motion.div
+      className="absolute inset-0 bg-orange-400/20 rounded-full blur-md"
+      animate={{ scale: [1, 1.1, 1] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    />
+  </div>
+);
+
+const AnalyticsIcon = () => (
+  <div className="relative group">
+    <PieChart className="w-6 h-6 text-cyan-100" />
+    <motion.div
+      className="absolute -bottom-1 -right-1"
+      animate={{ rotate: [0, 180, 360] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+    >
+      <BarChart3 className="w-3 h-3 text-cyan-300" />
+    </motion.div>
+    <div className="absolute -inset-1 bg-cyan-400/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+  </div>
+);
+
+const DesignIcon = () => (
+  <div className="relative">
+    <Brush className="w-5 h-5" />
+    <Palette className="w-3 h-3 absolute -top-1 -right-1 text-teal-300" />
+  </div>
+);
+
+const EcommerceIcon = () => (
+  <div className="relative">
+    <Store className="w-5 h-5" />
+    <ShoppingCart className="w-3 h-3 absolute -bottom-1 -right-1 text-yellow-300" />
+  </div>
+);
+
+const OptimizationIcon = () => (
+  <div className="relative">
+    <Zap className="w-5 h-5" />
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-1 h-1 bg-indigo-400 rounded-full animate-ping" />
+    </div>
+  </div>
+);
 
 const services = [
   { 
-    title: "Full-Stack Web Development", 
-    desc: "Modern web applications using React, Next.js, Node.js, Django, Laravel, and .NET with responsive design and optimal performance", 
-    icon: <Code2 className="w-6 h-6" />,
+    title: "Web Development", 
+    desc: "Full-stack MERN, Next.js, PERN, LAMP, Django, ASP.NET, Spring Boot", 
+    icon: <WebDevIcon />,
     color: "from-blue-500 to-indigo-600",
     tags: ["React", "Next.js", "Node.js", "Laravel"],
     stats: "50+ Projects"
   },
   { 
-    title: "Mobile App Development", 
-    desc: "Cross-platform mobile applications with React Native and Flutter, delivering native performance and seamless user experiences", 
-    icon: <Smartphone className="w-6 h-6" />,
+    title: "Mobile Apps", 
+    desc: "Cross-platform apps with React Native & Flutter", 
+    icon: <MobileIcon />,
     color: "from-green-500 to-emerald-600",
     tags: ["React Native", "Flutter", "iOS", "Android"],
     stats: "30+ Apps"
   },
   { 
-    title: "AI & Machine Learning", 
-    desc: "Intelligent automation solutions, custom AI agents, chatbots with LangChain, and workflow automation using cutting-edge AI technologies", 
-    icon: <Bot className="w-6 h-6" />,
+    title: "AI & Automation", 
+    desc: "Agents, LangChain chatbots, n8n automations, scraping", 
+    icon: <AIIcon />,
     color: "from-purple-500 to-violet-600",
     tags: ["TensorFlow", "LangChain", "OpenAI", "Automation"],
     stats: "25+ AI Solutions"
   },
   { 
-    title: "Digital Marketing & Growth", 
-    desc: "Comprehensive social media management, SEO optimization, content strategy, and growth hacking for maximum online presence", 
-    icon: <TrendingUp className="w-6 h-6" />,
+    title: "Social Media", 
+    desc: "FB/IG/TikTok growth with content & analytics", 
+    icon: <MarketingIcon />,
     color: "from-pink-500 to-rose-600",
     tags: ["SEO", "Social Media", "Analytics", "Growth"],
     stats: "100+ Campaigns"
   },
   { 
-    title: "Animation & Video Production", 
-    desc: "Professional 2D/3D animations, motion graphics, explainer videos, and interactive visualizations that captivate audiences", 
-    icon: <Video className="w-6 h-6" />,
+    title: "2D/3D Animation", 
+    desc: "Explainers, motion, and 3D visualizations", 
+    icon: <VideoIcon />,
     color: "from-orange-500 to-red-600",
     tags: ["After Effects", "Blender", "Motion", "3D"],
     stats: "200+ Videos"
   },
   { 
-    title: "Data Analytics & Dashboards", 
-    desc: "Interactive business intelligence dashboards, real-time analytics, data visualization, and automated reporting systems", 
-    icon: <BarChart3 className="w-6 h-6" />,
+    title: "Smart Dashboards", 
+    desc: "MERN dashboards with analytics & RBAC", 
+    icon: <AnalyticsIcon />,
     color: "from-cyan-500 to-blue-600",
     tags: ["Power BI", "D3.js", "Analytics", "Reporting"],
     stats: "40+ Dashboards"
-  },
-  { 
-    title: "UI/UX Design & Branding", 
-    desc: "Modern interface design, user experience optimization, brand identity creation, and design systems that convert visitors to customers", 
-    icon: <Palette className="w-6 h-6" />,
-    color: "from-teal-500 to-green-600",
-    tags: ["Figma", "Adobe XD", "Branding", "UX"],
-    stats: "80+ Designs"
-  },
-  { 
-    title: "E-commerce Solutions", 
-    desc: "Complete online store development with Shopify, WooCommerce, custom solutions, payment integration, and inventory management", 
-    icon: <ShoppingCart className="w-6 h-6" />,
-    color: "from-yellow-500 to-orange-600",
-    tags: ["Shopify", "WooCommerce", "Stripe", "PayPal"],
-    stats: "35+ Stores"
-  },
-  { 
-    title: "Performance Optimization", 
-    desc: "Website speed optimization, SEO enhancement, database optimization, and scalability improvements for maximum efficiency", 
-    icon: <Zap className="w-6 h-6" />,
-    color: "from-indigo-500 to-purple-600",
-    tags: ["Speed", "SEO", "Optimization", "Scaling"],
-    stats: "90% Faster"
   }
 ];
 

@@ -54,7 +54,7 @@ const techCategories: TechCategory[] = [
     color: "from-violet-500 to-purple-500",
     techs: [
       { name: "WordPress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", glow: "rgba(139,92,246,0.4)", category: 'cms' },
-      { name: "Shopify", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/shopify/shopify-original.svg", glow: "rgba(167,139,250,0.4)", category: 'cms' },
+      { name: "Shopify", src: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/shopify.svg", glow: "rgba(167,139,250,0.4)", category: 'cms' },
       { name: "Elementor", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", glow: "rgba(196,181,253,0.4)", category: 'cms' },
     ]
   },

@@ -78,7 +78,7 @@ export default function ServiceCard({
       transition={{ duration: 0.6, delay: Math.random() * 0.2 }}
       whileHover={{ y: -8, scale: 1.02 }}
     >
-      <Card className="relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl hover:border-violet-500/40 transition-all duration-300">
+      <Card className="relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl hover:border-violet-500/40 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500">
         {/* Animated background gradient */}
         <div className={`absolute -inset-16 rounded-full bg-gradient-to-br ${color} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
         
@@ -88,6 +88,16 @@ export default function ServiceCard({
           <div className="h-full w-full rounded-xl bg-slate-900/20 backdrop-blur-sm" />
         </div>
         
+        {/* Shimmer Effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            initial={{ x: "-100%" }}
+            whileHover={{ x: "100%" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+        </div>
+
         {/* Floating particles on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
           {[...Array(3)].map((_, i) => (
@@ -115,14 +125,24 @@ export default function ServiceCard({
         <CardContent className="relative z-10 p-6">
           <div className="flex items-start justify-between mb-4">
             <motion.div 
-              className={`w-16 h-16 rounded-2xl border border-indigo-400/20 bg-gradient-to-br ${color} flex items-center justify-center relative overflow-hidden shadow-lg`}
+              className={`w-16 h-16 rounded-2xl border border-indigo-400/20 bg-gradient-to-br ${color} flex items-center justify-center relative overflow-hidden shadow-lg group-hover:shadow-xl group-hover:shadow-indigo-500/20`}
               whileHover={{ rotate: 5, scale: 1.1 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <Sparkles className="absolute top-1 right-1 w-3 h-3 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative z-10 text-white">
+              <motion.div 
+                className="relative z-10 text-white"
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
                 {icon}
-              </div>
+              </motion.div>
             </motion.div>
             
             <div className="flex flex-col items-end">
@@ -140,13 +160,25 @@ export default function ServiceCard({
           
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <h3 className="text-foreground text-lg font-semibold tracking-tight font-display">{title}</h3>
+              <motion.h3 
+                className="text-foreground text-lg font-semibold tracking-tight font-display group-hover:text-indigo-300 transition-colors duration-300"
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
+              >
+                {title}
+              </motion.h3>
               <Badge variant="glow" className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">
                 New
               </Badge>
             </div>
             
-            <p className="text-foreground/70 text-sm leading-relaxed">{desc}</p>
+            <motion.p 
+              className="text-foreground/70 text-sm leading-relaxed group-hover:text-foreground/90 transition-colors duration-300"
+              whileHover={{ x: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {desc}
+            </motion.p>
             
             <motion.div 
               className="flex flex-wrap gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
