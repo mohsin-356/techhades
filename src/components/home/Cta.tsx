@@ -2,14 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, MapPin, Calendar } from "lucide-react";
-
 const teamMembers = [
   {
     name: "Muhammad Mohsin Saeed",
     role: "Chief Executive Officer",
     department: "Development Department",
     bio: "Leading the development vision and technical strategy. Expert in full-stack development with extensive experience in modern web technologies and team leadership.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: "/mohsin.jpg",
     skills: ["Leadership", "Full-Stack", "Strategy", "Innovation"],
     social: {
       github: "https://github.com/mohsin",
@@ -25,7 +24,7 @@ const teamMembers = [
     role: "Chief Business Officer",
     department: "Marketing Department",
     bio: "Driving business growth and marketing strategies. Specializes in digital marketing, brand development, and client relationship management.",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
+    image: "/munteeq.jpg",
     skills: ["Marketing", "Strategy", "Branding", "Growth"],
     social: {
       github: "https://github.com/munteeq",
@@ -41,7 +40,7 @@ const teamMembers = [
     role: "Project Manager",
     department: "Designing Department",
     bio: "Managing design projects and creative workflows. Expert in UI/UX design, project coordination, and delivering exceptional user experiences.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    image: "/hassan.jpg",
     skills: ["Project Management", "UI/UX", "Design", "Coordination"],
     social: {
       github: "https://github.com/hassan",
@@ -57,7 +56,7 @@ const teamMembers = [
     role: "Project Manager",
     department: "AI Department",
     bio: "Leading AI initiatives and machine learning projects. Specializes in artificial intelligence, automation, and innovative AI-driven solutions.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    image: "/hamza.jpg",
     skills: ["AI/ML", "Project Management", "Automation", "Innovation"],
     social: {
       github: "https://github.com/hamza",
