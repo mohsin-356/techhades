@@ -1,25 +1,10 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, MapPin, Calendar } from "lucide-react";
+import anime from "animejs";
+import { Github, Linkedin, Twitter, Mail, MapPin, Calendar, Code2, Sparkles } from "lucide-react";
 const teamMembers = [
-  {
-    name: "Muhammad Mohsin Saeed",
-    role: "Chief Executive Officer",
-    department: "Development Department",
-    bio: "Leading the development vision and technical strategy. Expert in full-stack development with extensive experience in modern web technologies and team leadership.",
-    image: "/mohsin.jpg",
-    objectPosition: "50% 16%",
-    skills: ["Leadership", "Full-Stack", "Strategy", "Innovation"],
-    social: {
-      github: "https://github.com/mohsin",
-      linkedin: "https://linkedin.com/in/mohsin",
-      twitter: "https://twitter.com/mohsin",
-      email: "mohsin@techhades.com"
-    },
-    location: "Pakistan",
-    experience: "8+ Years"
-  },
   {
     name: "Munteeq Manzoor",
     role: "Chief Business Officer",
@@ -55,6 +40,23 @@ const teamMembers = [
     experience: "5+ Years"
   },
   {
+    name: "Muhammad Mohsin Saeed",
+    role: "Chief Executive Officer",
+    department: "Development Department",
+    bio: "Leading the development vision and technical strategy. Expert in full-stack development with extensive experience in modern web technologies and team leadership.",
+    image: "/mohsin.jpg",
+    objectPosition: "50% 16%",
+    skills: ["Leadership", "Full-Stack", "Strategy", "Innovation"],
+    social: {
+      github: "https://github.com/mohsin-356",
+      linkedin: "https://www.linkedin.com/in/muhammad-mohsin-saeed-4ab1a0219/",
+      twitter: "https://x.com/mohsins88202110",
+      email: "mohsinsaeed356@gmail.com"
+    },
+    location: "Pakistan",
+    experience: "8+ Years"
+  },
+  {
     name: "Syed Ali Humza",
     role: "Project Manager",
     department: "AI Department",
@@ -70,10 +72,74 @@ const teamMembers = [
     },
     location: "Pakistan",
     experience: "4+ Years"
+  },
+  {
+    name: "Muhammad Furqan",
+    role: "UI/UX Designer",
+    department: "Designing Department",
+    bio: "Creating intuitive and visually stunning user experiences. Expert in user interface design, user research, and design systems.",
+    image: "/furqan.jpg",
+    objectPosition: "50% 18%",
+    skills: ["UI/UX", "Figma", "Design Systems", "Prototyping"],
+    social: {
+      github: "https://github.com/furqan",
+      linkedin: "https://linkedin.com/in/furqan",
+      twitter: "https://twitter.com/furqan",
+      email: "furqan@techhades.com"
+    },
+    location: "Pakistan",
+    experience: "3+ Years"
   }
 ];
 
 export default function OurTeam() {
+  const teamGridRef = useRef<HTMLDivElement>(null);
+  const codeRainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Anime.js: Floating code particles
+    if (codeRainRef.current) {
+      const particles = codeRainRef.current.querySelectorAll('.code-particle');
+      anime({
+        targets: particles,
+        translateY: () => anime.random(-30, 30),
+        translateX: () => anime.random(-20, 20),
+        opacity: [0.2, 0.8, 0.2],
+        scale: [0.8, 1.2, 0.8],
+        duration: () => anime.random(3000, 5000),
+        delay: anime.stagger(100),
+        loop: true,
+        easing: 'easeInOutQuad',
+      });
+    }
+
+    // Anime.js: Team cards staggered entrance
+    if (teamGridRef.current) {
+      const cards = teamGridRef.current.querySelectorAll('.team-card');
+      anime({
+        targets: cards,
+        translateY: [60, 0],
+        opacity: [0, 1],
+        scale: [0.9, 1],
+        rotateX: [45, 0],
+        duration: 1200,
+        delay: anime.stagger(150, { start: 300 }),
+        easing: 'spring(1, 80, 10, 0)',
+      });
+    }
+
+    // Anime.js: Circuit line animations
+    anime({
+      targets: '.circuit-line',
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutQuad',
+      duration: 2000,
+      delay: anime.stagger(200),
+      loop: true,
+      direction: 'alternate',
+    });
+  }, []);
+
   return (
     <section className="relative py-16 sm:py-24 overflow-hidden">
       {/* Enhanced Background with Multiple Layers */}
@@ -198,110 +264,231 @@ export default function OurTeam() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Tech-themed Code Rain Background - Fixed positions to avoid hydration issues */}
+        <div ref={codeRainRef} className="absolute inset-0 pointer-events-none">
+          {[
+            { left: 5, top: 10, symbol: '</>' },
+            { left: 15, top: 25, symbol: '{}' },
+            { left: 25, top: 15, symbol: '()' },
+            { left: 35, top: 35, symbol: '[]' },
+            { left: 45, top: 20, symbol: '::' },
+            { left: 55, top: 40, symbol: '->' },
+            { left: 65, top: 10, symbol: '=>' },
+            { left: 75, top: 30, symbol: '&&' },
+            { left: 85, top: 18, symbol: '||' },
+            { left: 95, top: 28, symbol: '==' },
+            { left: 10, top: 50, symbol: '</>' },
+            { left: 20, top: 65, symbol: '{}' },
+            { left: 30, top: 55, symbol: '()' },
+            { left: 40, top: 75, symbol: '[]' },
+            { left: 50, top: 60, symbol: '::' },
+            { left: 60, top: 80, symbol: '->' },
+            { left: 70, top: 50, symbol: '=>' },
+            { left: 80, top: 70, symbol: '&&' },
+            { left: 90, top: 58, symbol: '||' },
+            { left: 12, top: 88, symbol: '==' },
+            { left: 8, top: 42, symbol: '</>' },
+            { left: 18, top: 72, symbol: '{}' },
+            { left: 28, top: 38, symbol: '()' },
+            { left: 38, top: 82, symbol: '[]' },
+            { left: 48, top: 45, symbol: '::' },
+            { left: 58, top: 15, symbol: '->' },
+            { left: 68, top: 85, symbol: '=>' },
+            { left: 78, top: 52, symbol: '&&' },
+            { left: 88, top: 35, symbol: '||' },
+            { left: 92, top: 78, symbol: '==' },
+          ].map((particle, i) => (
+            <div
+              key={i}
+              className="code-particle absolute text-indigo-400/20 text-xs font-mono"
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+              }}
+            >
+              {particle.symbol}
+            </div>
+          ))}
+        </div>
+
+        {/* Unified Team Grid with CEO Highlight */}
+        <div ref={teamGridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className={`team-card group relative ${
+                member.role === 'Chief Executive Officer'
+                  ? 'lg:col-span-3 xl:col-span-1 xl:row-span-1 lg:row-start-1 lg:col-start-2'
+                  : ''
+              }`}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
-              className="group"
             >
-              <div className="relative bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-6 hover:border-violet-500/40 transition-all duration-200">
-                {/* Enhanced border glow on hover */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500" 
-                     style={{ padding: '1px' }}>
-                  <div className="h-full w-full rounded-2xl bg-slate-900/20 backdrop-blur-sm" />
-                </div>
+              <div className={`relative h-full backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-300 ${
+                member.role === 'Chief Executive Officer'
+                  ? 'bg-gradient-to-br from-indigo-500/15 via-violet-500/12 to-purple-500/15 border-2 border-indigo-400/40 hover:border-violet-400/60'
+                  : member.role === 'Chief Business Officer'
+                  ? 'bg-gradient-to-br from-violet-500/10 via-purple-500/8 to-indigo-500/10 border-2 border-violet-400/35 hover:border-purple-400/55'
+                  : 'bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 border border-indigo-500/20 hover:border-violet-500/40'
+              }`}>
+                {/* Tech Circuit Pattern Overlay */}
+                <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id={`circuit-${index}`} x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                      <path className="circuit-line" d="M10,10 L50,10 L50,50 L90,50" fill="none" stroke="currentColor" strokeWidth="1"/>
+                      <circle cx="50" cy="10" r="2" fill="currentColor"/>
+                      <circle cx="50" cy="50" r="2" fill="currentColor"/>
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill={`url(#circuit-${index})`} className="text-indigo-400"/>
+                </svg>
 
-                <div className="relative z-10">
-                  {/* Profile Image */}
+                {/* Glow Effect on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-violet-500/0 to-purple-500/0 group-hover:from-indigo-500/10 group-hover:via-violet-500/8 group-hover:to-purple-500/10 transition-all duration-500"></div>
+                
+                <div className="relative z-10 p-6">
+                  {/* CEO Badge */}
+                  {member.role === 'Chief Executive Officer' && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5, type: 'spring' }}
+                      className="absolute top-4 right-4 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                      CEO
+                    </motion.div>
+                  )}
+                  
+                  {/* CBO Badge */}
+                  {member.role === 'Chief Business Officer' && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5, type: 'spring' }}
+                      className="absolute top-4 right-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg"
+                    >
+                      <Code2 className="w-3 h-3" />
+                      CBO
+                    </motion.div>
+                  )}
+
+                  {/* Profile Image with Tech Border */}
                   <div className="relative mb-4">
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                      className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto rounded-full overflow-hidden border-2 border-indigo-400/30 p-0.5"
+                      whileHover={{ scale: 1.05, rotate: [0, -2, 2, 0] }}
+                      transition={{ duration: 0.3 }}
+                      className={`mx-auto rounded-full overflow-hidden border-2 p-0.5 relative ${
+                        member.role === 'Chief Executive Officer'
+                          ? 'w-28 h-28 border-indigo-400/50 shadow-lg shadow-indigo-500/30'
+                          : member.role === 'Chief Business Officer'
+                          ? 'w-28 h-28 border-violet-400/50 shadow-lg shadow-violet-500/30'
+                          : 'w-24 h-24 border-indigo-400/30'
+                      }`}
                     >
-                      <img 
-                        src={member.image} 
+                      {/* Animated Border Ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full"
+                        animate={{
+                          boxShadow: [
+                            '0 0 0 0 rgba(99, 102, 241, 0)',
+                            '0 0 0 4px rgba(99, 102, 241, 0.1)',
+                            '0 0 0 0 rgba(99, 102, 241, 0)',
+                          ],
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                      <img
+                        src={member.image}
                         alt={member.name}
-                        className="w-full h-full object-cover"
-                        style={{ objectPosition: (member as any).objectPosition || "50% 18%" }}
+                        className="w-full h-full object-cover rounded-full"
+                        style={{ objectPosition: member.objectPosition || '50% 18%' }}
                       />
                     </motion.div>
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                    
+                    {/* Status Indicator */}
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute bottom-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-background flex items-center justify-center"
+                    >
                       <div className="w-2 h-2 bg-white rounded-full"></div>
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Member Info */}
-                  <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
-                    <p className="text-sm text-indigo-400 font-medium mb-1">{member.role}</p>
-                    <p className="text-xs text-violet-300 font-medium mb-2">{member.department}</p>
-                    <p className="text-xs text-foreground/70 leading-relaxed">{member.bio}</p>
-                  </div>
+                  <div className="text-center space-y-2">
+                    <h3 className={`font-bold text-foreground ${
+                      member.role === 'Chief Executive Officer' || member.role === 'Chief Business Officer' ? 'text-lg' : 'text-base'
+                    }`}>
+                      {member.name}
+                    </h3>
+                    <p className="text-xs text-indigo-400 font-medium">{member.role}</p>
+                    <p className="text-[10px] text-violet-300">{member.department}</p>
+                    
+                    {/* Skills Pills */}
+                    <div className="flex flex-wrap gap-1 justify-center pt-2">
+                      {member.skills.slice(0, 3).map((skill, i) => (
+                        <motion.span
+                          key={skill}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.8 + i * 0.1 }}
+                          className="px-2 py-0.5 text-[10px] bg-indigo-500/15 text-indigo-300 rounded-full border border-indigo-500/25"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
 
-                  {/* Skills */}
-                  <div className="flex flex-wrap gap-1 mb-4 justify-center">
-                    {member.skills.map((skill) => (
-                      <span 
-                        key={skill}
-                        className="px-2 py-1 text-xs bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/30"
+                    {/* Quick Stats */}
+                    <div className="flex items-center justify-center gap-3 text-[10px] text-foreground/60 pt-2">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {member.location}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {member.experience}
+                      </div>
+                    </div>
+
+                    {/* Social Links - Show on Hover */}
+                    <div className="flex justify-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <motion.a
+                        href={member.social.github}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
                       >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Location & Experience */}
-                  <div className="flex items-center justify-between text-xs text-foreground/60 mb-4">
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
-                      <span>{member.location}</span>
+                        <Github className="w-3 h-3" />
+                      </motion.a>
+                      <motion.a
+                        href={member.social.linkedin}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                      >
+                        <Linkedin className="w-3 h-3" />
+                      </motion.a>
+                      <motion.a
+                        href={member.social.twitter}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                      >
+                        <Twitter className="w-3 h-3" />
+                      </motion.a>
+                      <motion.a
+                        href={`mailto:${member.social.email}`}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                      >
+                        <Mail className="w-3 h-3" />
+                      </motion.a>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      <span>{member.experience}</span>
-                    </div>
-                  </div>
-
-                  {/* Social Links */}
-                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <motion.a
-                      href={member.social.github}
-                      whileHover={{ scale: 1.2 }}
-                      transition={{ duration: 0.15 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
-                    >
-                      <Github className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      href={member.social.linkedin}
-                      whileHover={{ scale: 1.2 }}
-                      transition={{ duration: 0.15 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      href={member.social.twitter}
-                      whileHover={{ scale: 1.2 }}
-                      transition={{ duration: 0.15 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
-                    >
-                      <Twitter className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      href={`mailto:${member.social.email}`}
-                      whileHover={{ scale: 1.2 }}
-                      transition={{ duration: 0.15 }}
-                      className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 hover:bg-indigo-500/30 transition-colors duration-150"
-                    >
-                      <Mail className="w-4 h-4" />
-                    </motion.a>
                   </div>
                 </div>
               </div>
