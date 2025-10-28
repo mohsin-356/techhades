@@ -9,6 +9,7 @@ const teamMembers = [
     department: "Development Department",
     bio: "Leading the development vision and technical strategy. Expert in full-stack development with extensive experience in modern web technologies and team leadership.",
     image: "/mohsin.jpg",
+    objectPosition: "50% 16%",
     skills: ["Leadership", "Full-Stack", "Strategy", "Innovation"],
     social: {
       github: "https://github.com/mohsin",
@@ -25,6 +26,7 @@ const teamMembers = [
     department: "Marketing Department",
     bio: "Driving business growth and marketing strategies. Specializes in digital marketing, brand development, and client relationship management.",
     image: "/munteeq.jpg",
+    objectPosition: "50% 20%",
     skills: ["Marketing", "Strategy", "Branding", "Growth"],
     social: {
       github: "https://github.com/munteeq",
@@ -41,6 +43,7 @@ const teamMembers = [
     department: "Designing Department",
     bio: "Managing design projects and creative workflows. Expert in UI/UX design, project coordination, and delivering exceptional user experiences.",
     image: "/hassan.jpg",
+    objectPosition: "50% 12%",
     skills: ["Project Management", "UI/UX", "Design", "Coordination"],
     social: {
       github: "https://github.com/hassan",
@@ -57,6 +60,7 @@ const teamMembers = [
     department: "AI Department",
     bio: "Leading AI initiatives and machine learning projects. Specializes in artificial intelligence, automation, and innovative AI-driven solutions.",
     image: "/hamza.jpg",
+    objectPosition: "50% 18%",
     skills: ["AI/ML", "Project Management", "Automation", "Innovation"],
     social: {
       github: "https://github.com/hamza",
@@ -216,14 +220,15 @@ export default function OurTeam() {
                   {/* Profile Image */}
                   <div className="relative mb-4">
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
-                      className="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-indigo-400/30"
+                      className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto rounded-full overflow-hidden border-2 border-indigo-400/30 p-0.5"
                     >
                       <img 
                         src={member.image} 
                         alt={member.name}
                         className="w-full h-full object-cover"
+                        style={{ objectPosition: (member as any).objectPosition || "50% 18%" }}
                       />
                     </motion.div>
                     <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
