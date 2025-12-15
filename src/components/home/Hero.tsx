@@ -1,275 +1,63 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import anime from "animejs";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { AnimatedText, GlitchText } from "@/components/ui/animated-text";
-import { MotionDiv, MotionSection } from "@/components/ui/motion";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
-import { AlienHead, UFO, AlienSymbol, CrystalFormation } from "@/components/ui/alien-icons";
+import dynamic from 'next/dynamic';
+import { ChevronDown } from 'lucide-react';
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>
+});
 
 export default function Hero() {
-  const bgRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!bgRef.current) return;
-    const dots = Array.from({ length: 24 })
-      .map((_, i) => {
-        const el = document.createElement("div");
-        el.className = "w-1.5 h-1.5 rounded-full bg-cyan-300/50";
-        el.style.position = "absolute";
-        el.style.left = `${Math.random() * 100}%`;
-        el.style.top = `${Math.random() * 100}%`;
-        bgRef.current!.appendChild(el);
-        return el;
-      });
-
-    const anim = anime({
-      targets: dots,
-      translateX: () => anime.random(-40, 40),
-      translateY: () => anime.random(-40, 40),
-      direction: "alternate",
-      easing: "easeInOutSine",
-      duration: 4000,
-      delay: anime.stagger(50),
-      loop: true,
-      autoplay: true,
-    });
-
-    return () => {
-      anim.pause();
-      dots.forEach((d) => d.remove());
-    };
-  }, []);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    const moveBgX = (-px * 20).toFixed(2);
-    const moveBgY = (-py * 20).toFixed(2);
-    const moveContentX = (px * 8).toFixed(2);
-    const moveContentY = (py * 8).toFixed(2);
-    if (bgRef.current) {
-      bgRef.current.style.transform = `translate3d(${moveBgX}px, ${moveBgY}px, 0)`;
+  const handleScrollDown = () => {
+    if (typeof window !== 'undefined') {
+      const nextSection = window.innerHeight;
+      window.scrollTo({ top: nextSection, behavior: 'smooth' });
     }
-    if (contentRef.current) {
-      contentRef.current.style.transform = `translate3d(${moveContentX}px, ${moveContentY}px, 0)`;
-    }
-  }
-
-  function handleMouseLeave() {
-    if (bgRef.current) {
-      anime({ targets: bgRef.current, translateX: 0, translateY: 0, duration: 600, easing: "easeOutExpo" });
-    }
-    if (contentRef.current) {
-      anime({ targets: contentRef.current, translateX: 0, translateY: 0, duration: 600, easing: "easeOutExpo" });
-    }
-  }
+  };
 
   return (
-    <MotionSection
-      className="relative overflow-hidden pt-28 pb-20 sm:pt-20 sm:pb-20 section-gradient-1 section-transition"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Animated background particles */}
-      <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform" />
-      
-      {/* Floating alien elements */}
-      <motion.div 
-        className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-brand/20 to-brand-2/20 rounded-full blur-xl"
-        animate={{
-          y: [-20, 20, -20],
-          x: [-10, 10, -10],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent/20 to-brand/20 rounded-full blur-xl"
-        animate={{
-          y: [20, -20, 20],
-          x: [10, -10, 10],
-          scale: [1.1, 1, 1.1]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
-      
-      {/* Floating UFO */}
-      <motion.div
-        className="absolute top-32 right-1/4 opacity-40"
-        animate={{
-          y: [-15, 15, -15],
-          x: [-5, 5, -5],
-          rotate: [-2, 2, -2]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <UFO className="w-24 h-15" />
-      </motion.div>
-      
-      {/* Alien symbols */}
-      <motion.div
-        className="absolute bottom-32 left-1/4 opacity-20"
-        animate={{
-          rotate: [0, 360],
-          scale: [0.8, 1.2, 0.8]
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      >
-        <AlienSymbol className="w-12 h-12" />
-      </motion.div>
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col lg:grid lg:grid-cols-2 bg-background">
 
-      <div ref={contentRef} className="max-w-7xl mx-auto my-0 px-4 sm:px-6 lg:px-8 relative will-change-transform">
-        <MotionDiv 
-          variant="fadeInDown"
-          className="flex items-center gap-3 mb-6"
-        >
-          <AlienHead className="w-5 h-5 text-brand" />
-          <span className="inline-block text-xs font-medium uppercase tracking-widest text-brand/80 glass px-3 py-1 rounded-full">
-            Extraterrestrial • Advanced • Premium
-          </span>
-          <UFO className="w-6 h-4 text-accent" />
-        </MotionDiv>
-
-        <GlitchText 
-          text="We Build Intelligent Digital Experiences"
-          className="font-display neon-text text-balance tracking-tight leading-[1.05] text-[clamp(2rem,7vw,4rem)] md:text-[clamp(2.75rem,6vw,5.5rem)] max-w-[22ch] md:max-w-[26ch] mb-6"
-        />
-        
-        <MotionDiv 
-          variant="fadeInUp"
-          className="mt-6 max-w-2xl"
-        >
-          <p className="text-zinc-300 text-base sm:text-lg leading-relaxed">
-            Websites, Mobile Apps, AI Agents, Automations, and Smart Dashboards for elite brands.
+      {/* ========== TEXT CONTENT (LEFT/TOP) ========== */}
+      <div className="order-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:py-0 relative z-10 bg-background/50 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
+        <div className="max-w-xl mx-auto lg:mx-0 lg:max-w-2xl w-full">
+          <h1 className="section-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-center lg:text-left text-balance">
+            We Build <span className="heading-accent">Intelligent Digital Experiences</span>
+          </h1>
+          <p className="mt-6 text-base sm:text-lg lg:text-xl text-foreground/85 font-sans max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+            Your partner for Software, Website & App Development along with UI/UX Design, AI & Automation, and animations. Bring custom AI into your business processes, on premises or in the cloud.
           </p>
-        </MotionDiv>
-        
-        <MotionDiv 
-          variant="fadeInUp"
-          className="mt-8 flex flex-col sm:flex-row gap-4"
-        >
-          <Button 
-            asChild 
-            variant="glow" 
-            size="lg"
-            className="group"
-          >
-            <Link href="/services">
-              Explore Our Services
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-          <Button 
-            asChild 
-            variant="glass" 
-            size="lg"
-          >
-            <Link href="/contact">
-              Get a Quote
-            </Link>
-          </Button>
-        </MotionDiv>
-        
-        {/* Stats or features */}
-        <MotionDiv 
-          variant="fadeInUp"
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
-        >
-          {[
-            { label: "Projects", value: "150+", icon: <CrystalFormation className="w-6 h-6 mx-auto mb-2" /> },
-            { label: "Clients", value: "80+", icon: <AlienHead className="w-6 h-6 mx-auto mb-2" /> },
-            { label: "Countries", value: "25+", icon: <UFO className="w-8 h-5 mx-auto mb-2" /> },
-            { label: "Success Rate", value: "98%", icon: <AlienSymbol className="w-6 h-6 mx-auto mb-2" /> }
-          ].map((stat, index) => (
-            <motion.div 
-              key={stat.label}
-              className="group text-center relative overflow-hidden rounded-xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-md p-6 hover-lift"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.05,
-                borderColor: "rgba(139, 92, 246, 0.4)",
-                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)"
-              }}
-            >
-              {/* Enhanced border glow on hover */}
-              <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-indigo-500/30 via-violet-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500" 
-                   style={{ padding: '1px' }}>
-                <div className="h-full w-full rounded-xl bg-slate-900/90 backdrop-blur-md" />
-              </div>
-              
-              {/* Animated background glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
-              
-              {/* Floating particles effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                {[...Array(3)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-violet-400 rounded-full"
-                    style={{
-                      left: `${20 + i * 30}%`,
-                      top: `${20 + i * 20}%`,
-                    }}
-                    animate={{
-                      y: [-5, 5, -5],
-                      opacity: [0.3, 1, 0.3],
-                      scale: [0.8, 1.2, 0.8],
-                    }}
-                    transition={{
-                      duration: 2 + i * 0.5,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
-              </div>
-              
-              <div className="relative z-10">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {stat.icon}
-                </motion.div>
-                <motion.div 
-                  className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent font-display mt-2"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-sm text-foreground/70 mt-1 group-hover:text-foreground/90 transition-colors">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </MotionDiv>
+
+          {/* Mobile Scroll Indicator - visible only on small screens if needed, otherwise rely on the main bottom one */}
+        </div>
       </div>
-    </MotionSection>
+
+      {/* ========== 3D SCENE (RIGHT/BOTTOM) ========== */}
+      <div className="order-2 relative flex-1 min-h-[50vh] lg:min-h-screen w-full flex items-center justify-center overflow-hidden">
+        {/* 
+           Visual centering hack:
+           The 3D scene content is off-center (to the right).
+           We make the canvas 140% wide and shift it left by 20%.
+           This effectively moves the '70%' mark of the canvas to the visual center (50%) of the container.
+        */}
+        <div className="absolute top-0 h-full w-[140%] -left-[20%] lg:w-[150%] lg:-left-[25%] flex items-center justify-center spline-hero-container">
+          <Spline
+            scene={`/components/interactive_ai_website.spline?v=${Date.now()}`}
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+
+      {/* ========== SCROLL ARROW ========== */}
+      <button
+        onClick={handleScrollDown}
+        aria-label="Scroll to next section"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-12 h-12 rounded-full bg-background/20 backdrop-blur-md border border-white/10 hover:bg-background/40 transition-all duration-300 flex items-center justify-center group"
+      >
+        <ChevronDown className="w-6 h-6 text-foreground/80 group-hover:text-foreground group-hover:translate-y-0.5 transition-transform" />
+      </button>
+
+    </section>
   );
 }
