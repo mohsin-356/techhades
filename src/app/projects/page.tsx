@@ -15,9 +15,9 @@ const categories = [
   { label: "Ecommerce", value: "Ecommerce" },
   { label: "UI/UX Design", value: "Design" },
   { label: "AI/ML Applications", value: "AI/ML" },
-  { label: "AWS & Cloud", value: "Cloud" },
-  { label: "Ads & Social Media", value: "Social Media" },
-  { label: "Dashboard", value: "Dashboard" },
+  // { label: "AWS & Cloud", value: "Cloud" }, // temporarily hidden
+  // { label: "Ads & Social Media", value: "Social Media" }, // temporarily hidden
+  // { label: "Dashboard", value: "Dashboard" }, // temporarily hidden
 ];
 
 // Map category names from URL to filter names

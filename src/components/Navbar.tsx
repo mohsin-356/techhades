@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X, Sparkles, Globe, Smartphone, Palette, Bot, Code2, Megaphone, Gamepad2, Cloud, ShoppingCart, ChevronDown } from "lucide-react";
-import ThemeToggle from "@/components/ThemeToggle";
+// import ThemeToggle from "@/components/ThemeToggle"; // temporarily hidden
  
 
 export default function Navbar() {
@@ -89,7 +89,7 @@ export default function Navbar() {
                 Get a Quote
               </Link>
             </Button>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
 
           <motion.button
@@ -145,7 +145,7 @@ export default function Navbar() {
                 <MobileLink href="/contact" label="Contact" />
               </div>
               <div className="flex justify-center py-2">
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
               </div>
               <Button asChild variant="primary" className="w-full">
                 <Link href="/contact">
