@@ -159,6 +159,10 @@ html.dark .neon-text {
   font-family: var(--font-display), var(--font-sans), ui-sans-serif, system-ui;
 }
 
+.font-handwriting {
+  font-family: var(--font-handwriting), 'Patrick Hand', 'Caveat', cursive, sans-serif;
+}
+
 /* Global heading typography: keep all section/page headers consistent */
 h1,
 h2,
@@ -594,7 +598,7 @@ img {
 }
 
 /* Spline wrapper - ensure internal canvas container can wrap & center content */
-.spline-responsive-wrapper > div {
+.spline-responsive-wrapper>div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -608,13 +612,36 @@ img {
 }
 
 /* Spline Hero canvas styles - applied from browser preview changes */
-.spline-hero-container canvas {
-  min-width: 100px !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 67px !important;
-  flex-wrap: wrap !important;
-  padding: 0 217px !important;
-  box-sizing: border-box !important;
+/* Removed hacked styles for spline alignment to rely on Flexbox in Hero.tsx */
+
+/* Added for Hero Section Version 3 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

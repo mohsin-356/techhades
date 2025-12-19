@@ -203,7 +203,7 @@ export default function BlogPost() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Blog Post Not Found</h1>
-          <Button asChild variant="glow">
+          <Button asChild variant="secondary">
             <Link href="/blog">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
@@ -339,7 +339,7 @@ export default function BlogPost() {
             </header>
 
             {/* Article Content */}
-            <Card className="border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl">
+            <Card className="border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 shadow-lg">
               <CardContent className="p-8 lg:p-12">
                 <div 
                   className="prose prose-lg prose-invert max-w-none

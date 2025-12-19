@@ -1,349 +1,323 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  title: string;
-  country: string;
-  flag: string;
-  rating: number;
-};
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: "Artem Riabchuk",
+    role: "Senior Web Developer, SoftwareDevelopment.co",
+    country: "UK",
+    flagUrl: "https://flagcdn.com/w320/gb.png",
+    text: "Working with AlienMatrix was a wonderful experience. They provide quality services and solutions with a proactive approach to improvements. We rely on the team and recommend them to everyone.",
+  },
+  {
+    id: 2,
+    name: "Janie Mathews",
+    role: "Business Development Manager, LimeUp",
+    country: "Germany",
+    flagUrl: "https://flagcdn.com/w320/de.png",
+    text: "The team at AlienMatrix delivered beyond our expectations. Their technical expertise and dedication to quality made our project a huge success. Highly recommended!",
+  },
+  {
+    id: 3,
+    name: "Ian Greenhalgh",
+    role: "Managing Director",
+    country: "Ireland",
+    flagUrl: "https://flagcdn.com/w320/ie.png",
+    text: "Outstanding work! AlienMatrix transformed our vision into reality with precision and creativity. Their communication throughout the project was excellent.",
+  },
+  {
+    id: 4,
+    name: "Faisal Altaf",
+    role: "VP Operations, GoodCore",
+    country: "Pakistan",
+    flagUrl: "https://flagcdn.com/w320/pk.png",
+    text: "Professional, efficient, and innovative. AlienMatrix helped us scale our platform seamlessly. Their technical skills are top-notch and they're a pleasure to work with.",
+  },
+  {
+    id: 5,
+    name: "Ammar Suleman",
+    role: "COO, Abu Sufyan Furniture",
+    country: "UAE",
+    flagUrl: "https://flagcdn.com/w320/ae.png",
+    text: "AlienMatrix exceeded all our expectations. Their attention to detail and commitment to excellence is unmatched. We couldn't have asked for a better partner.",
+  },
+  {
+    id: 6,
+    name: "Robert Mitchell",
+    role: "Founder, TechBridge Solutions",
+    country: "USA",
+    flagUrl: "https://flagcdn.com/w320/us.png",
+    text: "Exceptional service from start to finish. AlienMatrix helped us modernize our entire tech stack. Their professionalism and expertise are unmatched.",
+  },
+  {
+    id: 7,
+    name: "Sophie Laurent",
+    role: "Marketing Director, Digital Innovations",
+    country: "France",
+    flagUrl: "https://flagcdn.com/w320/fr.png",
+    text: "We've worked with many development teams, but AlienMatrix stands out. Their attention to detail and commitment to deadlines is impressive.",
+  },
+  {
+    id: 8,
+    name: "James Thompson",
+    role: "Operations Manager, CloudTech Ltd",
+    country: "UK",
+    flagUrl: "https://flagcdn.com/w320/gb.png",
+    text: "AlienMatrix transformed our business operations with their innovative solutions. They understood our needs perfectly and delivered exceptional results.",
+  },
+  {
+    id: 9,
+    name: "Ahmed Al-Mansoori",
+    role: "CEO, Digital Horizons",
+    country: "Qatar",
+    flagUrl: "https://flagcdn.com/w320/qa.png",
+    text: "Working with AlienMatrix has been a game-changer for our company. Their expertise in modern technologies and professional approach made all the difference.",
+  },
+];
 
 export default function Testimonials() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const testimonials: Testimonial[] = [
-    {
-      quote: "Working with TechHades was absolutely phenomenal! They transformed our outdated e-commerce platform into a modern, lightning-fast website that increased our sales by 180%. The attention to detail and user experience is unmatched.",
-      name: "Sarah Mitchell",
-      title: "CEO, Fashion Forward Inc.",
-      country: "United States",
-      flag: "🇺🇸",
-      rating: 5
-    },
-    {
-      quote: "I've worked with many development teams, but TechHades stands out. They delivered our AI-powered analytics dashboard ahead of schedule and under budget. The real-time data visualization is exactly what we needed for our fintech startup.",
-      name: "James Thompson",
-      title: "CTO, DataFlow Solutions",
-      country: "Canada",
-      flag: "🇨🇦",
-      rating: 5
-    },
-    {
-      quote: "The mobile app they built for our healthcare platform has been a game-changer. Patient engagement increased by 250% and the seamless integration with our existing systems was flawless. Highly recommend their expertise!",
-      name: "Dr. Emily Rodriguez",
-      title: "Medical Director, HealthTech Pro",
-      country: "Australia",
-      flag: "🇦🇺",
-      rating: 5
-    },
-    {
-      quote: "TechHades created our company's digital transformation roadmap and executed it perfectly. The new CRM system streamlined our operations and the custom automation saved us 40 hours per week. Outstanding work!",
-      name: "Mohammed Al-Rashid",
-      title: "Operations Manager, Gulf Enterprises",
-      country: "Saudi Arabia",
-      flag: "🇸🇦",
-      rating: 5
-    },
-    {
-      quote: "From concept to deployment, the team was professional and innovative. Our WordPress site now loads 3x faster and the SEO improvements brought us to page 1 of Google. The ROI has been incredible.",
-      name: "Oliver Harrison",
-      title: "Marketing Director, London Digital",
-      country: "United Kingdom",
-      flag: "🇬🇧",
-      rating: 5
-    },
-    {
-      quote: "The AI chatbot they developed for our customer service has been revolutionary. It handles 70% of inquiries automatically while maintaining a human-like conversation flow. Customer satisfaction scores improved dramatically.",
-      name: "Klaus Weber",
-      title: "Head of Customer Experience, TechFlow GmbH",
-      country: "Germany",
-      flag: "🇩🇪",
-      rating: 5
-    },
-    {
-      quote: "I needed a complex inventory management system and TechHades delivered beyond expectations. The real-time tracking, automated reordering, and beautiful dashboard have transformed how we operate our business.",
-      name: "Sophie Dubois",
-      title: "Founder, Boutique Parisienne",
-      country: "France",
-      flag: "🇫🇷",
-      rating: 5
-    },
-    {
-      quote: "Their expertise in React and Node.js is exceptional. They built our SaaS platform from scratch and it now serves over 10,000 users daily without any performance issues. The code quality is top-notch.",
-      name: "Erik Johansson",
-      title: "Lead Developer, Nordic Solutions",
-      country: "Sweden",
-      flag: "🇸🇪",
-      rating: 5
-    },
-    {
-      quote: "The e-learning platform they created has revolutionized our online education business. Student engagement is up 300% and the interactive features they built are absolutely brilliant. Worth every penny!",
-      name: "Isabella Romano",
-      title: "Education Director, LearnItalia",
-      country: "Italy",
-      flag: "🇮🇹",
-      rating: 5
-    },
-    {
-      quote: "TechHades transformed our logistics company with a custom tracking system that integrates with all major shipping providers. Real-time updates and automated notifications have improved customer satisfaction by 85%.",
-      name: "Lucas van der Berg",
-      title: "CEO, Amsterdam Logistics",
-      country: "Netherlands",
-      flag: "🇳🇱",
-      rating: 5
-    },
-    {
-      quote: "TechHades built our e-commerce platform from scratch with advanced inventory management and multi-currency support. The system handles thousands of orders daily without any issues. Exceptional development quality!",
-      name: "Hiroshi Tanaka",
-      title: "E-commerce Director, Tokyo Digital",
-      country: "Japan",
-      flag: "🇯🇵",
-      rating: 5
-    },
-    {
-      quote: "Working with TechHades on our fintech app was seamless. They handled complex payment integrations, security protocols, and regulatory compliance perfectly. The app now processes millions in transactions monthly.",
-      name: "Michael O'Connor",
-      title: "Fintech Entrepreneur, Dublin Payments",
-      country: "Ireland",
-      flag: "🇮🇪",
-      rating: 5
-    },
-    {
-      quote: "They built our restaurant chain's ordering system and it's been phenomenal. Online orders increased by 400% and the kitchen management system optimized our operations. The ROI was achieved in just 3 months.",
-      name: "Carlos Mendoza",
-      title: "Restaurant Owner, Madrid Flavors",
-      country: "Spain",
-      flag: "🇪🇸",
-      rating: 5
-    },
-    {
-      quote: "The data analytics platform they created gives us insights we never had before. Real-time dashboards, predictive analytics, and automated reporting have transformed our decision-making process completely.",
-      name: "Anna Kowalski",
-      title: "Data Scientist, Warsaw Analytics",
-      country: "Poland",
-      flag: "🇵🇱",
-      rating: 5
-    },
-    {
-      quote: "TechHades developed our IoT monitoring system for smart buildings. The energy savings alone have paid for the entire project. The system monitors 500+ sensors in real-time with zero downtime.",
-      name: "Petra Novák",
-      title: "Smart City Coordinator, Prague Tech",
-      country: "Czech Republic",
-      flag: "🇨🇿",
-      rating: 5
-    },
-    {
-      quote: "Their expertise in Flutter helped us launch our mobile app simultaneously on iOS and Android. The performance is native-like and the user experience is smooth. Downloads exceeded 100K in the first month!",
-      name: "Andreas Mueller",
-      title: "Product Manager, Vienna Innovations",
-      country: "Austria",
-      flag: "🇦🇹",
-      rating: 5
-    },
-    {
-      quote: "The custom CMS they built for our news platform handles millions of articles with lightning speed. The editorial workflow and automated publishing features have increased our productivity by 200%.",
-      name: "Lars Hansen",
-      title: "Editor-in-Chief, Copenhagen Media",
-      country: "Denmark",
-      flag: "🇩🇰",
-      rating: 5
-    },
-    {
-      quote: "TechHades created our virtual reality training platform and it's revolutionary. Employee training time reduced by 60% while retention rates improved dramatically. The immersive experience is incredible.",
-      name: "Yuki Sato",
-      title: "Training Director, Osaka VR Solutions",
-      country: "Japan",
-      flag: "🇯🇵",
-      rating: 5
-    }
-  ];
-
-  // Continuous auto-scroll
-  useEffect(() => {
-    if (!isHovered && scrollRef.current) {
-      const timer = setInterval(() => {
-        setScrollPosition(prev => {
-          const newPosition = prev + 1;
-          if (scrollRef.current) {
-            const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-            if (newPosition >= maxScroll) {
-              scrollRef.current.scrollLeft = 0;
-              return 0;
-            } else {
-              scrollRef.current.scrollLeft = newPosition;
-              return newPosition;
-            }
-          }
-          return newPosition;
-        });
-      }, 30); // Smooth 30ms intervals for continuous movement
-      return () => clearInterval(timer);
-    }
-  }, [isHovered]);
-
-  // Manual navigation functions
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      const cardWidth = 272; // One card width (256px) + gap (16px)
-      const newPosition = Math.max(0, scrollRef.current.scrollLeft - cardWidth);
-      scrollRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth'
-      });
-      setScrollPosition(newPosition);
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      const cardWidth = 272; // One card width (256px) + gap (16px)
-      const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-      const newPosition = Math.min(maxScroll, scrollRef.current.scrollLeft + cardWidth);
-      scrollRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth'
-      });
-      setScrollPosition(newPosition);
-    }
-  };
-
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <section className="py-16 sm:py-24 section-gradient-4 parallax-gradient overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="font-display text-3xl sm:text-5xl text-foreground mb-4">
-            What Our <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">Global Clients</span> Say
-          </h2>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-            Trusted by businesses worldwide to deliver exceptional digital solutions
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden py-16 sm:py-24">
+      {/* Map/background layer (replace src with your asset when provided) */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(124,58,237,0.10),transparent_60%)]"/>
+        <div
+          className="absolute inset-0 opacity-[0.06] bg-center bg-cover"
+          style={{ backgroundImage: "url('/sectionandlogo.png')" }}
+        />
+      </div>
 
-        {/* Continuous Scroll Container */}
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={scrollLeft}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-violet-500/25"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* Left: Speech bubble testimonial */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative"
           >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          
-          <button
-            onClick={scrollRight}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-violet-500/25"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Scrolling Container */}
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-hidden scroll-smooth px-16"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {/* Duplicate testimonials for infinite scroll effect */}
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
+            <AnimatePresence mode="wait">
               <motion.div
-                key={`testimonial-${index}`}
-                initial={{ opacity: 1 }}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.01,
-                  transition: { duration: 0.3 }
-                }}
-                className="group flex-shrink-0 w-64 h-72"
+                key={TESTIMONIALS[activeIndex].id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="relative rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-foreground/10 shadow-xl p-6 sm:p-8"
               >
-                <div className="relative h-full bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-4 hover:border-violet-500/40 transition-all duration-300">
-                  {/* Country Flag */}
-                  <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-lg group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
-                    {testimonial.flag}
-                  </div>
-                  
-                  {/* Enhanced border glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500" 
-                       style={{ padding: '1px' }}>
-                    <div className="h-full w-full rounded-2xl bg-slate-900/20 backdrop-blur-sm" />
-                  </div>
-                  
-                  {/* Floating particles on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    {[...Array(2)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-violet-400 rounded-full"
-                        style={{
-                          left: `${25 + i * 30}%`,
-                          top: `${20 + i * 25}%`,
-                        }}
-                        animate={{
-                          y: [-2, 2, -2],
-                          opacity: [0.4, 1, 0.4],
-                          scale: [0.8, 1.1, 0.8],
-                        }}
-                        transition={{
-                          duration: 1.5 + i * 0.2,
-                          repeat: Infinity,
-                          delay: i * 0.3,
-                        }}
-                      />
-                    ))}
-                  </div>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                  {TESTIMONIALS[activeIndex].text}
+                </p>
 
-                  <div className="relative z-10">
-                    {/* Star Rating */}
-                    <div className="flex items-center gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.5 + i * 0.1 }}
-                          whileHover={{ scale: 1.2, rotate: 180 }}
-                        >
-                          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        </motion.div>
-                      ))}
-                    </div>
+                {/* bubble tail */}
+                <div className="absolute -bottom-4 left-10 h-4 w-4 rotate-45 bg-white/90 dark:bg-slate-900/90 border-b border-r border-foreground/10" />
+              </motion.div>
+            </AnimatePresence>
 
-                    {/* Quote */}
-                    <blockquote className="text-foreground/90 text-xs leading-relaxed mb-4 group-hover:text-foreground transition-colors duration-300 line-clamp-6">
-                      "{testimonial.quote}"
-                    </blockquote>
-
-                    {/* Client Info */}
-                    <div className="space-y-1">
-                      <div className="font-semibold text-foreground group-hover:text-indigo-300 transition-colors duration-300">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-xs text-foreground/60 group-hover:text-foreground/80 transition-colors duration-300">
-                        {testimonial.title}
-                      </div>
-                      <div className="text-xs text-indigo-400 font-medium">
-                        {testimonial.country}
-                      </div>
-                    </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`author-${TESTIMONIALS[activeIndex].id}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="mt-6 flex items-center gap-3"
+              >
+                <div className="relative h-14 w-14 rounded-full ring-2 ring-purple-500 overflow-hidden">
+                  <Image
+                    src={TESTIMONIALS[activeIndex].flagUrl}
+                    alt={TESTIMONIALS[activeIndex].country}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <div className="text-base font-semibold text-foreground">
+                    {TESTIMONIALS[activeIndex].name}
+                  </div>
+                  <div className="text-sm text-foreground/60">
+                    {TESTIMONIALS[activeIndex].role}
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Right: World map with geographic flag placement */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative mx-auto w-full max-w-[600px] h-[400px]"
+          >
+            {/* Card background with image (75% opacity) */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-800/90 dark:from-slate-950/90 dark:to-slate-900/90 border border-violet-500/30 overflow-hidden backdrop-blur-sm">
+              <div
+                className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-75"
+                style={{ backgroundImage: "url('/components/bgtestimonial.png')" }}
+              />
+              {/* Glow effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-600/10 via-transparent to-purple-600/10" />
+            </div>
+
+            {/* Flags positioned geographically on the map */}
+            {/* UK - Left side, upper middle (Europe) */}
+            <Avatar
+              src={TESTIMONIALS[0].flagUrl}
+              alt={TESTIMONIALS[0].country}
+              className="left-[28%] top-[25%]"
+              onClick={() => setActiveIndex(0)}
+              isActive={activeIndex === 0}
+              index={0}
+            />
+            {/* Germany - Europe, slightly right of UK */}
+            <Avatar
+              src={TESTIMONIALS[1].flagUrl}
+              alt={TESTIMONIALS[1].country}
+              className="left-[35%] top-[28%]"
+              onClick={() => setActiveIndex(1)}
+              isActive={activeIndex === 1}
+              index={1}
+            />
+            {/* Ireland - Left of UK */}
+            <Avatar
+              src={TESTIMONIALS[2].flagUrl}
+              alt={TESTIMONIALS[2].country}
+              className="left-[24%] top-[27%]"
+              onClick={() => setActiveIndex(2)}
+              isActive={activeIndex === 2}
+              index={2}
+            />
+            {/* Pakistan - South Asia, right side middle */}
+            <Avatar
+              src={TESTIMONIALS[3].flagUrl}
+              alt={TESTIMONIALS[3].country}
+              className="right-[28%] top-[38%]"
+              onClick={() => setActiveIndex(3)}
+              isActive={activeIndex === 3}
+              index={3}
+            />
+            {/* UAE - Middle East, center-right */}
+            <Avatar
+              src={TESTIMONIALS[4].flagUrl}
+              alt={TESTIMONIALS[4].country}
+              className="left-[48%] top-[42%]"
+              onClick={() => setActiveIndex(4)}
+              isActive={activeIndex === 4}
+              index={4}
+            />
+            {/* USA - Left side, center */}
+            <Avatar
+              src={TESTIMONIALS[5].flagUrl}
+              alt={TESTIMONIALS[5].country}
+              className="left-[12%] top-[35%]"
+              onClick={() => setActiveIndex(5)}
+              isActive={activeIndex === 5}
+              index={5}
+              size={68}
+            />
+            {/* France - Europe, near Germany */}
+            <Avatar
+              src={TESTIMONIALS[6].flagUrl}
+              alt={TESTIMONIALS[6].country}
+              className="left-[32%] top-[32%]"
+              onClick={() => setActiveIndex(6)}
+              isActive={activeIndex === 6}
+              index={6}
+            />
+            {/* UK (James) - Same as first UK */}
+            <Avatar
+              src={TESTIMONIALS[7].flagUrl}
+              alt={TESTIMONIALS[7].country}
+              className="left-[30%] top-[23%]"
+              onClick={() => setActiveIndex(7)}
+              isActive={activeIndex === 7}
+              index={7}
+            />
+            {/* Qatar - Middle East, near UAE */}
+            <Avatar
+              src={TESTIMONIALS[8].flagUrl}
+              alt={TESTIMONIALS[8].country}
+              className="left-[52%] top-[44%]"
+              onClick={() => setActiveIndex(8)}
+              isActive={activeIndex === 8}
+              index={8}
+            />
+          </motion.div>
+        </div>
+
+        {/* CTA under testimonials */}
+        <div className="mt-12 flex flex-wrap items-center gap-4">
+          <Link href="/contact" className="inline-flex items-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-white shadow-lg hover:opacity-95">
+            Start your project
+          </Link>
+          <span className="text-sm text-foreground/60">98% client satisfaction • 500+ projects</span>
         </div>
       </div>
     </section>
+  );
+}
+
+function Avatar({
+  src,
+  alt,
+  className,
+  size = 56,
+  onClick,
+  isActive,
+  index,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  size?: number;
+  onClick?: () => void;
+  isActive?: boolean;
+  index?: number;
+}) {
+  const activeSize = isActive ? size * 1.3 : size;
+  
+  return (
+    <motion.div
+      className={`absolute ${className || ""} cursor-pointer`}
+      onClick={onClick}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      animate={{
+        scale: isActive ? 1.15 : 1,
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      style={{ zIndex: isActive ? 20 : 10 }}
+    >
+      <motion.div
+        className={`rounded-full overflow-hidden shadow-lg ${
+          isActive ? "ring-4 ring-purple-500" : "ring-2 ring-white/60"
+        }`}
+        style={{
+          width: size,
+          height: size,
+        }}
+        animate={{
+          boxShadow: isActive
+            ? "0 10px 40px rgba(168, 85, 247, 0.5)"
+            : "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={size}
+          height={size}
+          className="object-cover w-full h-full"
+        />
+      </motion.div>
+    </motion.div>
   );
 }

@@ -3,7 +3,44 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const contentType = request.headers.get("content-type") || "";
+
+    let name = "";
+    let email = "";
+    let message = "";
+    let services: string[] = [];
+    let attachments: { filename: string; content: Buffer; contentType?: string }[] = [];
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      name = String(formData.get("name") || "");
+      email = String(formData.get("email") || "");
+      message = String(formData.get("message") || "");
+      const servicesRaw = String(formData.get("services") || "[]");
+      try {
+        const parsed = JSON.parse(servicesRaw);
+        if (Array.isArray(parsed)) services = parsed.map(String);
+      } catch {}
+      const files = formData.getAll("attachments") as unknown as File[];
+      attachments = await Promise.all(
+        (files || []).map(async (f) => {
+          const ab = await f.arrayBuffer();
+          return {
+            filename: (f as any).name || "attachment",
+            content: Buffer.from(ab),
+            contentType: (f as any).type,
+          };
+        })
+      );
+    } else {
+      // Fallback: JSON body (no attachments)
+      const body = await request.json().catch(() => ({}));
+      name = body.name || "";
+      email = body.email || "";
+      message = body.message || "";
+      if (Array.isArray(body.services)) services = body.services.map(String);
+    }
+
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
@@ -19,12 +56,18 @@ export async function POST(request: Request) {
     });
 
     const info = await transporter.sendMail({
-      from: `TechHades <${process.env.SMTP_USER}>`,
+      from: `AlienMatrix <${process.env.SMTP_USER}>`,
       to: process.env.TO_EMAIL,
       replyTo: email,
       subject: `New contact from ${name}`,
-      text: message,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p>${message}</p>`,
+      text: `${message}\n\nServices: ${services.join(", ")}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        ${services.length ? `<p><strong>Services:</strong> ${services.join(", ")}</p>` : ""}
+        <p>${message}</p>
+      `,
+      attachments,
     });
 
     return NextResponse.json({ ok: true, id: info.messageId });
@@ -32,3 +75,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: e?.message || "Server error" }, { status: 500 });
   }
 }
+

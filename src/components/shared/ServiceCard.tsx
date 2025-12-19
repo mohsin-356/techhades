@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { AlienwareLogo } from "@/components/ui/alienware-logo";
+import { LiquidGlass } from "@/components/ui/LiquidGlass";
 
 export default function ServiceCard({
   title,
@@ -78,7 +79,8 @@ export default function ServiceCard({
       transition={{ duration: 0.6, delay: Math.random() * 0.2 }}
       whileHover={{ y: -8, scale: 1.02 }}
     >
-      <Card className="relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl hover:border-violet-500/40 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500">
+      <LiquidGlass variant="card" className="h-full">
+        <Card className="relative overflow-hidden border-none bg-transparent backdrop-blur-none hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500">
         {/* Animated background gradient */}
         <div className={`absolute -inset-16 rounded-full bg-gradient-to-br ${color} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
         
@@ -202,6 +204,7 @@ export default function ServiceCard({
           </div>
         </CardContent>
       </Card>
+      </LiquidGlass>
     </motion.div>
   );
 }

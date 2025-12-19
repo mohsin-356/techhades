@@ -12,7 +12,7 @@ interface AlienGuideProps {
 const guideSteps = [
   {
     id: 1,
-    title: "👽 Welcome to TechHades!",
+    title: "👽 Welcome to AlienMatrix!",
     message: "Greetings, Earthling! I'm Zyx, your friendly alien guide. I'm here to show you our incredible digital universe!",
     position: "center",
     highlight: null

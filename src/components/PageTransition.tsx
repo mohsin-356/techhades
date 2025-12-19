@@ -38,7 +38,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
     <div className="relative">
       <div
         ref={curtainRef}
-        className="pointer-events-none fixed inset-0 z-[40]"
+        className="pointer-events-none fixed inset-0 z-[40] hidden"
         style={{
           background:
             "linear-gradient(90deg, rgba(10,11,28,1) 0%, rgba(25,27,62,0.96) 40%, rgba(10,11,28,0.85) 100%)",

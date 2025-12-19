@@ -277,6 +277,190 @@ export function AlienSymbol({ className, animated = true }: AlienIconProps) {
   )
 }
 
+export function UFOThemeToggle({ 
+  className, 
+  animated = true,
+  isDark = true 
+}: AlienIconProps & { isDark?: boolean }) {
+  return (
+    <motion.svg
+      viewBox="0 0 140 90"
+      className={cn("w-12 h-12", className)}
+      animate={animated ? {
+        y: [-2, 2, -2],
+        rotate: [-1, 1, -1]
+      } : {}}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    >
+      {/* UFO body */}
+      <ellipse
+        cx="70"
+        cy="40"
+        rx="50"
+        ry="18"
+        fill="url(#ufoToggleGradient)"
+        stroke={isDark ? "rgba(109, 106, 255, 0.8)" : "rgba(59, 130, 246, 0.8)"}
+        strokeWidth="2"
+      />
+      
+      {/* UFO dome with theme icon */}
+      <ellipse
+        cx="70"
+        cy="35"
+        rx="28"
+        ry="14"
+        fill="url(#domeToggleGradient)"
+        stroke={isDark ? "rgba(59, 130, 246, 0.6)" : "rgba(168, 85, 247, 0.6)"}
+        strokeWidth="1.5"
+      />
+      
+      {/* Theme Icon - Sun for dark mode, Moon for light mode */}
+      {isDark ? (
+        // Sun icon (shown in dark mode to switch to light)
+        <g>
+          <motion.circle
+            cx="70"
+            cy="35"
+            r="8"
+            fill="rgba(251, 191, 36, 0.9)"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.8, 1, 0.8]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          {/* Sun rays */}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+            <motion.line
+              key={i}
+              x1={70 + Math.cos(angle * Math.PI / 180) * 10}
+              y1={35 + Math.sin(angle * Math.PI / 180) * 10}
+              x2={70 + Math.cos(angle * Math.PI / 180) * 14}
+              y2={35 + Math.sin(angle * Math.PI / 180) * 14}
+              stroke="rgba(251, 191, 36, 0.8)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              animate={{
+                opacity: [0.5, 1, 0.5]
+              }}
+              transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
+            />
+          ))}
+        </g>
+      ) : (
+        // Moon icon (shown in light mode to switch to dark)
+        <g>
+          <motion.circle
+            cx="70"
+            cy="35"
+            r="8"
+            fill="rgba(109, 106, 255, 0.9)"
+            animate={{
+              scale: [1, 1.05, 1],
+              opacity: [0.8, 1, 0.8]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <circle
+            cx="73"
+            cy="33"
+            r="7"
+            fill="rgba(255, 255, 255, 0.2)"
+          />
+          {/* Stars around moon */}
+          <motion.circle
+            cx="62"
+            cy="30"
+            r="1"
+            fill="rgba(168, 85, 247, 0.8)"
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              scale: [0.8, 1.2, 0.8]
+            }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+          />
+          <motion.circle
+            cx="78"
+            cy="32"
+            r="1"
+            fill="rgba(168, 85, 247, 0.8)"
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              scale: [0.8, 1.2, 0.8]
+            }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+          />
+        </g>
+      )}
+      
+      {/* UFO Lights - more vibrant */}
+      <motion.circle
+        cx="45"
+        cy="48"
+        r="4"
+        fill={isDark ? "rgba(59, 130, 246, 0.9)" : "rgba(168, 85, 247, 0.9)"}
+        animate={animated ? {
+          opacity: [0.4, 1, 0.4],
+          scale: [0.8, 1.3, 0.8]
+        } : {}}
+        transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+      />
+      <motion.circle
+        cx="70"
+        cy="52"
+        r="4"
+        fill={isDark ? "rgba(168, 85, 247, 0.9)" : "rgba(59, 130, 246, 0.9)"}
+        animate={animated ? {
+          opacity: [0.4, 1, 0.4],
+          scale: [0.8, 1.3, 0.8]
+        } : {}}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
+      />
+      <motion.circle
+        cx="95"
+        cy="48"
+        r="4"
+        fill={isDark ? "rgba(34, 211, 238, 0.9)" : "rgba(251, 191, 36, 0.9)"}
+        animate={animated ? {
+          opacity: [0.4, 1, 0.4],
+          scale: [0.8, 1.3, 0.8]
+        } : {}}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+      />
+      
+      {/* Light beam effect */}
+      <motion.polygon
+        points="50,60 90,60 100,80 40,80"
+        fill="url(#beamToggleGradient)"
+        opacity="0.25"
+        animate={animated ? {
+          opacity: [0.15, 0.35, 0.15]
+        } : {}}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      
+      <defs>
+        <linearGradient id="ufoToggleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor={isDark ? "rgba(59, 130, 246, 0.4)" : "rgba(168, 85, 247, 0.4)"} />
+          <stop offset="100%" stopColor={isDark ? "rgba(29, 78, 216, 0.3)" : "rgba(139, 92, 246, 0.3)"} />
+        </linearGradient>
+        <radialGradient id="domeToggleGradient" cx="50%" cy="30%">
+          <stop offset="0%" stopColor={isDark ? "rgba(96, 165, 250, 0.3)" : "rgba(196, 181, 253, 0.3)"} />
+          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.15)" : "rgba(168, 85, 247, 0.15)"} />
+        </radialGradient>
+        <linearGradient id="beamToggleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor={isDark ? "rgba(96, 165, 250, 0.5)" : "rgba(196, 181, 253, 0.5)"} />
+          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.2)" : "rgba(168, 85, 247, 0.2)"} />
+        </linearGradient>
+      </defs>
+    </motion.svg>
+  )
+}
+
 export function CrystalFormation({ className, animated = true }: AlienIconProps) {
   return (
     <motion.svg

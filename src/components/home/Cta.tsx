@@ -17,7 +17,7 @@ const teamMembers = [
       github: "https://github.com/munteeq",
       linkedin: "https://linkedin.com/in/munteeq",
       twitter: "https://twitter.com/munteeq",
-      email: "munteeq@techhades.com"
+      email: "munteeq@alienmatrix.com"
     },
     location: "Pakistan",
     experience: "6+ Years"
@@ -34,7 +34,7 @@ const teamMembers = [
       github: "https://github.com/hassan",
       linkedin: "https://linkedin.com/in/hassan",
       twitter: "https://twitter.com/hassan",
-      email: "hassan@techhades.com"
+      email: "hassan@alienmatrix.com"
     },
     location: "Pakistan",
     experience: "5+ Years"
@@ -68,7 +68,7 @@ const teamMembers = [
       github: "https://github.com/hamza",
       linkedin: "https://linkedin.com/in/hamza",
       twitter: "https://twitter.com/hamza",
-      email: "hamza@techhades.com"
+      email: "hamza@alienmatrix.com"
     },
     location: "Pakistan",
     experience: "4+ Years"
@@ -85,7 +85,7 @@ const teamMembers = [
       github: "https://github.com/furqan",
       linkedin: "https://linkedin.com/in/furqan",
       twitter: "https://twitter.com/furqan",
-      email: "furqan@techhades.com"
+      email: "furqan@alienmatrix.com"
     },
     location: "Pakistan",
     experience: "3+ Years"
@@ -325,15 +325,15 @@ export default function OurTeam() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <div className={`relative h-full backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-300 ${
+              <div className={`relative h-full rounded-2xl overflow-hidden transition-all duration-300 shadow-lg dark:shadow-none ${
                 member.role === 'Chief Executive Officer'
-                  ? 'bg-gradient-to-br from-indigo-500/15 via-violet-500/12 to-purple-500/15 border-2 border-indigo-400/40 hover:border-violet-400/60'
+                  ? 'bg-gradient-to-br from-indigo-100 via-violet-100 to-purple-100 dark:from-indigo-500/15 dark:via-violet-500/12 dark:to-purple-500/15 border-2 border-indigo-300 dark:border-indigo-400/40 hover:border-violet-500 dark:hover:border-violet-400/60'
                   : member.role === 'Chief Business Officer'
-                  ? 'bg-gradient-to-br from-violet-500/10 via-purple-500/8 to-indigo-500/10 border-2 border-violet-400/35 hover:border-purple-400/55'
-                  : 'bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 border border-indigo-500/20 hover:border-violet-500/40'
+                  ? 'bg-gradient-to-br from-violet-100 via-purple-100 to-indigo-100 dark:from-violet-500/10 dark:via-purple-500/8 dark:to-indigo-500/10 border-2 border-violet-300 dark:border-violet-400/35 hover:border-purple-500 dark:hover:border-purple-400/55'
+                  : 'bg-gradient-to-br from-indigo-50 via-violet-50 to-purple-50 dark:from-indigo-500/5 dark:via-violet-500/3 dark:to-purple-500/5 border border-indigo-200 dark:border-indigo-500/20 hover:border-violet-400 dark:hover:border-violet-500/40'
               }`}>
                 {/* Tech Circuit Pattern Overlay */}
-                <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+                <svg className="absolute inset-0 w-full h-full opacity-5 dark:opacity-5" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <pattern id={`circuit-${index}`} x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
                       <path className="circuit-line" d="M10,10 L50,10 L50,50 L90,50" fill="none" stroke="currentColor" strokeWidth="1"/>
@@ -341,7 +341,7 @@ export default function OurTeam() {
                       <circle cx="50" cy="50" r="2" fill="currentColor"/>
                     </pattern>
                   </defs>
-                  <rect width="100%" height="100%" fill={`url(#circuit-${index})`} className="text-indigo-400"/>
+                  <rect width="100%" height="100%" fill={`url(#circuit-${index})`} className="text-indigo-600 dark:text-indigo-400"/>
                 </svg>
 
                 {/* Glow Effect on Hover */}
@@ -371,6 +371,19 @@ export default function OurTeam() {
                     >
                       <Code2 className="w-3 h-3" />
                       CBO
+                    </motion.div>
+                  )}
+
+                  {/* COO Badge for Muhammad Furqan */}
+                  {(member.name === 'Muhammad Furqan' || member.role === 'Chief Operating Officer') && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5, type: 'spring' }}
+                      className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg"
+                    >
+                      <Code2 className="w-3 h-3" />
+                      COO
                     </motion.div>
                   )}
 
@@ -419,13 +432,13 @@ export default function OurTeam() {
 
                   {/* Member Info */}
                   <div className="text-center space-y-2">
-                    <h3 className={`font-bold text-foreground ${
-                      member.role === 'Chief Executive Officer' || member.role === 'Chief Business Officer' ? 'text-lg' : 'text-base'
+                    <h3 className={`font-bold text-slate-900 dark:text-foreground ${
+                      member.role === 'Chief Executive Officer' || member.role === 'Chief Business Officer' || member.role === 'Chief Operating Officer' || member.name === 'Muhammad Furqan' ? 'text-lg' : 'text-base'
                     }`}>
                       {member.name}
                     </h3>
-                    <p className="text-xs text-indigo-400 font-medium">{member.role}</p>
-                    <p className="text-[10px] text-violet-300">{member.department}</p>
+                    <p className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">{member.role}</p>
+                    <p className="text-[10px] text-violet-600 dark:text-violet-300">{member.department}</p>
                     
                     {/* Skills Pills */}
                     <div className="flex flex-wrap gap-1 justify-center pt-2">
@@ -435,7 +448,7 @@ export default function OurTeam() {
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.8 + i * 0.1 }}
-                          className="px-2 py-0.5 text-[10px] bg-indigo-500/15 text-indigo-300 rounded-full border border-indigo-500/25"
+                          className="px-2 py-0.5 text-[10px] bg-indigo-200 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 rounded-full border border-indigo-300 dark:border-indigo-500/25"
                         >
                           {skill}
                         </motion.span>
@@ -443,7 +456,7 @@ export default function OurTeam() {
                     </div>
 
                     {/* Quick Stats */}
-                    <div className="flex items-center justify-center gap-3 text-[10px] text-foreground/60 pt-2">
+                    <div className="flex items-center justify-center gap-3 text-[10px] text-slate-600 dark:text-foreground/60 pt-2">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
                         {member.location}
@@ -460,7 +473,7 @@ export default function OurTeam() {
                         href={member.social.github}
                         whileHover={{ scale: 1.2, rotate: 360 }}
                         transition={{ duration: 0.3 }}
-                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                        className="w-7 h-7 rounded-full bg-indigo-200 dark:bg-indigo-500/20 hover:bg-indigo-300 dark:hover:bg-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-400 transition-colors"
                       >
                         <Github className="w-3 h-3" />
                       </motion.a>
@@ -468,7 +481,7 @@ export default function OurTeam() {
                         href={member.social.linkedin}
                         whileHover={{ scale: 1.2, rotate: 360 }}
                         transition={{ duration: 0.3 }}
-                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                        className="w-7 h-7 rounded-full bg-indigo-200 dark:bg-indigo-500/20 hover:bg-indigo-300 dark:hover:bg-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-400 transition-colors"
                       >
                         <Linkedin className="w-3 h-3" />
                       </motion.a>
@@ -476,7 +489,7 @@ export default function OurTeam() {
                         href={member.social.twitter}
                         whileHover={{ scale: 1.2, rotate: 360 }}
                         transition={{ duration: 0.3 }}
-                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                        className="w-7 h-7 rounded-full bg-indigo-200 dark:bg-indigo-500/20 hover:bg-indigo-300 dark:hover:bg-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-400 transition-colors"
                       >
                         <Twitter className="w-3 h-3" />
                       </motion.a>
@@ -484,7 +497,7 @@ export default function OurTeam() {
                         href={`mailto:${member.social.email}`}
                         whileHover={{ scale: 1.2, rotate: 360 }}
                         transition={{ duration: 0.3 }}
-                        className="w-7 h-7 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 flex items-center justify-center text-indigo-400 transition-colors"
+                        className="w-7 h-7 rounded-full bg-indigo-200 dark:bg-indigo-500/20 hover:bg-indigo-300 dark:hover:bg-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-400 transition-colors"
                       >
                         <Mail className="w-3 h-3" />
                       </motion.a>

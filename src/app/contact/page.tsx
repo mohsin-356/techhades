@@ -6,12 +6,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MotionSection, MotionDiv } from "@/components/ui/motion";
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Paperclip } from "lucide-react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [services, setServices] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [otherText, setOtherText] = useState("");
+
+  const SERVICE_OPTIONS = [
+    { value: "custom-software", label: "Custom Software Development" },
+    { value: "web-design-dev", label: "Website Design & Development" },
+    { value: "mobile-app", label: "Mobile App Development" },
+    { value: "ui-ux", label: "UI/UX Design" },
+    { value: "hire-developers", label: "Hire Developers" },
+    { value: "other", label: "Other" },
+  ];
+
+  const FLAG_CODES = [
+    "ae","us","gb","sa","kw","de","fr","it","ie","au","es","nl","dk","pk","tr","az","nz","ca","qa","my","jp","fi","gb-sct"
+  ];
+  const FLAG_POS = [
+    { top: "6%", left: "12%" }, { top: "14%", left: "24%" }, { top: "4%", left: "36%" },
+    { top: "10%", left: "70%" }, { top: "6%", left: "84%" }, { top: "22%", left: "88%" },
+    { top: "30%", left: "90%" }, { top: "44%", left: "86%" }, { top: "62%", left: "80%" },
+    { top: "76%", left: "70%" }, { top: "82%", left: "56%" }, { top: "86%", left: "40%" },
+    { top: "78%", left: "26%" }, { top: "66%", left: "16%" }, { top: "50%", left: "10%" },
+    { top: "34%", left: "8%" }, { top: "22%", left: "16%" }, { top: "28%", left: "76%" },
+    { top: "58%", left: "86%" }, { top: "68%", left: "54%" }, { top: "60%", left: "32%" },
+    { top: "38%", left: "22%" },
+  ];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,15 +46,18 @@ export default function ContactPage() {
     const formData = new FormData(form);
     setStatus("loading");
     setMessage(null);
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-      }),
-    });
+    // Build multipart FormData with services + attachments
+    const postData = new FormData();
+    postData.set("name", String(formData.get("name") || ""));
+    postData.set("email", String(formData.get("email") || ""));
+    postData.set("message", String(formData.get("message") || ""));
+    postData.set("services", JSON.stringify(services.includes("other") && otherText
+      ? [...services.filter(s => s !== "other"), `other:${otherText}`]
+      : services
+    ));
+    files.forEach((f) => postData.append("attachments", f));
+
+    const res = await fetch("/api/contact", { method: "POST", body: postData });
     if (res.ok) {
       setStatus("success");
       setMessage("Thank you! We'll get back to you shortly.");
@@ -35,6 +65,9 @@ export default function ContactPage() {
         description: "We'll get back to you within 24 hours."
       });
       form.reset();
+      setServices([]);
+      setFiles([]);
+      setOtherText("");
     } else {
       setStatus("error");
       const { error } = await res.json().catch(() => ({ error: "Something went wrong." }));
@@ -61,7 +94,7 @@ export default function ContactPage() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Contact Form */}
         <MotionDiv variant="fadeInLeft" className="lg:col-span-2">
-          <Card className="glass-card border-0">
+          <Card className="bg-background/80 border border-foreground/10 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Send className="w-5 h-5 text-brand" />
@@ -69,43 +102,98 @@ export default function ContactPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" id="contact-form">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground/80">Name</label>
                     <input 
                       name="name" 
                       className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all" 
-                      placeholder="Your full name"
+                      placeholder="Your name"
                       required 
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground/80">Email</label>
+                    <label className="text-sm font-medium text-foreground/80">Work email</label>
                     <input 
                       type="email" 
                       name="email" 
                       className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all" 
-                      placeholder="your@email.com"
+                      placeholder="Email address"
                       required 
                     />
                   </div>
                 </div>
+
+                {/* Services checklist */}
+                <div className="space-y-3">
+                  <label className="text-sm font-medium text-foreground/80">Choose what you need help with<span className="text-red-500">*</span></label>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {SERVICE_OPTIONS.map((opt) => {
+                      const checked = services.includes(opt.value);
+                      return (
+                        <label key={opt.value} className="flex items-center gap-3 p-3 rounded-lg border border-foreground/10 hover:bg-foreground/5 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-foreground/30"
+                            checked={checked}
+                            onChange={(e) => {
+                              setServices((prev) =>
+                                e.target.checked ? [...prev, opt.value] : prev.filter((v) => v !== opt.value)
+                              );
+                            }}
+                          />
+                          <span className="text-sm text-foreground/90">{opt.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                  {services.includes("other") && (
+                    <input
+                      value={otherText}
+                      onChange={(e) => setOtherText(e.target.value)}
+                      className="mt-2 w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+                      placeholder="Please specify"
+                    />
+                  )}
+                </div>
+
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/80">Message</label>
+                  <label className="text-sm font-medium text-foreground/80">Tell us about your needs<span className="text-red-500">*</span></label>
                   <textarea 
                     name="message" 
                     rows={6} 
                     className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all resize-none" 
-                    placeholder="Tell us about your project..."
+                    placeholder="Message..."
                     required 
                   />
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between gap-4">
+                  {/* Attach files */}
+                  <div className="flex items-center gap-3">
+                    <input
+                      id="attachments"
+                      type="file"
+                      multiple
+                      className="hidden"
+                      onChange={(e) => {
+                        const list = Array.from(e.target.files || []);
+                        setFiles(list);
+                      }}
+                    />
+                    <label htmlFor="attachments" className="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-foreground cursor-pointer">
+                      <Paperclip className="w-4 h-4" />
+                      Attach files
+                    </label>
+                    {files.length > 0 && (
+                      <span className="text-xs text-foreground/60">{files.length} file(s) selected</span>
+                    )}
+                  </div>
+                  
                   <Button
                     type="submit"
                     disabled={status === "loading"}
-                    variant="glow"
+                    variant="primary"
                     size="lg"
                     className="min-w-[140px]"
                   >
@@ -122,23 +210,23 @@ export default function ContactPage() {
                       </>
                     )}
                   </Button>
-                  {message && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className={`flex items-center gap-2 text-sm ${
-                        status === "success" ? "text-emerald-500" : "text-red-500"
-                      }`}
-                    >
-                      {status === "success" ? (
-                        <CheckCircle className="w-4 h-4" />
-                      ) : (
-                        <AlertCircle className="w-4 h-4" />
-                      )}
-                      {message}
-                    </motion.div>
-                  )}
                 </div>
+                {message && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`flex items-center gap-2 text-sm ${
+                      status === "success" ? "text-emerald-500" : "text-red-500"
+                    }`}
+                  >
+                    {status === "success" ? (
+                      <CheckCircle className="w-4 h-4" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4" />
+                    )}
+                    {message}
+                  </motion.div>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -146,7 +234,7 @@ export default function ContactPage() {
 
         {/* Contact Info */}
         <MotionDiv variant="fadeInRight" className="space-y-6">
-          <Card className="glass-card border-0">
+          <Card className="bg-background/80 border border-foreground/10 shadow-lg">
             <CardContent className="p-6">
               <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Phone className="w-4 h-4 text-brand" />
@@ -157,7 +245,7 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5 text-brand" />
                   <div>
                     <div className="text-sm font-medium">Email</div>
-                    <div className="text-sm text-foreground/70">hello@techhades.com</div>
+                    <div className="text-sm text-foreground/70">hello@alienmatrix.com</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
@@ -178,17 +266,17 @@ export default function ContactPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-0">
+          <Card className="bg-background/80 border border-foreground/10 shadow-lg">
             <CardContent className="p-6">
               <h3 className="font-semibold text-foreground mb-4">Response Time</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-foreground/70">Email</span>
-                  <Badge variant="glass">&lt; 24h</Badge>
+                  <Badge variant="outline">&lt; 24h</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-foreground/70">WhatsApp</span>
-                  <Badge variant="glass">&lt; 2h</Badge>
+                  <Badge variant="outline">&lt; 2h</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-foreground/70">Project Call</span>
@@ -198,6 +286,81 @@ export default function ContactPage() {
             </CardContent>
           </Card>
         </MotionDiv>
+      </div>
+      
+      <div className="mt-20 relative">
+        <div className="relative mx-auto max-w-7xl h-[600px] flex items-center justify-center">
+          {/* Scattered flags around the center */}
+          {[
+            { code: "ae", top: "8%", left: "12%", size: "w-16 h-16" },
+            { code: "us", top: "15%", left: "6%", size: "w-14 h-14" },
+            { code: "gb", top: "28%", left: "4%", size: "w-12 h-12" },
+            { code: "sa", top: "45%", left: "8%", size: "w-16 h-16" },
+            { code: "kw", top: "58%", left: "12%", size: "w-14 h-14" },
+            { code: "de", top: "72%", left: "6%", size: "w-12 h-12" },
+            { code: "fr", top: "82%", left: "15%", size: "w-14 h-14" },
+            { code: "it", top: "88%", left: "28%", size: "w-12 h-12" },
+            { code: "ie", top: "12%", left: "24%", size: "w-12 h-12" },
+            { code: "au", top: "6%", left: "35%", size: "w-14 h-14" },
+            { code: "es", top: "85%", left: "40%", size: "w-12 h-12" },
+            { code: "nl", top: "78%", left: "68%", size: "w-12 h-12" },
+            { code: "dk", top: "10%", left: "65%", size: "w-14 h-14" },
+            { code: "pk", top: "6%", left: "78%", size: "w-16 h-16" },
+            { code: "tr", top: "18%", left: "88%", size: "w-14 h-14" },
+            { code: "az", top: "32%", left: "92%", size: "w-12 h-12" },
+            { code: "nz", top: "48%", left: "90%", size: "w-16 h-16" },
+            { code: "ca", top: "64%", left: "88%", size: "w-14 h-14" },
+            { code: "qa", top: "78%", left: "84%", size: "w-12 h-12" },
+            { code: "my", top: "88%", left: "72%", size: "w-14 h-14" },
+            { code: "jp", top: "85%", left: "54%", size: "w-16 h-16" },
+            { code: "fi", top: "18%", left: "76%", size: "w-12 h-12" },
+            { code: "gb", top: "72%", left: "18%", size: "w-14 h-14" },
+          ].map((flag, i) => (
+            <motion.div
+              key={`${flag.code}-${i}`}
+              className="absolute"
+              style={{ top: flag.top, left: flag.left }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              animate={{ 
+                y: [0, -10, 0, 10, 0],
+                x: [0, 5, 0, -5, 0],
+                rotate: [0, 5, 0, -5, 0]
+              }}
+              transition={{ 
+                duration: 8 + (i % 3) * 2,
+                delay: i * 0.05,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <div className={`${flag.size} rounded-full overflow-hidden ring-2 ring-white/40 dark:ring-white/20 shadow-xl bg-white`}>
+                <Image 
+                  src={`https://flagcdn.com/w80/${flag.code}.png`} 
+                  alt={flag.code}
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-cover"
+                  unoptimized
+                />
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Center CTA */}
+          <MotionDiv variant="fadeInUp" className="relative z-10 text-center max-w-2xl px-4">
+            <h2 className="section-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4">
+              Start Your Journey Today
+            </h2>
+            <p className="text-foreground/70 text-sm sm:text-base mb-6">
+              We work with clients worldwide. Share your needs and we'll reply within 24 hours.
+            </p>
+            <Button asChild variant="primary" size="lg">
+              <a href="#contact-form">Schedule a Meeting</a>
+            </Button>
+          </MotionDiv>
+        </div>
       </div>
     </MotionSection>
   );
