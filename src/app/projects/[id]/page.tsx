@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { allProjects, Project } from "../projectsData";
+import { allProjects, Project } from "@/data/projectsData";
 import { motion } from "framer-motion";
 import Image from "next/image";
 // import LottieGrid from "@/components/LottieGrid";

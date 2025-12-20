@@ -1,8 +1,10 @@
+"use client";
+
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { allProjects, Project } from "@/app/projects/projectsData";
+import { allProjects, Project } from "@/data/projectsData";
 
 interface ProjectsGridProps {
   filter?: string;

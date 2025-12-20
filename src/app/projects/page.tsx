@@ -1,9 +1,11 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { useState, useEffect } from "react";
 import { MotionDiv } from "@/components/ui/motion";
 import ProjectsGrid from "@/components/ProjectsGrid";
-import { useSearchParams } from "next/navigation";
 
 const categories = [
   { label: "All", value: "All" },
@@ -45,16 +47,17 @@ const categoryToFilter: Record<string, string> = {
 };
 
 export default function ProjectsPage() {
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get('category');
-  const [filter, setFilter] = useState(categoryParam && categoryToFilter[categoryParam] ? categoryToFilter[categoryParam] : "All");
-  
-  // Update filter when URL parameter changes
+  const [filter, setFilter] = useState("All");
+
+  // Read category from URL on client after mount
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get('category');
     if (categoryParam && categoryToFilter[categoryParam]) {
       setFilter(categoryToFilter[categoryParam]);
     }
-  }, [categoryParam]);
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
