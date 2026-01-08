@@ -13,12 +13,12 @@ const aiMlApplicationsConfig: ServiceConfig = {
   processTitle: "Our AI/ML Development Process",
   processSubtitle: "We build intelligent solutions through data analysis, model development, and continuous optimization",
   steps: [
-    { number: 1, title: "Problem Definition", desc: "Identify business problems suitable for AI/ML solutions. Define success metrics and gather requirements." },
-    { number: 2, title: "Data Collection & Preparation", desc: "Gather and prepare training data. Clean, normalize, and structure data for optimal model performance." },
-    { number: 3, title: "Model Development", desc: "Build and train machine learning models using appropriate algorithms and frameworks for your use case." },
-    { number: 4, title: "Model Evaluation", desc: "Validate model performance using test data. Optimize hyperparameters and improve accuracy through iteration." },
-    { number: 5, title: "Integration & Deployment", desc: "Integrate trained models into your applications. Set up APIs and monitoring for production performance." },
-    { number: 6, title: "Monitoring & Optimization", desc: "Monitor model performance in production. Retrain models with new data and optimize for changing conditions." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your data landscape and AI goals. Through collaborative discussions, we define project requirements, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our data scientists design the model architecture and data pipelines, creating prototypes to validate the feasibility and performance of the AI solution." },
+    { number: 3, title: "Development & Coding", desc: "We build using latest technologies like TensorFlow, PyTorch, and Python ensuring robust, secure and performant AI models with clean code architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test model accuracy, bias, and edge cases using automated and manual testing techniques to ensure flawless execution and reliable predictions." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy with proper MLOps pipelines, containerization, and API endpoints for zero-downtime integration and maximum reliability." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive monitoring, retraining, and support packages to keep your AI application updated and performing efficiently." },
   ],
   projectsHeading: "Recent AI/ML Application Projects",
   projectsDescription: "Explore our portfolio of intelligent AI and machine learning solutions that drive business value",
@@ -32,8 +32,8 @@ export default function AIMLApplicationsPage() {
       config={aiMlApplicationsConfig}
       extraSection={
         <div className="grid lg:grid-cols-2 gap-0">
-          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
             <img
               src="https://cdn.dribbble.com/users/2482999/screenshots/17532501/media/8e2b0b5dd7c8be6b6d6e4d1e8e9e4e6d.gif"
               alt="AI & ML Applications"
@@ -41,7 +41,7 @@ export default function AIMLApplicationsPage() {
             />
           </div>
           <div className="p-8 lg:p-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
               <span className="mr-1">AI &amp; Automation</span>
               <span className="animate-pulse">✨</span>
             </div>
@@ -68,7 +68,7 @@ export default function AIMLApplicationsPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-bot w-4 h-4 text-purple-500"
+                    className="lucide lucide-bot w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M12 8V4H8" />
                     <rect x="3" y="8" width="18" height="12" rx="2" />
@@ -89,7 +89,7 @@ export default function AIMLApplicationsPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-workflow w-4 h-4 text-purple-500"
+                    className="lucide lucide-workflow w-4 h-4 text-[#6467FF]"
                   >
                     <rect x="3" y="3" width="6" height="6" rx="1" />
                     <rect x="15" y="3" width="6" height="6" rx="1" />
@@ -110,7 +110,7 @@ export default function AIMLApplicationsPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-trending-up w-4 h-4 text-purple-500"
+                    className="lucide lucide-trending-up w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M3 17 9 11 13 15 21 7" />
                     <path d="M21 11V7h-4" />
@@ -128,7 +128,7 @@ export default function AIMLApplicationsPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-database w-4 h-4 text-purple-500"
+                    className="lucide lucide-database w-4 h-4 text-[#6467FF]"
                   >
                     <ellipse cx="12" cy="5" rx="9" ry="3" />
                     <path d="M3 5v14a9 3 0 0 0 18 0V5" />
@@ -238,7 +238,7 @@ export default function AIMLApplicationsPage() {
               </div>
             </div>
             <div className="flex space-x-3">
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                 AI &amp; Automation
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +256,7 @@ export default function AIMLApplicationsPage() {
                   <path d="m12 5 7 7-7 7" />
                 </svg>
               </button>
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                 View Details
               </button>
             </div>

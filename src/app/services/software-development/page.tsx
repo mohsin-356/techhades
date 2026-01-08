@@ -13,12 +13,12 @@ const softwareDevelopmentConfig: ServiceConfig = {
   processTitle: "Our Software Development Process",
   processSubtitle: "We deliver enterprise-grade software solutions through rigorous planning, development, and testing",
   steps: [
-    { number: 1, title: "Requirements Analysis", desc: "Deep dive into your business processes to understand needs, pain points, and desired outcomes. Define clear project scope." },
-    { number: 2, title: "Architecture Design", desc: "Design scalable, maintainable software architecture. Plan database structure, APIs, and system integrations." },
-    { number: 3, title: "Development", desc: "Build using industry best practices and modern technologies. Write clean, well-documented code with regular code reviews." },
-    { number: 4, title: "Quality Assurance", desc: "Comprehensive testing including unit tests, integration tests, and user acceptance testing to ensure reliability." },
-    { number: 5, title: "Deployment", desc: "Deploy to production with minimal downtime. Set up monitoring, logging, and backup systems for reliability." },
-    { number: 6, title: "Maintenance & Support", desc: "Ongoing support, bug fixes, performance optimization, and feature enhancements based on user feedback." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by comprehensively analyzing business needs. Through collaborative discussions, we define software requirements, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our architects create scalable system designs and interactive prototypes that reflect the operational flow and optimize user efficiency." },
+    { number: 3, title: "Development & Coding", desc: "We build using robust technologies like .NET, Python, and React ensuring secure, scalable and maintainable software with clean code architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test functionality, security, and performance using automated unit, integration, and load testing techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy with proper CI/CD pipelines, containerization, and zero-downtime release strategies for maximum business continuity." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive maintenance, monitoring, and support packages to keep your software updated, secure, and running efficiently." },
   ],
   projectsHeading: "Recent Software Development Projects",
   projectsDescription: "Explore our portfolio of custom software solutions that solve complex business challenges",
@@ -33,8 +33,8 @@ export default function SoftwareDevelopmentPage() {
       extraSection={
         <div className="relative overflow-hidden rounded-3xl bg-white/80 dark:bg-slate-900 backdrop-blur-sm border border-gray-200 dark:border-slate-700 shadow-lg">
           <div className="grid lg:grid-cols-2 gap-0">
-            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
               <img
                 src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif"
                 alt="Software Development"
@@ -42,7 +42,7 @@ export default function SoftwareDevelopmentPage() {
               />
             </div>
             <div className="p-8 lg:p-10">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
                 <span className="mr-1">Software Development</span>
                 <span className="animate-pulse">✨</span>
               </div>
@@ -69,7 +69,7 @@ export default function SoftwareDevelopmentPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-cpu w-4 h-4 text-purple-500"
+                      className="lucide lucide-cpu w-4 h-4 text-[#6467FF]"
                     >
                       <rect width="16" height="16" x="4" y="4" rx="2" />
                       <rect width="6" height="6" x="9" y="9" rx="1" />
@@ -95,7 +95,7 @@ export default function SoftwareDevelopmentPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-shield-check w-4 h-4 text-purple-500"
+                      className="lucide lucide-shield-check w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
                       <path d="m9 12 2 2 4-4" />
@@ -113,7 +113,7 @@ export default function SoftwareDevelopmentPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-code-xml w-4 h-4 text-purple-500"
+                      className="lucide lucide-code-xml w-4 h-4 text-[#6467FF]"
                     >
                       <path d="m18 16 4-4-4-4" />
                       <path d="m6 8-4 4 4 4" />
@@ -132,7 +132,7 @@ export default function SoftwareDevelopmentPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-zap w-4 h-4 text-purple-500"
+                      className="lucide lucide-zap w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
                     </svg>
@@ -248,7 +248,7 @@ export default function SoftwareDevelopmentPage() {
                 </div>
               </div>
               <div className="flex space-x-3">
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                   Software Development
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +266,7 @@ export default function SoftwareDevelopmentPage() {
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </button>
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                   View Details
                 </button>
               </div>

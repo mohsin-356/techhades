@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight, 
-  CheckCircle, 
-  Clock, 
+import {
+  ArrowRight,
+  CheckCircle,
+  Clock,
   Users,
   Code2,
   Smartphone,
@@ -173,8 +173,8 @@ export default function ServiceDetailCard({ category }: ServiceDetailCardProps) 
     >
       <div className="grid lg:grid-cols-2 gap-0">
         {/* Left Side - GIF/Animation */}
-        <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+        <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/15 to-[#43B2F9]/15 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/15 to-[#43B2F9]/15 dark:from-[#6467FF]/10 dark:to-[#43B2F9]/10" />
           {service.gif ? (
             <img
               src={service.gif}
@@ -186,7 +186,7 @@ export default function ServiceDetailCard({ category }: ServiceDetailCardProps) 
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="w-32 h-32 mx-auto mb-4 rounded-full border-4 border-dashed border-purple-300 dark:border-purple-600"
+                className="w-32 h-32 mx-auto mb-4 rounded-full border-4 border-dashed border-[#43B2F9]/40 dark:border-[#6467FF]/50"
               />
               <p className="text-gray-500 dark:text-gray-400">Animation Placeholder</p>
             </div>
@@ -196,7 +196,7 @@ export default function ServiceDetailCard({ category }: ServiceDetailCardProps) 
         {/* Right Side - Content */}
         <div className="p-8 lg:p-10">
           {/* Top Tag */}
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#43B2F9]/10 dark:bg-[#43B2F9]/10 text-[#43B2F9] dark:text-[#43B2F9] text-xs font-semibold mb-4 border border-[#43B2F9]/20">
             <span className="mr-1">{service.topTag}</span>
             <span className="animate-pulse">✨</span>
           </div>
@@ -227,7 +227,7 @@ export default function ServiceDetailCard({ category }: ServiceDetailCardProps) 
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center space-x-2 text-sm"
                   >
-                    <Icon className="w-4 h-4 text-purple-500" />
+                    <Icon className="w-4 h-4 text-[#43B2F9]" />
                     <span className="text-gray-700 dark:text-gray-300">{feature.text}</span>
                   </motion.div>
                 );
@@ -250,8 +250,8 @@ export default function ServiceDetailCard({ category }: ServiceDetailCardProps) 
                   className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700"
                 >
                   {techIcons[tech] && (
-                    <img 
-                      src={techIcons[tech]} 
+                    <img
+                      src={techIcons[tech]}
                       alt={tech}
                       className="w-4 h-4"
                     />

@@ -64,20 +64,22 @@ const variants = {
   slideInFromBottom
 }
 
-export function MotionDiv({ 
-  className, 
-  variant = "fadeInUp", 
-  children, 
-  ...props 
+// PERFORMANCE FIX: Use whileInView with once:true instead of animate
+// This prevents re-animation on every route change
+export function MotionDiv({
+  className,
+  variant = "fadeInUp",
+  children,
+  ...props
 }: MotionDivProps) {
   return (
     <motion.div
       className={cn(className)}
       variants={variants[variant]}
       initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileInView="animate"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       {...props}
     >
       {children}
@@ -85,10 +87,10 @@ export function MotionDiv({
   )
 }
 
-export function MotionSection({ 
-  className, 
-  children, 
-  ...props 
+export function MotionSection({
+  className,
+  children,
+  ...props
 }: HTMLMotionProps<"section">) {
   return (
     <motion.section
@@ -104,17 +106,20 @@ export function MotionSection({
   )
 }
 
-export function MotionCard({ 
-  className, 
-  children, 
-  ...props 
+export function MotionCard({
+  className,
+  children,
+  ...props
 }: HTMLMotionProps<"div">) {
   return (
     <motion.div
       className={cn(className)}
       variants={scaleIn}
-      whileHover={{ 
-        scale: 1.02, 
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{
+        scale: 1.02,
         y: -5,
         transition: { duration: 0.2 }
       }}
@@ -126,10 +131,10 @@ export function MotionCard({
   )
 }
 
-export function MotionButton({ 
-  className, 
-  children, 
-  ...props 
+export function MotionButton({
+  className,
+  children,
+  ...props
 }: HTMLMotionProps<"button">) {
   return (
     <motion.button

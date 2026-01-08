@@ -10,6 +10,9 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle, Code2, Rocket, Zap, Users, Shield, Target, ArrowRight, Clock, CircleCheckBig, CodeXml, Cloud, ShieldCheck, Sparkles, LightbulbIcon, Gauge, UserCheck, Lock } from "lucide-react";
 import ProjectsGrid from "@/components/ProjectsGrid";
+ import FaqAccordion from "@/components/faq/FaqAccordion";
+ import FaqJsonLd from "@/components/faq/FaqJsonLd";
+ import { SERVICE_FAQS } from "@/data/serviceFaqs";
 
 
 // Typing Animation Component
@@ -34,7 +37,7 @@ function TypingText({ text }: { text: string }) {
   }, [isInView, text]);
 
   return (
-    <h2 ref={ref} className="section-heading text-3xl sm:text-4xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 dark:from-purple-400 dark:via-indigo-400 dark:to-purple-400">
+    <h2 ref={ref} className="section-heading text-3xl sm:text-4xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF] dark:from-[#6467FF] dark:via-[#43B2F9] dark:to-[#6467FF]">
       {displayText}
       <motion.span
         animate={{ opacity: [1, 0] }}
@@ -86,7 +89,7 @@ export default function WebDevelopmentPage() {
             return (
               <motion.div
                 key={i}
-                className="absolute px-4 py-2 bg-purple-500 text-white font-semibold rounded-full text-sm whitespace-nowrap shadow-lg"
+                className="absolute px-4 py-2 bg-[#6467FF] text-white font-semibold rounded-full text-sm whitespace-nowrap shadow-lg"
                 style={{ left: tag.left, top: `${tag.top}px` }}
                 initial={{ opacity: 0, y: -30, rotate: -5 }}
                 animate={{
@@ -114,12 +117,12 @@ export default function WebDevelopmentPage() {
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
             {["Web Development", "✱", "API Services", "✱", "Backend", "✱", "Frontend", "✱", "Full Stack", "✱"].map((item, i) => (
-              <span key={i} className="text-purple-400 text-2xl font-bold">
+              <span key={i} className="text-[#6467FF] text-2xl font-bold">
                 {item}
               </span>
             ))}
             {["Web Development", "✱", "API Services", "✱", "Backend", "✱", "Frontend", "✱", "Full Stack", "✱"].map((item, i) => (
-              <span key={`dup-${i}`} className="text-purple-400 text-2xl font-bold">
+              <span key={`dup-${i}`} className="text-[#6467FF] text-2xl font-bold">
                 {item}
               </span>
             ))}
@@ -127,63 +130,84 @@ export default function WebDevelopmentPage() {
         </div>
       </MotionSection>
 
-      {/* Process Timeline - HORIZONTAL ROW */}
-      <MotionSection className="bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 dark:from-black dark:via-purple-950 dark:to-black py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <MotionDiv variant="fadeInUp" className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+      {/* Process Timeline - Development Process */}
+      <MotionSection className="bg-[#050714] py-24 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#43B2F9]/5 via-transparent to-transparent opacity-40"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#43B2F9]/20 to-transparent"></div>
+          <div className="absolute bottom-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#6467FF]/20 to-transparent"></div>
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <MotionDiv variant="fadeInUp" className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
               Our Web Development Process
             </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+            <p className="text-lg text-[#94A3B8] max-w-3xl mx-auto leading-relaxed">
               We follow a structured approach to deliver high-quality web applications that exceed expectations
             </p>
           </MotionDiv>
 
-          {/* Desktop Horizontal Flow */}
-          <div className="hidden lg:flex flex-col items-center relative">
-            {/* Center Brand Text */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <h3 className="text-6xl font-bold text-white/10 tracking-wider">AlienMatrix</h3>
-            </div>
-
-            {/* Horizontal Process Steps with Animated Flow */}
-            <div className="relative w-full flex items-center justify-between mb-12">
-              <div className="absolute top-1/2 left-0 w-full h-2 -translate-y-1/2 z-0">
+          {/* New Horizontal 6-Step Layout */}
+          <div className="relative">
+            {/* Desktop View */}
+            <div className="hidden lg:block relative">
+              {/* Connecting Line - Top */}
+              <div className="absolute top-8 left-[8%] right-[8%] h-[2px] bg-[#1E293B]">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600"
+                  className="h-full bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF]"
                   initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  whileInView={{ width: "100%" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
                   viewport={{ once: true }}
                 />
               </div>
 
-              {/* Step Indicators with Arrows */}
-              <div className="absolute top-1/2 w-full flex justify-between px-4 z-10 -translate-y-1/2">
-                {[1, 2, 3, 4, 5, 6].map((_, index, array) => {
-                  if (index === array.length - 1) return null; // Don't show arrow after last step
-                  const left = `calc(${(index + 0.5) * 100 / (array.length - 0.5)}% - 8px)`;
-                  return (
-                    <motion.div
-                      key={`arrow-${index}`}
-                      className="absolute"
-                      style={{ left }}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ delay: 0.8 + (index * 0.15), duration: 0.5 }}
-                      viewport={{ once: true }}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 1L15 8L8 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </motion.div>
-                  )
-                })}
+              <div className="grid grid-cols-6 gap-6 relative z-10">
+                {[
+                  { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your business, goals, and target audience. Through collaborative discussions, we define project requirements, timelines, and resources." },
+                  { number: 2, title: "Design & Prototyping", desc: "Our design team creates interactive wireframes and high-fidelity prototypes that reflect the user journey and optimize interface flow for maximum engagement." },
+                  { number: 3, title: "Development & Coding", desc: "We build using latest technologies like React, Next.js, Node.js, and Laravel ensuring responsive, secure and performant web applications with clean code architecture." },
+                  { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test functionality, performance, security, and cross-device compatibility using automated and manual testing techniques to ensure flawless execution." },
+                  { number: 5, title: "Launch & Deployment", desc: "We deploy with proper CI/CD pipelines, security hardening, CDN configuration, and optimal scaling for zero-downtime releases and maximum reliability." },
+                  { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive maintenance, monitoring, and support packages to keep your website updated, secure, and running efficiently with proactive issue resolution." },
+                ].map((step, index) => (
+                  <motion.div
+                    key={step.number}
+                    className="flex flex-col items-center group"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                    viewport={{ once: true }}
+                  >
+                    {/* Number Indicator */}
+                    <div className="relative mb-8">
+                      <div className="w-16 h-16 rounded-full bg-[#0B1526] border-2 border-[#43B2F9] flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(67,178,249,0.3)]">
+                        <span className="text-xl font-bold text-[#43B2F9]">{step.number}</span>
+                      </div>
+                      {/* Glow behind number */}
+                      <div className="absolute inset-0 bg-[#43B2F9]/20 blur-xl rounded-full"></div>
+                    </div>
+
+                    {/* Card */}
+                    <div className="w-full h-full">
+                      <div className="h-full bg-[#0B1526]/60 backdrop-blur-md border border-[#43B2F9]/30 rounded-2xl p-6 hover:border-[#43B2F9] transition-colors duration-300 flex flex-col items-center text-center group-hover:shadow-[0_0_30px_rgba(67,178,249,0.1)]">
+                        <h3 className="text-lg font-bold text-white mb-3 min-h-[48px] flex items-center justify-center">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-[#94A3B8] leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
-            {/* Process Steps in a Row */}
-            <div className="w-full grid grid-cols-6 gap-6 relative z-20">
+            {/* Mobile/Tablet View (Stacked) */}
+            <div className="lg:hidden space-y-8">
               {[
                 { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your business, goals, and target audience. Through collaborative discussions, we define project requirements, timelines, and resources." },
                 { number: 2, title: "Design & Prototyping", desc: "Our design team creates interactive wireframes and high-fidelity prototypes that reflect the user journey and optimize interface flow for maximum engagement." },
@@ -194,152 +218,32 @@ export default function WebDevelopmentPage() {
               ].map((step, index) => (
                 <motion.div
                   key={step.number}
-                  className="flex flex-col items-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
+                  className="flex gap-6 relative"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-xl shadow-purple-500/50 mb-4"
-                    initial={{ scale: 0.8 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.4 + (index * 0.15) }}
-                    viewport={{ once: true }}
-                  >
-                    {step.number}
-                  </motion.div>
-                  <div className="bg-purple-900/40 backdrop-blur-sm border-2 border-purple-500/50 rounded-lg p-4 h-full w-full">
-                    <h3 className="text-base font-bold text-white mb-2 text-center">{step.title}</h3>
-                    <p className="text-xs text-gray-300 leading-tight text-center">{step.desc}</p>
+                  {/* Vertical Line */}
+                  {index !== 5 && (
+                    <div className="absolute left-[31px] top-[64px] bottom-[-32px] w-[2px] bg-gradient-to-b from-[#43B2F9]/50 to-transparent"></div>
+                  )}
+
+                  <div className="shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-[#0B1526] border-2 border-[#43B2F9] flex items-center justify-center shadow-[0_0_15px_rgba(67,178,249,0.2)]">
+                      <span className="text-xl font-bold text-[#43B2F9]">{step.number}</span>
+                    </div>
+                  </div>
+
+                  <div className="grow pb-4">
+                    <div className="bg-[#0B1526]/60 backdrop-blur-sm border border-[#43B2F9]/30 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                      <p className="text-[#94A3B8] text-sm leading-relaxed">{step.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Return Arrow */}
-            <motion.div
-              className="mt-12 flex justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <motion.path
-                  d="M75 20C75 8 60 5 40 5C20 5 5 8 5 20"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 1.7, duration: 1 }}
-                />
-                <motion.path
-                  d="M15 10L5 20L15 30"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 2.7, duration: 0.4 }}
-                />
-              </svg>
-            </motion.div>
-
-            {/* Continuous Improvement Callout */}
-            <div className="mt-12 bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-3xl mx-auto border border-purple-500/30">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 4V20M4 12H20" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-white">Continuous Improvement</h3>
-              </div>
-              <p className="text-white/80 text-center">
-                Our process isn't linear—it's cyclical. We constantly gather feedback, analyze metrics, and implement improvements to ensure your web application evolves with your business needs and user expectations.
-              </p>
-            </div>
-          </div>
-
-          {/* Mobile Process Flow */}
-          <div className="lg:hidden space-y-8">
-            {[
-              { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your business, goals, and target audience. Through collaborative discussions, we define project requirements, timelines, and resources." },
-              { number: 2, title: "Design & Prototyping", desc: "Our design team creates interactive wireframes and high-fidelity prototypes that reflect the user journey and optimize interface flow for maximum engagement." },
-              { number: 3, title: "Development & Coding", desc: "We build using latest technologies like React, Next.js, Node.js, and Laravel ensuring responsive, secure and performant web applications with clean code architecture." },
-              { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test functionality, performance, security, and cross-device compatibility using automated and manual testing techniques to ensure flawless execution." },
-              { number: 5, title: "Launch & Deployment", desc: "We deploy with proper CI/CD pipelines, security hardening, CDN configuration, and optimal scaling for zero-downtime releases and maximum reliability." },
-              { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive maintenance, monitoring, and support packages to keep your website updated, secure, and running efficiently with proactive issue resolution." },
-            ].map((step, index, array) => (
-              <motion.div
-                key={step.number}
-                className="flex gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-lg"
-                  whileInView={{
-                    boxShadow: ["0 10px 15px -3px rgba(139, 92, 246, 0.3)", "0 10px 20px -2px rgba(139, 92, 246, 0.6)", "0 10px 15px -3px rgba(139, 92, 246, 0.3)"],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {step.number}
-                </motion.div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-300">{step.desc}</p>
-
-                  {index < array.length - 1 && (
-                    <motion.div
-                      className="flex justify-center mt-4 text-white"
-                      animate={{ y: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 4L12 16" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                        <path d="M6 10L12 16L18 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-            {/* Return Arrow for Mobile */}
-            <motion.div
-              className="flex justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <motion.path
-                  d="M30 20C30 25.5228 25.5228 30 20 30C14.4772 30 10 25.5228 10 20C10 14.4772 14.4772 10 20 10"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5, delay: 1 }}
-                />
-                <motion.path
-                  d="M20 10L26 7M20 10L26 13"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 2.5 }}
-                />
-              </svg>
-            </motion.div>
           </div>
         </div>
       </MotionSection>
@@ -350,7 +254,7 @@ export default function WebDevelopmentPage() {
           <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden shadow-2xl">
             {/* Left - Image/GIF */}
             <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20"></div>
               <img
                 src="https://i.pinimg.com/originals/2a/53/65/2a53651a35816f499270d8275fd5318f.gif"
                 alt="Website Development"
@@ -360,7 +264,7 @@ export default function WebDevelopmentPage() {
 
             {/* Right - Content */}
             <div className="p-8 lg:p-10 bg-background">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 text-[#6467FF] text-xs font-semibold mb-4">
                 <span className="mr-1">Website Development</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
@@ -383,19 +287,19 @@ export default function WebDevelopmentPage() {
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   <MotionDiv variant="fadeInUp" className="flex items-center space-x-2 text-sm">
-                    <CodeXml className="w-4 h-4 text-purple-500" />
+                    <CodeXml className="w-4 h-4 text-[#6467FF]" />
                     <span className="text-gray-700 dark:text-gray-300">Custom-Built Solutions</span>
                   </MotionDiv>
                   <MotionDiv variant="fadeInUp" className="flex items-center space-x-2 text-sm">
-                    <Zap className="w-4 h-4 text-purple-500" />
+                    <Zap className="w-4 h-4 text-[#6467FF]" />
                     <span className="text-gray-700 dark:text-gray-300">Fast & Responsive Design</span>
                   </MotionDiv>
                   <MotionDiv variant="fadeInUp" className="flex items-center space-x-2 text-sm">
-                    <Cloud className="w-4 h-4 text-purple-500" />
+                    <Cloud className="w-4 h-4 text-[#6467FF]" />
                     <span className="text-gray-700 dark:text-gray-300">SEO-Friendly Architecture</span>
                   </MotionDiv>
                   <MotionDiv variant="fadeInUp" className="flex items-center space-x-2 text-sm">
-                    <ShieldCheck className="w-4 h-4 text-purple-500" />
+                    <ShieldCheck className="w-4 h-4 text-[#6467FF]" />
                     <span className="text-gray-700 dark:text-gray-300">Scalable & Secure Systems</span>
                   </MotionDiv>
                 </div>
@@ -450,7 +354,7 @@ export default function WebDevelopmentPage() {
               <div className="flex space-x-3">
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] dark:from-purple-500 dark:to-indigo-500"
+                  className="bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02]"
                 >
                   <Link href="/contact">
                     Website Development <ArrowRight className="w-4 h-4 ml-2" />
@@ -458,7 +362,7 @@ export default function WebDevelopmentPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="bg-white/80 dark:bg-slate-900 text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 hover:bg-white dark:hover:bg-slate-800"
+                  className="bg-white/80 dark:bg-slate-900 text-[#6467FF] border-2 border-[#6467FF] hover:bg-white dark:hover:bg-slate-800"
                 >
                   View Details
                 </Button>
@@ -493,7 +397,7 @@ export default function WebDevelopmentPage() {
             <Button
               asChild
               variant="secondary"
-              className="px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 text-white hover:scale-105 transition-transform duration-300"
+              className="px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF] text-white hover:scale-105 transition-transform duration-300"
             >
               <Link href="/projects?category=Web" className="flex items-center gap-2">
                 <span>Show All</span>
@@ -712,7 +616,7 @@ export default function WebDevelopmentPage() {
               {/* Item 2 */}
               <MotionDiv variant="fadeInUp" className="relative">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-4 shadow-lg shadow-purple-500/30">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#6467FF] to-[#43B2F9] flex items-center justify-center mb-4 shadow-lg shadow-[#6467FF]/30">
                     <LightbulbIcon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-lg font-bold mb-3">Cutting-Edge Technologies</h3>
@@ -787,7 +691,7 @@ export default function WebDevelopmentPage() {
               <div className="grid grid-cols-2 gap-4">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-purple-600 to-indigo-600"
+                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-[#6467FF] to-[#43B2F9]"
                 >
                   <div className="w-full h-full flex items-center justify-center text-white text-6xl">
                     👨‍💻
@@ -795,7 +699,7 @@ export default function WebDevelopmentPage() {
                 </motion.div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-indigo-600 to-blue-600 mt-8"
+                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-[#43B2F9] to-[#6467FF] mt-8"
                 >
                   <div className="w-full h-full flex items-center justify-center text-white text-6xl">
                     👩‍💻
@@ -811,7 +715,7 @@ export default function WebDevelopmentPage() {
                 </motion.div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-purple-600 to-pink-600"
+                  className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-[#6467FF] to-[#43B2F9]"
                 >
                   <div className="w-full h-full flex items-center justify-center text-white text-6xl">
                     👩‍🎨
@@ -868,16 +772,28 @@ export default function WebDevelopmentPage() {
         </div>
       </MotionSection>
 
+      {SERVICE_FAQS["web-development"] && (
+        <>
+          <FaqJsonLd groups={[SERVICE_FAQS["web-development"]]} />
+          <FaqAccordion
+            groups={[SERVICE_FAQS["web-development"]]}
+            searchable
+            oneAtATime
+            showCta
+          />
+        </>
+      )}
+
       {/* Final CTA Section */}
-      <MotionSection className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-black dark:via-purple-950 dark:to-black py-20 relative overflow-hidden">
+      <MotionSection className="bg-gradient-to-br from-[#050714] via-[#0B1526] to-[#050714] py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <MotionDiv variant="fadeInUp" className="text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Let's Create an <span className="bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">Amazing</span>
+              Let's Create an <span className="bg-gradient-to-r from-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">Amazing</span>
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">Project Together!</span>
+              <span className="bg-gradient-to-r from-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">Project Together!</span>
             </h2>
-            <Button asChild size="lg" className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-6 text-lg">
+            <Button asChild size="lg" className="bg-[#6467FF] hover:bg-[#43B2F9] text-white px-8 py-6 text-lg">
               <Link href="/contact">Contact Us</Link>
             </Button>
           </MotionDiv>

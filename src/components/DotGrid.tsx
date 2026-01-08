@@ -55,8 +55,8 @@ interface Dot {
 const DotGrid = ({
   dotSize = 16,
   gap = 32,
-  baseColor = '#5227FF',
-  activeColor = '#5227FF',
+  baseColor = '#6467FF',
+  activeColor = '#6467FF',
   proximity = 150,
   speedTrigger = 100,
   shockRadius = 250,

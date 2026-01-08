@@ -26,13 +26,8 @@ export function GlobalLoaderClient({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         if (isInitialLoad) return;
 
-        // When pathname changes (navigation complete), keep loader for a bit
-        // This handles the "arrival" at the new page
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000); // 2 seconds after arrival
-
-        return () => clearTimeout(timer);
+        // When pathname changes (navigation complete), hide loader immediately
+        setIsLoading(false);
     }, [pathname, isInitialLoad]);
 
     // Link Interception for Pre-Navigation Loading
@@ -57,10 +52,8 @@ export function GlobalLoaderClient({ children }: { children: React.ReactNode }) 
 
                     setIsLoading(true); // Show loader immediately
 
-                    // Wait a brief moment for animation to start, then push
-                    setTimeout(() => {
-                        router.push(anchor.href);
-                    }, 500); // 500ms delay before starting navigation
+                    // Navigate immediately (avoid intentional lag)
+                    router.push(anchor.href);
                 }
             }
         };

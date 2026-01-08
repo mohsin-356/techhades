@@ -1,0 +1,414 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "slug": "alfred-robotics",
+      "title": "Alfred Robotics Platform",
+      "category": "AI & Automation",
+      "client": {
+        "name": "Confidential",
+        "location": "",
+        "industry": "",
+        "website": ""
+      },
+      "hero": {
+        "tagline": "Transforming Restaurant Automation",
+        "brief": "Meet Alfred, an advanced robotic arm designed for culinary excellence. Alfred was powerful, but only robotics and software engineers could communicate with it. Restaurant teams needed a visual, role-based interface to operate and troubleshoot without technical support.",
+        "featuredImage": "/projectgifs/softwaresprojects/foodify.gif",
+        "problem": "Engineer-only tooling slowed deployments and created downtime risk during peak service.",
+        "solution": "We built a task-first operator platform with real-time monitoring, guided recovery flows, and offline resilience."
+      },
+      "quickInfo": {
+        "platform": "Web Platform",
+        "type": "Operations Dashboard",
+        "duration": "24 Months",
+        "process": "Research → UX → UI → Prototype → Development"
+      },
+      "techStack": [
+        { "name": "React", "icon": "react", "category": "frontend" },
+        { "name": "Ruby on Rails", "icon": "rails", "category": "backend" },
+        { "name": "Python", "icon": "python", "category": "backend" },
+        { "name": "RabbitMQ", "icon": "rabbitmq", "category": "infrastructure" },
+        { "name": "PostgreSQL", "icon": "postgres", "category": "database" },
+        { "name": "Figma", "icon": "figma", "category": "design" }
+      ],
+      "team": {
+        "size": "6 Members",
+        "breakdown": [
+          "1 Project Manager",
+          "1 Account Manager",
+          "1 Designer",
+          "1 Software Architect",
+          "2 Senior Developers"
+        ]
+      },
+      "features": [
+        {
+          "title": "Intuitive Robot Control",
+          "description": "Restaurant staff can send task-based commands through a visual UI with immediate system feedback.",
+          "image": "/projectgifs/softwaresprojects/foodify.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Real-Time Monitoring",
+          "description": "Live status, safety states, and alerts enable fast, confident operations.",
+          "image": "/projectgifs/softwaresprojects/EarthMatrix.gif",
+          "alignment": "right"
+        },
+        {
+          "title": "Multi-Robot Management",
+          "description": "Manage multiple Alfred units with health checks, role-based permissions, and audit logs.",
+          "image": "/projectgifs/softwaresprojects/EcomMatrix.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Guided Recovery",
+          "description": "Clear error states and step-by-step recovery reduce downtime during service.",
+          "image": "/projectgifs/softwaresprojects/cryptomatrix.gif",
+          "alignment": "right"
+        }
+      ],
+      "details": {
+        "aboutClient": "This case study covers an operator platform for a robotics product used in commercial kitchens. The goal was to make operation simple for non-technical teams.",
+        "challenge": {
+          "description": "Translate complex robot states into a language kitchen teams understand while ensuring reliability across unstable networks.",
+          "requirements": [
+            "Offline operation support",
+            "Role-based permissions",
+            "Real-time state updates",
+            "Guided error recovery",
+            "Multi-robot scalability",
+            "Operational logging"
+          ]
+        },
+        "solution": {
+          "overview": "We designed a task-first operator experience centered on speed, clarity, and safety.",
+          "technicalApproach": [
+            "React UI with large touch targets and immediate feedback",
+            "Rails API for orchestration, audit logs, and RBAC",
+            "Python services for robot communication",
+            "Event-driven state updates via RabbitMQ",
+            "Offline cache + resync strategy"
+          ],
+          "implementationFeatures": [
+            {
+              "icon": "users",
+              "title": "Role-Based Access",
+              "description": "Managers, operators, and maintenance teams see exactly what they need"
+            },
+            {
+              "icon": "activity",
+              "title": "Live Status",
+              "description": "Instant visibility into current tasks and blockers"
+            },
+            {
+              "icon": "alert-circle",
+              "title": "Guided Troubleshooting",
+              "description": "Plain-language errors with recovery steps"
+            },
+            {
+              "icon": "shield-check",
+              "title": "Safety-First UI",
+              "description": "Clear safety gates and confirmations for critical actions"
+            }
+          ]
+        },
+        "businessValue": {
+          "before": [
+            "Engineering required for daily operations",
+            "Expensive demos and slow rollouts",
+            "Downtime risk during connectivity drops"
+          ],
+          "after": [
+            "Kitchen staff can operate after short training",
+            "Higher deployment success through simplified workflows",
+            "Improved reliability with offline resilience"
+          ]
+        }
+      },
+      "technologies": {
+        "design": ["Figma", "Miro"],
+        "development": ["React", "Ruby on Rails", "Python", "RabbitMQ", "PostgreSQL"],
+        "experience": ["User Research", "Usability Testing", "Prototyping"]
+      },
+      "relatedProjects": ["cloudforge-dashboard", "healthsync-mobile"],
+      "metrics": {
+        "deploymentTime": "15 min",
+        "supportTickets": "-75%",
+        "training": "15 min"
+      },
+      "tags": ["AI & Automation", "Operations", "Dashboard"],
+      "testimonial": {
+        "quote": "The operator experience feels simple and reliable for day-to-day use.",
+        "author": "Product Team",
+        "position": "Confidential"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "cloudforge-dashboard",
+      "title": "CloudForge Systems Dashboard",
+      "category": "Web",
+      "client": {
+        "name": "Confidential",
+        "location": "",
+        "industry": "",
+        "website": ""
+      },
+      "hero": {
+        "tagline": "Enterprise Power, Without Complexity",
+        "brief": "CloudForge had strong infrastructure tooling but the dashboard overwhelmed users with noisy metrics and unclear priorities. We redesigned the product experience around clarity, speed, and guided actions.",
+        "featuredImage": "/projectgifs/softwaresprojects/EarthMatrix.gif",
+        "problem": "Too many metrics created analysis paralysis and slowed incident response.",
+        "solution": "We built a progressive disclosure UI with performance-first charts and contextual automation."
+      },
+      "quickInfo": {
+        "platform": "Web Platform",
+        "type": "SaaS Dashboard",
+        "duration": "6 Months",
+        "process": "Research → IA → UI → Build → Testing"
+      },
+      "techStack": [
+        { "name": "React", "icon": "react", "category": "frontend" },
+        { "name": "TypeScript", "icon": "typescript", "category": "frontend" },
+        { "name": "Node.js", "icon": "nodejs", "category": "backend" },
+        { "name": "MongoDB", "icon": "mongodb", "category": "database" },
+        { "name": "AWS", "icon": "aws", "category": "infrastructure" },
+        { "name": "Figma", "icon": "figma", "category": "design" }
+      ],
+      "team": {
+        "size": "5 Members",
+        "breakdown": ["1 PM", "1 UX Researcher", "1 Designer", "2 Full-Stack Developers"]
+      },
+      "features": [
+        {
+          "title": "Progressive Disclosure UI",
+          "description": "Daily ops metrics are front-and-center, while advanced tooling lives behind contextual actions.",
+          "image": "/projectgifs/softwaresprojects/EarthMatrix.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Real-Time Health Overview",
+          "description": "A single glance view for uptime, alerts, and cost anomalies with clear escalation paths.",
+          "image": "/projectgifs/softwaresprojects/cryptomatrix.gif",
+          "alignment": "right"
+        },
+        {
+          "title": "Cost & Usage Insights",
+          "description": "Budget forecasting and breakdowns using chart patterns optimized for readability.",
+          "image": "/projectgifs/softwaresprojects/EcomMatrix.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Guided Automation Actions",
+          "description": "Inline recommended actions help teams apply safe automation during incidents.",
+          "image": "/projectgifs/softwaresprojects/Carban jobs Admin.gif",
+          "alignment": "right"
+        }
+      ],
+      "details": {
+        "aboutClient": "This case study covers a cloud operations dashboard redesign. As the platform matured, the dashboard became too complex for self-serve adoption.",
+        "challenge": {
+          "description": "Reduce cognitive load while preserving advanced capabilities and improving dashboard performance under large datasets.",
+          "requirements": [
+            "Information architecture redesign",
+            "Fast dashboards on large datasets",
+            "Accessible charts and tables",
+            "Clear alerting and triage",
+            "Guided onboarding for new users"
+          ]
+        },
+        "solution": {
+          "overview": "We rebuilt the dashboard around decisions: what to do next, why it matters, and how to act safely.",
+          "technicalApproach": [
+            "Component-driven UI with reusable charts",
+            "Client virtualization for large tables",
+            "Server-side aggregation to reduce payload size",
+            "Type-safe analytics events"
+          ],
+          "implementationFeatures": [
+            {
+              "icon": "layout-dashboard",
+              "title": "Custom Views",
+              "description": "Teams build dashboards that match their workflows"
+            },
+            {
+              "icon": "zap",
+              "title": "Performance UI",
+              "description": "Virtualized lists and optimized queries for speed"
+            },
+            {
+              "icon": "shield-check",
+              "title": "Safe Actions",
+              "description": "Guardrails and confirmations prevent costly mistakes"
+            },
+            {
+              "icon": "book-open",
+              "title": "Embedded Learning",
+              "description": "In-context explanations for metrics and actions"
+            }
+          ]
+        },
+        "businessValue": {
+          "before": [
+            "New users dropped off after first login",
+            "Important alerts were buried under noise",
+            "Incident decision-making was slow"
+          ],
+          "after": [
+            "Higher activation through clearer onboarding",
+            "Fewer support tickets with in-context guidance",
+            "Faster incident response with clear hierarchy"
+          ]
+        }
+      },
+      "technologies": {
+        "design": ["Figma"],
+        "development": ["React", "TypeScript", "Node.js", "MongoDB", "AWS"],
+        "experience": ["User Research", "Design Systems", "Usability Testing"]
+      },
+      "relatedProjects": ["alfred-robotics", "healthsync-mobile"],
+      "metrics": {
+        "supportTickets": "-42%",
+        "retention": "+35%"
+      },
+      "tags": ["Web", "SaaS", "Dashboard"],
+      "testimonial": {
+        "quote": "The new dashboard finally makes the platform approachable. Users get value in minutes.",
+        "author": "Product Team",
+        "position": "Confidential"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "healthsync-mobile",
+      "title": "HealthSync Pro Mobile App",
+      "category": "Mobile",
+      "client": {
+        "name": "Confidential",
+        "location": "",
+        "industry": "",
+        "website": ""
+      },
+      "hero": {
+        "tagline": "Care Coordination, Without the Chaos",
+        "brief": "This case study focuses on building a calm, clear app experience for patients and clinicians. The original product was dense and stressful to use during real care moments.",
+        "featuredImage": "/projectgifs/fitness.gif",
+        "problem": "Critical information was scattered across screens, creating friction and risk.",
+        "solution": "We designed a mobile-first experience with clear flows, reminders, and secure sharing."
+      },
+      "quickInfo": {
+        "platform": "Mobile App",
+        "type": "Patient + Clinician App",
+        "duration": "5 Months",
+        "process": "Research → Flows → UI → Prototype → Build"
+      },
+      "techStack": [
+        { "name": "React Native", "icon": "react", "category": "mobile" },
+        { "name": "TypeScript", "icon": "typescript", "category": "frontend" },
+        { "name": "Firebase", "icon": "firebase", "category": "infrastructure" },
+        { "name": "Node.js", "icon": "nodejs", "category": "backend" },
+        { "name": "Figma", "icon": "figma", "category": "design" }
+      ],
+      "team": {
+        "size": "4 Members",
+        "breakdown": ["1 Product Designer", "1 Mobile Developer", "1 Backend Developer", "1 QA"]
+      },
+      "features": [
+        {
+          "title": "Daily Plan & Reminders",
+          "description": "Medication, appointments, and tasks in a single timeline with gentle reminders.",
+          "image": "/projectgifs/fitness.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Secure Sharing",
+          "description": "Patients share updates with clinicians and caregivers using permissioned access.",
+          "image": "/projectgifs/homeie.gif",
+          "alignment": "right"
+        },
+        {
+          "title": "Symptom Tracking",
+          "description": "Fast entry patterns and visual trends improve adherence and reduce cognitive load.",
+          "image": "/projectgifs/fitness App.gif",
+          "alignment": "left"
+        },
+        {
+          "title": "Clinician Summaries",
+          "description": "Readable summaries help clinicians make faster decisions and coordinate care.",
+          "image": "/projectgifs/uptome.gif",
+          "alignment": "right"
+        }
+      ],
+      "details": {
+        "aboutClient": "This case study covers a care coordination product designed to reduce friction between patients, clinicians, and caregivers.",
+        "challenge": {
+          "description": "Create a calm UX that works for diverse users while prioritizing privacy and speed.",
+          "requirements": [
+            "Mobile-first UX optimized for quick actions",
+            "Secure auth and permissioned sharing",
+            "Reliable reminders",
+            "Accessible typography and contrast",
+            "Clinician-friendly summaries"
+          ]
+        },
+        "solution": {
+          "overview": "We simplified the experience around a Today model: what do users need right now?",
+          "technicalApproach": [
+            "React Native for consistent iOS/Android experience",
+            "Firebase for auth and push notifications",
+            "Type-safe APIs and analytics"
+          ],
+          "implementationFeatures": [
+            {
+              "icon": "heart-pulse",
+              "title": "Calm UI",
+              "description": "Clear hierarchy and spacing reduce stress"
+            },
+            {
+              "icon": "bell",
+              "title": "Smart Reminders",
+              "description": "Reliable reminders that fit user routines"
+            },
+            {
+              "icon": "lock",
+              "title": "Privacy by Design",
+              "description": "Permissioned sharing and secure data handling"
+            },
+            {
+              "icon": "clipboard-check",
+              "title": "Care Summaries",
+              "description": "Readable summaries for clinicians"
+            }
+          ]
+        },
+        "businessValue": {
+          "before": [
+            "Users dropped off after onboarding",
+            "Clinicians lacked consistent patient updates"
+          ],
+          "after": [
+            "Improved retention through simpler flows",
+            "More consistent updates for care teams"
+          ]
+        }
+      },
+      "technologies": {
+        "design": ["Figma"],
+        "development": ["React Native", "TypeScript", "Firebase", "Node.js"],
+        "experience": ["Accessibility", "Prototyping", "User Research"]
+      },
+      "relatedProjects": ["alfred-robotics", "cloudforge-dashboard"],
+      "metrics": {
+        "retention": "+28%",
+        "supportTickets": "-33%"
+      },
+      "tags": ["Mobile", "HealthTech", "React Native"],
+      "testimonial": {
+        "quote": "The redesign made the experience feel human. Users love the clarity.",
+        "author": "Product Team",
+        "position": "Confidential"
+      }
+    }
+  ]
+}

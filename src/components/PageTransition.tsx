@@ -1,51 +1,37 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import anime from "animejs";
+import { motion, AnimatePresence } from "framer-motion";
 
+// Simpler, GPU-accelerated page transition using Framer Motion
+// Replaces Anime.js to avoid library conflicts and reduce bundle size
 export default function PageTransition({ children }: { children: React.ReactNode }) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const curtainRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (!contentRef.current) return;
-    // Curtain reveal
-    if (curtainRef.current) {
-      curtainRef.current.style.transformOrigin = "left center";
-      curtainRef.current.style.transform = "scaleX(1)";
-      anime({
-        targets: curtainRef.current,
-        scaleX: [1, 0],
-        easing: "easeInOutExpo",
-        duration: 700,
-        delay: 80,
-      });
-    }
-
-    // Content fade/slide
-    anime({
-      targets: contentRef.current,
-      opacity: [0, 1],
-      translateY: [16, 0],
-      easing: "easeOutExpo",
-      duration: 700,
-    });
+    // Quick fade-in on route change
+    setIsVisible(false);
+    const timer = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return (
-    <div className="relative">
-      <div
-        ref={curtainRef}
-        className="pointer-events-none fixed inset-0 z-[40] hidden"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(10,11,28,1) 0%, rgba(25,27,62,0.96) 40%, rgba(10,11,28,0.85) 100%)",
-          transform: "scaleX(0)",
-        }}
-      />
-      <div ref={contentRef}>{children}</div>
-    </div>
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1]
+      }}
+      style={{
+        willChange: "transform, opacity",
+        transform: "translate3d(0,0,0)"
+      }}
+    >
+      {children}
+    </motion.div>
   );
 }

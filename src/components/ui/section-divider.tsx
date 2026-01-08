@@ -47,23 +47,23 @@ export function SectionDivider({
               <stop offset="0%" stopColor="rgba(109, 106, 255, 0.2)">
                 <animate
                   attributeName="stop-color"
-                  values="rgba(109, 106, 255, 0.2);rgba(168, 85, 247, 0.3);rgba(34, 211, 238, 0.2);rgba(109, 106, 255, 0.2)"
+                  values="rgba(109, 106, 255, 0.2);rgba(100, 103, 255, 0.3);rgba(67, 178, 249, 0.2);rgba(109, 106, 255, 0.2)"
                   dur="4s"
                   repeatCount="indefinite"
                 />
               </stop>
-              <stop offset="50%" stopColor="rgba(168, 85, 247, 0.3)">
+              <stop offset="50%" stopColor="rgba(100, 103, 255, 0.3)">
                 <animate
                   attributeName="stop-color"
-                  values="rgba(168, 85, 247, 0.3);rgba(34, 211, 238, 0.2);rgba(109, 106, 255, 0.2);rgba(168, 85, 247, 0.3)"
+                  values="rgba(100, 103, 255, 0.3);rgba(67, 178, 249, 0.2);rgba(109, 106, 255, 0.2);rgba(100, 103, 255, 0.3)"
                   dur="4s"
                   repeatCount="indefinite"
                 />
               </stop>
-              <stop offset="100%" stopColor="rgba(34, 211, 238, 0.2)">
+              <stop offset="100%" stopColor="rgba(67, 178, 249, 0.2)">
                 <animate
                   attributeName="stop-color"
-                  values="rgba(34, 211, 238, 0.2);rgba(109, 106, 255, 0.2);rgba(168, 85, 247, 0.3);rgba(34, 211, 238, 0.2)"
+                  values="rgba(67, 178, 249, 0.2);rgba(109, 106, 255, 0.2);rgba(100, 103, 255, 0.3);rgba(67, 178, 249, 0.2)"
                   dur="4s"
                   repeatCount="indefinite"
                 />

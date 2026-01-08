@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X, Sparkles, Globe, Smartphone, Palette, Bot, Code2, Megaphone, Gamepad2, Cloud, ShoppingCart, ChevronDown } from "lucide-react";
 // import ThemeToggle from "@/components/ThemeToggle"; // temporarily hidden
- 
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -20,15 +20,12 @@ export default function Navbar() {
     setOpen(false);
   }, [pathname]);
 
-  // Track scroll direction to switch between full-width (top) and condensed (on scroll up)
+  // Track scroll position to switch between full-width (top) and condensed (after leaving top)
   useEffect(() => {
-    let lastY = window.scrollY || 0;
     const onScroll = () => {
       const y = window.scrollY || 0;
-      const scrollingUp = y < lastY;
       const atTop = y <= 8;
-      setCondensed(!atTop && scrollingUp);
-      lastY = y;
+      setCondensed(!atTop);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -39,22 +36,21 @@ export default function Navbar() {
     <motion.header
       className={cn(
         "fixed z-50 transition-all duration-300",
-        "backdrop-blur-2xl border",
-        "dark:bg-slate-900/60 dark:border-white/10",
-        "bg-white/60 border-white/20",
+        "backdrop-blur-[14px] border",
+        "bg-[rgba(5,7,20,0.6)] border-[rgba(255,255,255,0.08)]",
         condensed
-          ? "top-2 left-[10%] right-[10%] w-auto rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden"
-          : "top-0 left-0 right-0 w-full rounded-none border-b shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+          ? "top-2 left-[10%] right-[10%] w-auto rounded-2xl shadow-[0_8px_32px_rgba(100,103,255,0.15)]"
+          : "top-0 left-0 right-0 w-full rounded-none border-b shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="relative">
-        {/* Dispersion tint + highlight sweep */}
+        {/* AlienMatrix gradient sweep */}
         <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]">
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 via-white/10 to-indigo-500/10 dark:from-purple-500/5 dark:via-white/5 dark:to-indigo-500/5" />
-          <div className="absolute -inset-x-8 -top-24 h-48 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(255,255,255,0.35),transparent)] dark:bg-[radial-gradient(80%_60%_at_50%_0%,rgba(255,255,255,0.15),transparent)]" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(100,103,255,0.08)] via-transparent to-[rgba(67,178,249,0.05)]" />
+          <div className="absolute -inset-x-8 -top-24 h-48 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(67,178,249,0.15),transparent)]" />
         </div>
 
         <div className="relative mx-auto flex max-w-[1400px] items-center justify-between px-6 py-3">
@@ -68,13 +64,13 @@ export default function Navbar() {
                 className="h-7 w-7 rounded-sm shadow-sm"
                 priority
               />
-              <span className="font-display text-xl tracking-wide text-foreground group-hover:text-brand transition-colors">
+              <span className="font-display text-xl tracking-wide brand-shift">
                 AlienMatrix
               </span>
             </Link>
           </motion.div>
 
-          <nav className="hidden md:flex items-center gap-1 rounded-full bg-white/40 dark:bg-slate-800/40 p-1 ring-1 ring-white/40 dark:ring-white/10 backdrop-blur-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.35),0_6px_20px_rgba(99,102,241,0.1)]">
+          <nav className="hidden md:flex items-center gap-1 rounded-full bg-[rgba(11,21,38,0.6)] p-1 ring-1 ring-[rgba(255,255,255,0.08)] backdrop-blur-xl shadow-[inset_0_0_0_1px_rgba(100,103,255,0.2),0_6px_20px_rgba(100,103,255,0.1)]">
             <NavPillLink href="/" label="Home" />
             <ServicesDropdownPill />
             <NavPillLink href="/projects" label="Projects" />
@@ -129,7 +125,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden bg-background/90 border border-foreground/10 rounded-2xl mt-2 mx-2 shadow-lg"
+            className="md:hidden bg-[#0B1526] border border-[rgba(100,103,255,0.25)] rounded-2xl mt-2 mx-2 shadow-[0_8px_32px_rgba(100,103,255,0.15)]"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -194,8 +190,8 @@ function NavPillLink({ href, label }: { href: string; label: string }) {
       className={cn(
         "inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
         active
-          ? "text-purple-900 dark:text-purple-100 shadow-[0_6px_24px_rgba(168,85,247,0.35)] ring-1 ring-white/50 dark:ring-purple-400/50 bg-[linear-gradient(135deg,#e9d5ff_0%,#f3e8ff_50%,#e9d5ff_100%)] dark:bg-[linear-gradient(135deg,#6b21a8_0%,#7e22ce_50%,#6b21a8_100%)] font-semibold"
-          : "text-slate-700/90 dark:text-slate-300/90 hover:text-slate-900 dark:hover:text-slate-100"
+          ? "text-white bg-gradient-to-r from-[#6467FF] to-[#43B2F9] shadow-[0_0_24px_rgba(100,103,255,0.5)] font-semibold"
+          : "text-[#94A3B8] hover:text-white hover:bg-[rgba(100,103,255,0.15)]"
       )}
     >
       {label}
@@ -231,8 +227,8 @@ function ServicesDropdownPill() {
         className={cn(
           "inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
           active
-            ? "text-purple-900 dark:text-purple-100 shadow-[0_6px_24px_rgba(168,85,247,0.35)] ring-1 ring-white/50 dark:ring-purple-400/50 bg-[linear-gradient(135deg,#e9d5ff_0%,#f3e8ff_50%,#e9d5ff_100%)] dark:bg-[linear-gradient(135deg,#6b21a8_0%,#7e22ce_50%,#6b21a8_100%)] font-semibold"
-            : "text-slate-700/90 dark:text-slate-300/90 hover:text-slate-900 dark:hover:text-slate-100"
+            ? "text-white bg-gradient-to-r from-[#6467FF] to-[#43B2F9] shadow-[0_0_24px_rgba(100,103,255,0.5)] font-semibold"
+            : "text-[#94A3B8] hover:text-white hover:bg-[rgba(100,103,255,0.15)]"
         )}
       >
         Services
@@ -248,9 +244,9 @@ function ServicesDropdownPill() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.18 }}
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[min(92vw,980px)] z-50"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[min(92vw,980px)] z-[60]"
           >
-            <div className="rounded-2xl border shadow-xl backdrop-blur bg-white/95 dark:bg-slate-900/95 border-gray-200 dark:border-slate-700">
+            <div className="rounded-2xl border shadow-[0_8px_32px_rgba(100,103,255,0.2)] backdrop-blur-[14px] bg-[rgba(11,21,38,0.95)] border-[rgba(100,103,255,0.25)]">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 p-4">
                 {services.map((service) => (
                   <Link
@@ -258,17 +254,17 @@ function ServicesDropdownPill() {
                     href={service.href}
                     className="group"
                   >
-                    <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-100/80 dark:hover:bg-slate-800/80 transition-colors border border-transparent hover:border-gray-200/70 dark:hover:border-slate-700/70">
-                      <div className="mt-0.5 flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 text-white dark:from-purple-500 dark:to-indigo-500">
+                    <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-[rgba(100,103,255,0.1)] transition-colors border border-transparent hover:border-[rgba(67,178,249,0.3)]">
+                      <div className="mt-0.5 flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white shadow-[0_0_15px_rgba(100,103,255,0.4)]">
                         <motion.div whileHover={{ scale: 1.1, rotate: 8 }} transition={{ type: 'spring', stiffness: 300, damping: 18 }}>
                           {(() => { const Icon = service.icon as any; return <Icon className="w-5 h-5" />; })()}
                         </motion.div>
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 dark:text-white">
+                        <div className="font-semibold text-white group-hover:text-[#43B2F9] transition-colors">
                           {service.title}
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-[#94A3B8]">
                           {service.desc}
                         </div>
                       </div>
@@ -283,7 +279,7 @@ function ServicesDropdownPill() {
     </div>
   );
 }
- 
+
 function MobileServicesDropdown() {
   const [open, setOpen] = useState(false);
   const services = [
@@ -300,15 +296,15 @@ function MobileServicesDropdown() {
   ];
 
   return (
-    <div className="rounded-lg border border-foreground/10">
+    <div className="rounded-lg border border-[rgba(100,103,255,0.25)]">
       <button
         className="w-full flex items-center justify-between px-4 py-2 text-left"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        <span className="font-medium text-foreground/90">Services</span>
+        <span className="font-medium text-white">Services</span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="w-4 h-4 text-[#43B2F9]" />
         </motion.span>
       </button>
       <AnimatePresence initial={false}>
@@ -323,15 +319,15 @@ function MobileServicesDropdown() {
             <div className="grid grid-cols-1 gap-1">
               {services.map((service) => (
                 <Link key={service.href} href={service.href} className="group">
-                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors border border-transparent hover:border-foreground/10">
-                    <div className="mt-0.5 flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 text-white dark:from-purple-500 dark:to-indigo-500">
+                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-[rgba(100,103,255,0.1)] transition-colors border border-transparent hover:border-[rgba(67,178,249,0.2)]">
+                    <div className="mt-0.5 flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white shadow-[0_0_10px_rgba(100,103,255,0.3)]">
                       {(() => { const Icon = service.icon as any; return <Icon className="w-5 h-5" />; })()}
                     </div>
                     <div>
-                      <div className="font-semibold text-foreground">
+                      <div className="font-semibold text-white group-hover:text-[#43B2F9] transition-colors">
                         {service.title}
                       </div>
-                      <div className="text-sm text-foreground/70">
+                      <div className="text-sm text-[#94A3B8]">
                         {service.desc}
                       </div>
                     </div>
@@ -349,14 +345,14 @@ function MobileServicesDropdown() {
 function MobileLink({ href, label }: { href: string; label: string }) {
   return (
     <motion.div
-      whileHover={{ x: 4 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="px-4 py-2 rounded-lg bg-foreground/5 hover:bg-foreground/10 transition-colors">
+      <div className="px-4 py-2 rounded-lg bg-[rgba(100,103,255,0.08)] hover:bg-[rgba(100,103,255,0.15)] transition-colors">
         <Link
           href={href}
-          className="block text-foreground/80 hover:text-foreground transition-colors"
+          className="block text-[#94A3B8] hover:text-white transition-colors"
         >
           {label}
         </Link>

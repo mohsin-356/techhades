@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 const AlienLoader = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [loadingText, setLoadingText] = useState("");
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -39,7 +40,7 @@ const AlienLoader = () => {
                 // Purple: #bd00ff (RGB 189, 0, 255)
                 // We'll mix them.
 
-                const randomColor = Math.random() > 0.5 ? "#00ffff" : "#bd00ff";
+                const randomColor = Math.random() > 0.5 ? "#43B2F9" : "#6467FF";
                 ctx.fillStyle = randomColor;
 
                 const text = characters.charAt(Math.floor(Math.random() * characters.length));
@@ -73,21 +74,52 @@ const AlienLoader = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const fullText = "Matrix Loading • • •";
+        let i = 0;
+        let intervalId: ReturnType<typeof setInterval> | undefined;
+        let restartTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+        const startTyping = () => {
+            i = 0;
+            setLoadingText("");
+
+            intervalId = setInterval(() => {
+                i += 1;
+                setLoadingText(fullText.slice(0, i));
+
+                if (i >= fullText.length) {
+                    if (intervalId) clearInterval(intervalId);
+                    restartTimeoutId = setTimeout(() => {
+                        startTyping();
+                    }, 800);
+                }
+            }, 55);
+        };
+
+        startTyping();
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+            if (restartTimeoutId) clearTimeout(restartTimeoutId);
+        };
+    }, []);
+
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0b1c] overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050714] overflow-hidden">
             {/* Canvas Background */}
-            <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40" />
+            <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-30" />
 
             {/* Overlay Effects */}
-            <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,#0a0b1c_120%)]" />
+            <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,#050714_120%)]" />
             <div className="absolute inset-0 z-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5" />
 
             {/* Content */}
-            <div className="relative z-20 flex flex-col items-center justify-center">
+            <div className="relative z-20 flex flex-col items-center justify-center px-4">
                 {/* Logo Container with Glitch Effect */}
                 <div className="relative group">
                     {/* Glitch layers */}
-                    <div className="absolute inset-0 animate-pulse opacity-50 blur-sm bg-cyan-500/20 rounded-full scale-110" />
+                    <div className="absolute inset-0 animate-pulse opacity-35 blur-[2px] bg-[rgba(59, 168, 236, 0.48)] rounded-full scale-110" />
 
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -100,7 +132,7 @@ const AlienLoader = () => {
                             src="/components/AlienMatrix_logo.png"
                             alt="AlienMatrix Logo"
                             fill
-                            className="object-contain drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]"
+                            className="object-contain drop-shadow-[0_0_10px_rgba(67,178,249,0.35)]"
                             priority
                         />
 
@@ -121,9 +153,52 @@ const AlienLoader = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
-                    className="mt-8 text-cyan-400/80 font-mono text-sm tracking-[0.5em] uppercase"
+                    className="mt-8 text-[#43B2F9]/80 font-mono text-sm sm:text-base tracking-[0.25em] uppercase"
                 >
-                    Loading...
+                    <span className="type-caret">{loadingText}</span>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9, duration: 0.6 }}
+                    className="mt-10 w-full max-w-5xl"
+                >
+                    <div className="text-center text-white/80 font-mono text-xs sm:text-sm tracking-[0.35em] uppercase">
+                        We Offer Services
+                    </div>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">Web Development</div>
+                            <div className="mt-1 text-white/70 text-sm">Code from another planet 👽</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Fast &amp; Secure • Scalable</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">UI / UX Design</div>
+                            <div className="mt-1 text-white/70 text-sm">Designs humans love</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Clean • Modern • Human-Centered</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">Mobile Apps</div>
+                            <div className="mt-1 text-white/70 text-sm">Built beyond Earth</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Android • iOS • Cross-Platform</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">AI &amp; Automation</div>
+                            <div className="mt-1 text-white/70 text-sm">Alien-level intelligence</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Smart Systems • Real Results</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">Custom Software</div>
+                            <div className="mt-1 text-white/70 text-sm">Not made on Earth</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Increase Productivity • Built for Your Vision</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
+                            <div className="text-white font-semibold">E-Commerce Solutions</div>
+                            <div className="mt-1 text-white/70 text-sm">Sell beyond Earth 🌍</div>
+                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Shopify • WordPress • Custom E-Commerce • Payment Gateways</div>
+                        </div>
+                    </div>
                 </motion.div>
             </div>
 
@@ -152,6 +227,21 @@ const AlienLoader = () => {
         }
         .animate-glitch {
           animation: glitch 3s infinite linear;
+        }
+
+        @keyframes caretBlink {
+          0%, 49% {
+            border-color: rgba(67, 178, 249, 0.75);
+          }
+          50%, 100% {
+            border-color: transparent;
+          }
+        }
+        .type-caret {
+          display: inline-block;
+          padding-right: 6px;
+          border-right: 2px solid rgba(67, 178, 249, 0.75);
+          animation: caretBlink 1s step-end infinite;
         }
       `}</style>
         </div>

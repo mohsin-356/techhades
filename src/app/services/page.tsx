@@ -8,19 +8,20 @@ import {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-[#050714] min-h-screen">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
-        <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent mb-8" />
-        <h2 className="text-4xl sm:text-6xl font-[family:var(--font-display)] text-foreground mb-4">
-          <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">Our Core Services</span>
+        <div className="h-px bg-gradient-to-r from-transparent via-[#6467FF]/50 to-transparent mb-8" />
+        <h2 className="text-4xl sm:text-6xl font-[family:var(--font-display)] text-white mb-4">
+          <span className="bg-gradient-to-r from-[#43B2F9] via-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">Our Core Services</span>
         </h2>
-        <p className="mt-4 text-zinc-400 max-w-3xl mx-auto text-lg leading-relaxed">
+        <p className="mt-4 text-[#94A3B8] max-w-3xl mx-auto text-lg leading-relaxed">
           Comprehensive digital solutions tailored to transform your business with cutting-edge technology and innovative strategies
         </p>
       </div>
 
-      <div className="space-y-8 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="grid gap-8 xl:grid-cols-2">
 
         {/* 1. Web Development */}
         <ServiceDetailedSection
@@ -252,6 +253,7 @@ export default function ServicesPage() {
           imageSrc="https://cdn.dribbble.com/userupload/41679749/file/original-f7d95157bd48917750fac2b5715386db.gif"
         />
 
+        </div>
       </div>
     </div>
   );

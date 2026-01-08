@@ -146,7 +146,7 @@ export function UFO({ className, animated = true }: AlienIconProps) {
         cx="60"
         cy="45"
         r="3"
-        fill="rgba(168, 85, 247, 0.8)"
+        fill="rgba(100, 103, 255, 0.8)"
         animate={animated ? {
           opacity: [0.3, 1, 0.3],
           scale: [0.8, 1.2, 0.8]
@@ -254,7 +254,7 @@ export function AlienSymbol({ className, animated = true }: AlienIconProps) {
         cx="50"
         cy="30"
         r="2"
-        fill="rgba(168, 85, 247, 0.8)"
+        fill="rgba(100, 103, 255, 0.8)"
         animate={animated ? {
           rotate: [0, 360]
         } : {}}
@@ -269,8 +269,8 @@ export function AlienSymbol({ className, animated = true }: AlienIconProps) {
       <defs>
         <linearGradient id="symbolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="rgba(109, 106, 255, 0.8)" />
-          <stop offset="50%" stopColor="rgba(168, 85, 247, 0.6)" />
-          <stop offset="100%" stopColor="rgba(34, 211, 238, 0.8)" />
+          <stop offset="50%" stopColor="rgba(100, 103, 255, 0.6)" />
+          <stop offset="100%" stopColor="rgba(67, 178, 249, 0.8)" />
         </linearGradient>
       </defs>
     </motion.svg>
@@ -314,7 +314,7 @@ export function UFOThemeToggle({
         rx="28"
         ry="14"
         fill="url(#domeToggleGradient)"
-        stroke={isDark ? "rgba(59, 130, 246, 0.6)" : "rgba(168, 85, 247, 0.6)"}
+        stroke={isDark ? "rgba(59, 130, 246, 0.6)" : "rgba(100, 103, 255, 0.6)"}
         strokeWidth="1.5"
       />
       
@@ -376,7 +376,7 @@ export function UFOThemeToggle({
             cx="62"
             cy="30"
             r="1"
-            fill="rgba(168, 85, 247, 0.8)"
+            fill="rgba(100, 103, 255, 0.8)"
             animate={{
               opacity: [0.3, 1, 0.3],
               scale: [0.8, 1.2, 0.8]
@@ -387,7 +387,7 @@ export function UFOThemeToggle({
             cx="78"
             cy="32"
             r="1"
-            fill="rgba(168, 85, 247, 0.8)"
+            fill="rgba(100, 103, 255, 0.8)"
             animate={{
               opacity: [0.3, 1, 0.3],
               scale: [0.8, 1.2, 0.8]
@@ -402,7 +402,7 @@ export function UFOThemeToggle({
         cx="45"
         cy="48"
         r="4"
-        fill={isDark ? "rgba(59, 130, 246, 0.9)" : "rgba(168, 85, 247, 0.9)"}
+        fill={isDark ? "rgba(59, 130, 246, 0.9)" : "rgba(100, 103, 255, 0.9)"}
         animate={animated ? {
           opacity: [0.4, 1, 0.4],
           scale: [0.8, 1.3, 0.8]
@@ -413,7 +413,7 @@ export function UFOThemeToggle({
         cx="70"
         cy="52"
         r="4"
-        fill={isDark ? "rgba(168, 85, 247, 0.9)" : "rgba(59, 130, 246, 0.9)"}
+        fill={isDark ? "rgba(100, 103, 255, 0.9)" : "rgba(59, 130, 246, 0.9)"}
         animate={animated ? {
           opacity: [0.4, 1, 0.4],
           scale: [0.8, 1.3, 0.8]
@@ -424,7 +424,7 @@ export function UFOThemeToggle({
         cx="95"
         cy="48"
         r="4"
-        fill={isDark ? "rgba(34, 211, 238, 0.9)" : "rgba(251, 191, 36, 0.9)"}
+        fill={isDark ? "rgba(67, 178, 249, 0.9)" : "rgba(251, 191, 36, 0.9)"}
         animate={animated ? {
           opacity: [0.4, 1, 0.4],
           scale: [0.8, 1.3, 0.8]
@@ -445,16 +445,16 @@ export function UFOThemeToggle({
       
       <defs>
         <linearGradient id="ufoToggleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor={isDark ? "rgba(59, 130, 246, 0.4)" : "rgba(168, 85, 247, 0.4)"} />
+          <stop offset="0%" stopColor={isDark ? "rgba(59, 130, 246, 0.4)" : "rgba(100, 103, 255, 0.4)"} />
           <stop offset="100%" stopColor={isDark ? "rgba(29, 78, 216, 0.3)" : "rgba(139, 92, 246, 0.3)"} />
         </linearGradient>
         <radialGradient id="domeToggleGradient" cx="50%" cy="30%">
           <stop offset="0%" stopColor={isDark ? "rgba(96, 165, 250, 0.3)" : "rgba(196, 181, 253, 0.3)"} />
-          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.15)" : "rgba(168, 85, 247, 0.15)"} />
+          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.15)" : "rgba(100, 103, 255, 0.15)"} />
         </radialGradient>
         <linearGradient id="beamToggleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor={isDark ? "rgba(96, 165, 250, 0.5)" : "rgba(196, 181, 253, 0.5)"} />
-          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.2)" : "rgba(168, 85, 247, 0.2)"} />
+          <stop offset="100%" stopColor={isDark ? "rgba(59, 130, 246, 0.2)" : "rgba(100, 103, 255, 0.2)"} />
         </linearGradient>
       </defs>
     </motion.svg>
@@ -495,7 +495,7 @@ export function CrystalFormation({ className, animated = true }: AlienIconProps)
       <motion.polygon
         points="30,35 20,65 40,65"
         fill="url(#crystalGradient2)"
-        stroke="rgba(168, 85, 247, 0.5)"
+        stroke="rgba(100, 103, 255, 0.5)"
         strokeWidth="1"
         animate={animated ? {
           fill: [

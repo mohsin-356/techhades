@@ -156,7 +156,7 @@ function AlienHeadSVG({ className }: { className?: string }) {
       <defs>
         <radialGradient id="alienGrad" cx="50%" cy="30%">
           <stop offset="0%" stopColor="rgba(109, 106, 255, 0.15)" />
-          <stop offset="100%" stopColor="rgba(168, 85, 247, 0.08)" />
+          <stop offset="100%" stopColor="rgba(100, 103, 255, 0.08)" />
         </radialGradient>
       </defs>
       
@@ -164,8 +164,8 @@ function AlienHeadSVG({ className }: { className?: string }) {
       <ellipse cx="50" cy="45" rx="30" ry="35" fill="url(#alienGrad)" stroke="rgba(109, 106, 255, 0.2)" strokeWidth="0.5" />
       
       {/* Eyes */}
-      <ellipse cx="42" cy="40" rx="6" ry="10" fill="rgba(34, 211, 238, 0.3)" />
-      <ellipse cx="58" cy="40" rx="6" ry="10" fill="rgba(34, 211, 238, 0.3)" />
+      <ellipse cx="42" cy="40" rx="6" ry="10" fill="rgba(67, 178, 249, 0.3)" />
+      <ellipse cx="58" cy="40" rx="6" ry="10" fill="rgba(67, 178, 249, 0.3)" />
       
       {/* Pupils */}
       <circle cx="42" cy="42" r="2" fill="rgba(15, 23, 42, 0.6)" />
@@ -184,7 +184,7 @@ function UFOSvg({ className }: { className?: string }) {
     <svg viewBox="0 0 120 80" className={className}>
       <defs>
         <linearGradient id="ufoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="rgba(168, 85, 247, 0.15)" />
+          <stop offset="0%" stopColor="rgba(100, 103, 255, 0.15)" />
           <stop offset="100%" stopColor="rgba(109, 106, 255, 0.1)" />
         </linearGradient>
       </defs>
@@ -193,12 +193,12 @@ function UFOSvg({ className }: { className?: string }) {
       <ellipse cx="60" cy="35" rx="40" ry="12" fill="url(#ufoGrad)" stroke="rgba(109, 106, 255, 0.2)" strokeWidth="0.5" />
       
       {/* Dome */}
-      <ellipse cx="60" cy="30" rx="20" ry="8" fill="rgba(34, 211, 238, 0.1)" stroke="rgba(34, 211, 238, 0.2)" strokeWidth="0.5" />
+      <ellipse cx="60" cy="30" rx="20" ry="8" fill="rgba(67, 178, 249, 0.1)" stroke="rgba(67, 178, 249, 0.2)" strokeWidth="0.5" />
       
       {/* Lights */}
-      <circle cx="40" cy="42" r="2" fill="rgba(34, 211, 238, 0.4)" />
-      <circle cx="60" cy="45" r="2" fill="rgba(168, 85, 247, 0.4)" />
-      <circle cx="80" cy="42" r="2" fill="rgba(34, 211, 238, 0.4)" />
+      <circle cx="40" cy="42" r="2" fill="rgba(67, 178, 249, 0.4)" />
+      <circle cx="60" cy="45" r="2" fill="rgba(100, 103, 255, 0.4)" />
+      <circle cx="80" cy="42" r="2" fill="rgba(67, 178, 249, 0.4)" />
     </svg>
   )
 }
@@ -209,14 +209,14 @@ function CrystalSVG({ className }: { className?: string }) {
     <svg viewBox="0 0 100 100" className={className}>
       <defs>
         <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="rgba(34, 211, 238, 0.15)" />
-          <stop offset="100%" stopColor="rgba(34, 211, 238, 0.05)" />
+          <stop offset="0%" stopColor="rgba(67, 178, 249, 0.15)" />
+          <stop offset="100%" stopColor="rgba(67, 178, 249, 0.05)" />
         </linearGradient>
       </defs>
       
       {/* Crystal formations */}
-      <polygon points="50,20 42,50 58,50" fill="url(#crystalGrad)" stroke="rgba(34, 211, 238, 0.2)" strokeWidth="0.5" />
-      <polygon points="30,35 22,65 38,65" fill="rgba(168, 85, 247, 0.1)" stroke="rgba(168, 85, 247, 0.2)" strokeWidth="0.5" />
+      <polygon points="50,20 42,50 58,50" fill="url(#crystalGrad)" stroke="rgba(67, 178, 249, 0.2)" strokeWidth="0.5" />
+      <polygon points="30,35 22,65 38,65" fill="rgba(100, 103, 255, 0.1)" stroke="rgba(100, 103, 255, 0.2)" strokeWidth="0.5" />
       <polygon points="70,35 62,65 78,65" fill="rgba(109, 106, 255, 0.1)" stroke="rgba(109, 106, 255, 0.2)" strokeWidth="0.5" />
     </svg>
   )

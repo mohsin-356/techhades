@@ -8,6 +8,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Code2, ArrowRight } from "lucide-react";
 import ProjectsGrid from "@/components/ProjectsGrid";
+ import FaqAccordion from "@/components/faq/FaqAccordion";
+ import FaqJsonLd from "@/components/faq/FaqJsonLd";
+ import { SERVICE_FAQS } from "@/data/serviceFaqs";
 
 export type ServiceStep = {
   number: number;
@@ -103,7 +106,7 @@ export default function ServicePageTemplate({
                 return (
                   <motion.div
                     key={tag + i}
-                    className="absolute px-4 py-2 bg-purple-500 text-white font-semibold rounded-full text-sm whitespace-nowrap shadow-lg"
+                    className="absolute px-4 py-2 bg-[#6467FF] text-white font-semibold rounded-full text-sm whitespace-nowrap shadow-lg"
                     style={{ left: layout.left, top: `${layout.top}px` }}
                     initial={{ opacity: 0, y: -30, rotate: baseRotation - 3 }}
                     animate={{
@@ -131,7 +134,7 @@ export default function ServicePageTemplate({
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
                 {marqueeLoop.map((item, i) => (
-                  <span key={item + i} className="text-purple-400 text-2xl font-bold">
+                  <span key={item + i} className="text-[#6467FF] text-2xl font-bold">
                     {item}
                   </span>
                 ))}
@@ -142,7 +145,7 @@ export default function ServicePageTemplate({
       </MotionSection>
 
       {/* Process Timeline - Horizontal Flow */}
-      <MotionSection className="bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 dark:from-black dark:via-purple-950 dark:to-black py-20 relative overflow-hidden">
+      <MotionSection className="bg-gradient-to-br from-[#050714] via-[#0B1526] to-[#050714] py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <MotionDiv variant="fadeInUp" className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -162,7 +165,7 @@ export default function ServicePageTemplate({
             <div className="relative w-full flex items-center justify-between mb-12">
               <div className="absolute top-1/2 left-0 w-full h-2 -translate-y-1/2 z-0">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 rounded-full"
+                  className="h-full bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF] rounded-full"
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
@@ -218,7 +221,7 @@ export default function ServicePageTemplate({
                   viewport={{ once: true }}
                 >
                   <motion.div
-                    className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-xl shadow-purple-500/50 mb-4"
+                    className="w-16 h-16 rounded-full bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white flex items-center justify-center font-bold text-xl shadow-xl shadow-[#6467FF]/50 mb-4"
                     initial={{ scale: 0.8 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.15 }}
@@ -226,7 +229,7 @@ export default function ServicePageTemplate({
                   >
                     {step.number}
                   </motion.div>
-                  <div className="bg-purple-900/40 backdrop-blur-sm border-2 border-purple-500/50 rounded-lg p-4 h-full w-full">
+                  <div className="bg-[#0B1526]/40 backdrop-blur-sm border-2 border-[#6467FF]/50 rounded-lg p-4 h-full w-full">
                     <h3 className="text-base font-bold text-white mb-2 text-center">{step.title}</h3>
                     <p className="text-xs text-gray-300 leading-tight text-center">{step.desc}</p>
                   </div>
@@ -284,12 +287,12 @@ export default function ServicePageTemplate({
                 viewport={{ once: true }}
               >
                 <motion.div
-                  className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-lg"
+                  className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white flex items-center justify-center font-bold text-xl shadow-lg"
                   whileInView={{
                     boxShadow: [
-                      "0 10px 15px -3px rgba(139, 92, 246, 0.3)",
-                      "0 10px 20px -2px rgba(139, 92, 246, 0.6)",
-                      "0 10px 15px -3px rgba(139, 92, 246, 0.3)",
+                      "0 10px 15px -3px rgba(100, 103, 255, 0.3)",
+                      "0 10px 20px -2px rgba(100, 103, 255, 0.6)",
+                      "0 10px 15px -3px rgba(100, 103, 255, 0.3)",
                     ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -397,7 +400,7 @@ export default function ServicePageTemplate({
             <Button
               asChild
               variant="secondary"
-              className="px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 text-white hover:scale-105 transition-transform duration-300"
+              className="px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF] text-white hover:scale-105 transition-transform duration-300"
             >
               <Link href={`/projects?category=${encodeURIComponent(projectsCategoryLabel)}`} className="flex items-center gap-2">
                 <span>Show All</span>
@@ -408,8 +411,15 @@ export default function ServicePageTemplate({
         </div>
       </MotionSection>
 
+      {SERVICE_FAQS[slug] && (
+        <>
+          <FaqJsonLd groups={[SERVICE_FAQS[slug]]} />
+          <FaqAccordion groups={[SERVICE_FAQS[slug]]} searchable oneAtATime showCta />
+        </>
+      )}
+
       {/* Final CTA Section */}
-      <MotionSection className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-black dark:via-purple-950 dark:to-black py-20 relative overflow-hidden">
+      <MotionSection className="bg-gradient-to-br from-[#050714] via-[#0B1526] to-[#050714] py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <MotionDiv variant="fadeInUp" className="text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
@@ -418,7 +428,7 @@ export default function ServicePageTemplate({
             <Button
               asChild
               size="lg"
-              className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-6 text-lg"
+              className="bg-[#6467FF] hover:bg-[#43B2F9] text-white px-8 py-6 text-lg"
             >
               <Link href="/contact">Contact Us</Link>
             </Button>

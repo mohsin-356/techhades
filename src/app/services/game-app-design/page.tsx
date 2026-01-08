@@ -13,12 +13,12 @@ const gameAppDesignConfig: ServiceConfig = {
   processTitle: "Our Game App Design Process",
   processSubtitle: "We craft immersive and intuitive interfaces that enhance gameplay and user engagement",
   steps: [
-    { number: 1, title: "Concept & Research", desc: "Understand game mechanics, target audience, and platform requirements. Research competitor designs and player expectations." },
-    { number: 2, title: "Wireframing", desc: "Create low-fidelity wireframes to map out user flows, menus, and interaction patterns for optimal gameplay." },
-    { number: 3, title: "Visual Design", desc: "Develop high-fidelity mockups with consistent art style, color schemes, and visual hierarchy that align with your game's theme." },
-    { number: 4, title: "Prototyping", desc: "Build interactive prototypes to test user flows, animations, and interactions before full development." },
-    { number: 5, title: "User Testing", desc: "Conduct playtesting sessions to gather feedback and identify UX issues. Iterate based on real player behavior." },
-    { number: 6, title: "Implementation & Polish", desc: "Collaborate with developers for seamless implementation. Fine-tune animations, transitions, and feedback systems." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by analyzing game mechanics, genre, and target audience. Through collaborative discussions, we define visual direction, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our designers create character concepts, environments, and interactive prototypes that reflect the core gameplay loop and optimize engagement." },
+    { number: 3, title: "Development & Coding", desc: "We implement UI/UX assets using engines like Unity or Unreal ensuring responsive, immersive and performant game interfaces with clean architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test gameplay flows, HUD elements, and device compatibility using automated playtesting and manual review techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We prepare asset bundles for developer handoff and store submission, ensuring proper optimization and visual fidelity across all target devices." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive design support for DLCs, live ops updates, and seasonal events to keep your game fresh and engaging." },
   ],
   projectsHeading: "Recent Game & App Design Projects",
   projectsDescription: "Explore our portfolio of beautifully designed game interfaces and interactive applications",
@@ -33,8 +33,8 @@ export default function GameAppDesignPage() {
       extraSection={
         <div className="relative overflow-hidden rounded-3xl bg-white/80 dark:bg-slate-900 backdrop-blur-sm border border-gray-200 dark:border-slate-700 shadow-lg">
           <div className="grid lg:grid-cols-2 gap-0">
-            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
               <img
                 src="https://cdn.dribbble.com/userupload/21617979/file/original-756d16dda13c3b13319d8cc29fdbb780.gif"
                 alt="Game & App Design"
@@ -42,7 +42,7 @@ export default function GameAppDesignPage() {
               />
             </div>
             <div className="p-8 lg:p-10">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
                 <span className="mr-1">Game & App Designing</span>
                 <span className="animate-pulse">✨</span>
               </div>
@@ -69,7 +69,7 @@ export default function GameAppDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-gamepad-2 w-4 h-4 text-purple-500"
+                      className="lucide lucide-gamepad-2 w-4 h-4 text-[#6467FF]"
                     >
                       <line x1="6" x2="10" y1="11" y2="11" />
                       <line x1="8" x2="8" y1="9" y2="13" />
@@ -94,7 +94,7 @@ export default function GameAppDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-smartphone w-4 h-4 text-purple-500"
+                      className="lucide lucide-smartphone w-4 h-4 text-[#6467FF]"
                     >
                       <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
                       <path d="M12 18h.01" />
@@ -112,7 +112,7 @@ export default function GameAppDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-users w-4 h-4 text-purple-500"
+                      className="lucide lucide-users w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
@@ -132,7 +132,7 @@ export default function GameAppDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-zap w-4 h-4 text-purple-500"
+                      className="lucide lucide-zap w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
                     </svg>
@@ -224,7 +224,7 @@ export default function GameAppDesignPage() {
                 </div>
               </div>
               <div className="flex space-x-3">
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                   Game App Designing
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +242,7 @@ export default function GameAppDesignPage() {
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </button>
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                   View Details
                 </button>
               </div>

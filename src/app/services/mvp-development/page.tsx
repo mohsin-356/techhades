@@ -21,36 +21,12 @@ const mvpDevelopmentConfig: ServiceConfig = {
   processSubtitle:
     "From idea to live MVP, we focus on what matters most so you can learn from real users as early as possible.",
   steps: [
-    {
-      number: 1,
-      title: "Idea & Problem Validation",
-      desc: "Clarify the problem, target users, and value proposition. Validate assumptions before committing to build.",
-    },
-    {
-      number: 2,
-      title: "Scope & MVP Definition",
-      desc: "Identify the smallest set of features that can deliver value. Define what goes into v1 and what can wait.",
-    },
-    {
-      number: 3,
-      title: "UX Flows & Prototype",
-      desc: "Design key user journeys and interactive prototypes to validate flows with stakeholders and early users.",
-    },
-    {
-      number: 4,
-      title: "MVP Build",
-      desc: "Develop a production-ready MVP using modern web and mobile technologies with a lean, scalable architecture.",
-    },
-    {
-      number: 5,
-      title: "Launch & Measure",
-      desc: "Release the MVP to real users, instrument analytics, and gather qualitative and quantitative feedback.",
-    },
-    {
-      number: 6,
-      title: "Iterate & Roadmap",
-      desc: "Use insights to refine the product, prioritise new features, and plan the roadmap beyond the MVP stage.",
-    },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by validating your core hypothesis and target audience. Through collaborative discussions, we define MVP scope, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our product team creates rapid wireframes and interactive prototypes that reflect the key user flows and validate the core value proposition." },
+    { number: 3, title: "Development & Coding", desc: "We build using scalable technologies like Next.js and Node.js ensuring a fast, secure and robust MVP foundation with clean code architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test core features, user feedback loops, and stability using automated and manual testing techniques for reliable early access." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy with robust analytics setup, user onboarding flows, and scalable infrastructure for immediate market validation and data collection." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive iteration support, analyzing user feedback to prioritize features and pivot quickly based on real market data." },
   ],
   projectsHeading: "Recent MVP & Early-Stage Product Projects",
   projectsDescription:

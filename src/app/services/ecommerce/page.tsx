@@ -12,12 +12,12 @@ const ecommerceConfig: ServiceConfig = {
   processTitle: "Our Ecommerce Development Process",
   processSubtitle: "We follow a proven approach to build high-converting online stores that scale with your business",
   steps: [
-    { number: 1, title: "Discovery & Strategy", desc: "Understand your products, target market, and business goals. We analyze competitors and define a winning ecommerce strategy." },
-    { number: 2, title: "Platform Selection", desc: "Choose the right platform (Shopify, WooCommerce, custom) based on your needs, budget, and scalability requirements." },
-    { number: 3, title: "Design & UX", desc: "Create an intuitive, mobile-first design that guides customers through the buying journey with minimal friction." },
-    { number: 4, title: "Development & Integration", desc: "Build your store with secure payment gateways, inventory systems, and third-party integrations for seamless operations." },
-    { number: 5, title: "Testing & Launch", desc: "Rigorous testing of checkout flows, payments, and performance. Deploy with confidence and monitor closely." },
-    { number: 6, title: "Optimization & Support", desc: "Continuous optimization for conversion rates, performance, and customer satisfaction. Ongoing support and updates." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your retail goals and target audience. Through collaborative discussions, we define store requirements, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our design team creates interactive wireframes and store prototypes that reflect the customer journey and optimize checkout flow for maximum conversion." },
+    { number: 3, title: "Development & Coding", desc: "We build using latest technologies like Shopify, WooCommerce, or Custom Stacks ensuring secure, fast and scalable online stores with clean code architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test cart functionality, payments, security, and mobile responsiveness using automated and manual testing techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy with proper store configuration, SEO setup, payment verification, and optimal scaling for zero-downtime launches." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive maintenance, monitoring, and support packages to keep your store updated, secure, and running efficiently with 24/7 support." },
   ],
   projectsHeading: "Recent Ecommerce Projects",
   projectsDescription: "Explore our portfolio of successful ecommerce implementations that drive revenue and customer loyalty",
@@ -33,8 +33,8 @@ export default function EcommercePage() {
       extraSection={
         <div className="relative overflow-hidden rounded-3xl bg-white/80 dark:bg-slate-900 backdrop-blur-sm border border-gray-200 dark:border-slate-700 shadow-lg">
           <div className="grid lg:grid-cols-2 gap-0">
-            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 dark:from-indigo-500/20 dark:to-purple-500/20" />
+            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#43B2F9]/10 to-[#6467FF]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#43B2F9]/10 to-[#6467FF]/10 dark:from-[#43B2F9]/20 dark:to-[#6467FF]/20" />
               <img
                 src="https://cdn.dribbble.com/userupload/41679749/file/original-f7d95157bd48917750fac2b5715386db.gif"
                 alt="Ecommerce Dashboard"
@@ -42,7 +42,7 @@ export default function EcommercePage() {
               />
             </div>
             <div className="p-8 lg:p-10">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-semibold mb-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#43B2F9]/10 dark:bg-[#43B2F9]/20 text-[#43B2F9] dark:text-[#43B2F9] text-xs font-semibold mb-4">
                 <span className="mr-1">Ecommerce Solutions</span>
                 <span className="animate-pulse">✨</span>
               </div>
@@ -59,25 +59,25 @@ export default function EcommercePage() {
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                    <span className="w-1.5 h-1.5 bg-[#43B2F9] rounded-full" />
                     <span className="text-gray-700 dark:text-gray-300">Shopify & WooCommerce</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                    <span className="w-1.5 h-1.5 bg-[#43B2F9] rounded-full" />
                     <span className="text-gray-700 dark:text-gray-300">Payment Gateways</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                    <span className="w-1.5 h-1.5 bg-[#43B2F9] rounded-full" />
                     <span className="text-gray-700 dark:text-gray-300">Inventory Sync</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                    <span className="w-1.5 h-1.5 bg-[#43B2F9] rounded-full" />
                     <span className="text-gray-700 dark:text-gray-300">Custom UI/UX</span>
                   </div>
                 </div>
               </div>
               <div className="flex space-x-3">
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 bg-gradient-to-r from-[#43B2F9] to-[#6467FF] text-white shadow-lg shadow-[#43B2F9]/30 hover:shadow-xl hover:shadow-[#43B2F9]/40 hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                   Launch Store
                 </button>
               </div>

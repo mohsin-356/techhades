@@ -13,12 +13,12 @@ const adsSocialMediaConfig: ServiceConfig = {
   processTitle: "Our Ads & Social Media Process",
   processSubtitle: "We build comprehensive social strategies that drive engagement, reach, and conversions",
   steps: [
-    { number: 1, title: "Strategy & Planning", desc: "Develop a comprehensive social media strategy aligned with your business goals. Identify target audiences and key platforms." },
-    { number: 2, title: "Content Creation", desc: "Create engaging, on-brand content including posts, videos, and graphics. Plan content calendar for consistent posting." },
-    { number: 3, title: "Campaign Setup", desc: "Design and launch targeted ad campaigns on Facebook, Instagram, LinkedIn, and other platforms for maximum reach." },
-    { number: 4, title: "Community Management", desc: "Engage with your audience, respond to comments, and build a loyal community around your brand." },
-    { number: 5, title: "Analytics & Optimization", desc: "Track performance metrics and optimize campaigns for better ROI. A/B test content and ad variations." },
-    { number: 6, title: "Growth & Scaling", desc: "Scale successful campaigns and strategies. Continuously improve reach, engagement, and conversion rates." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your business, goals, and target audience. Through collaborative discussions, we define campaign requirements, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our creative team designs engaging ad creatives and content strategies that reflect the user journey and optimize engagement flow for maximum conversion." },
+    { number: 3, title: "Development & Coding", desc: "We implement advanced tracking pixels, set up campaign structures, and configure audience targeting using latest platform tools for optimal performance." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test ad variations, tracking events, and landing page compatibility using A/B testing techniques to ensure flawless execution." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy with proper budget allocation, bid strategies, and audience segmentation for immediate impact and maximum ROI." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive monitoring, optimization, and reporting to keep your campaigns updated, efficient, and delivering consistent results." },
   ],
   projectsHeading: "Recent Social Media & Ad Projects",
   projectsDescription: "Explore our portfolio of successful social media campaigns and growth strategies",
@@ -32,8 +32,8 @@ export default function AdsSocialMediaPage() {
       config={adsSocialMediaConfig}
       extraSection={
         <div className="grid lg:grid-cols-2 gap-0">
-          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
             <img
               src="https://cdn.dribbble.com/userupload/41679749/file/original-f7d95157bd48917750fac2b5715386db.gif"
               alt="Ads & Social Media"
@@ -41,7 +41,7 @@ export default function AdsSocialMediaPage() {
             />
           </div>
           <div className="p-8 lg:p-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
               <span className="mr-1">Ads &amp; Social Media</span>
               <span className="animate-pulse">✨</span>
             </div>
@@ -68,7 +68,7 @@ export default function AdsSocialMediaPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-megaphone w-4 h-4 text-purple-500"
+                    className="lucide lucide-megaphone w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M3 11v2a4 4 0 0 0 4 4h1" />
                     <path d="M11 12a5 5 0 0 0 0-10H9a4 4 0 0 0-4 4v1" />
@@ -88,7 +88,7 @@ export default function AdsSocialMediaPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-messages-square w-4 h-4 text-purple-500"
+                    className="lucide lucide-messages-square w-4 h-4 text-[#6467FF]"
                   >
                     <path d="m18 10 4-4-4-4" />
                     <path d="M22 6H12a8 8 0 0 0-8 8v4" />
@@ -107,7 +107,7 @@ export default function AdsSocialMediaPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-target w-4 h-4 text-purple-500"
+                    className="lucide lucide-target w-4 h-4 text-[#6467FF]"
                   >
                     <circle cx="12" cy="12" r="8" />
                     <circle cx="12" cy="12" r="4" />
@@ -126,7 +126,7 @@ export default function AdsSocialMediaPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-bar-chart-3 w-4 h-4 text-purple-500"
+                    className="lucide lucide-bar-chart-3 w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M3 3v18h18" />
                     <rect x="7" y="8" width="3" height="7" rx="1" />
@@ -201,7 +201,7 @@ export default function AdsSocialMediaPage() {
               </div>
             </div>
             <div className="flex space-x-3">
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                 Ads &amp; Social Media
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ export default function AdsSocialMediaPage() {
                   <path d="m12 5 7 7-7 7" />
                 </svg>
               </button>
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                 View Details
               </button>
             </div>

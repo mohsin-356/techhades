@@ -28,7 +28,7 @@ const techCategories: TechCategory[] = [
   {
     title: "Development & Programming",
     icon: <CrystalFormation className="w-5 h-5" />,
-    color: "from-indigo-500 to-violet-500",
+    color: "from-[#6467FF] to-[#43B2F9]",
     techs: [
       { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", glow: "rgba(99,102,241,0.4)", category: 'development' },
       { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", glow: "rgba(139,92,246,0.4)", category: 'development' },
@@ -51,7 +51,7 @@ const techCategories: TechCategory[] = [
   {
     title: "CMS & E-commerce",
     icon: <AlienHead className="w-5 h-5" />,
-    color: "from-violet-500 to-purple-500",
+    color: "from-[#43B2F9] to-[#6467FF]",
     techs: [
       { name: "WordPress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", glow: "rgba(139,92,246,0.4)", category: 'cms' },
       { name: "Shopify", src: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/shopify.svg", glow: "rgba(167,139,250,0.4)", category: 'cms' },
@@ -61,7 +61,7 @@ const techCategories: TechCategory[] = [
   {
     title: "Design & Graphics",
     icon: <UFO className="w-6 h-4" />,
-    color: "from-purple-500 to-pink-500",
+    color: "from-[#6467FF] to-[#43B2F9]",
     techs: [
       { name: "Adobe Photoshop", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", glow: "rgba(167,139,250,0.4)", category: 'design' },
       { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", glow: "rgba(196,181,253,0.4)", category: 'design' },
@@ -71,7 +71,7 @@ const techCategories: TechCategory[] = [
   {
     title: "Animation & AI",
     icon: <AlienSymbol className="w-5 h-5" />,
-    color: "from-pink-500 to-indigo-500",
+    color: "from-[#43B2F9] to-[#6467FF]",
     techs: [
       { name: "CapCut", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg", glow: "rgba(196,181,253,0.4)", category: 'animation' },
       { name: "TensorFlow", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", glow: "rgba(221,214,254,0.4)", category: 'animation' },
@@ -103,14 +103,14 @@ export default function TechGrid() {
   return (
     <MotionSection className="pt-14 sm:pt-20 pb-16 sm:pb-24 section-gradient-2 breathing-gradient dot-pattern section-overlay">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           className="h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent mb-10"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
         />
-        
+
         <div className="flex items-center gap-4 mb-8">
           <motion.div
             initial={{ rotate: 0 }}
@@ -125,7 +125,7 @@ export default function TechGrid() {
             Alien Tech
           </Badge>
         </div>
-        
+
         <div
           ref={containerRef}
           onMouseMove={onMouseMove}
@@ -138,7 +138,7 @@ export default function TechGrid() {
               background: `radial-gradient(600px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(99,102,241,0.12), transparent 40%)`
             }}
           />
-          
+
           {techCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -164,7 +164,7 @@ export default function TechGrid() {
                   <div className="h-0.5 bg-gradient-to-r from-indigo-500/50 to-transparent w-32 mt-1" />
                 </div>
               </div>
-              
+
               {/* Technology Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {category.techs.map((tech, index) => (
@@ -228,18 +228,18 @@ function TechTile({ tech, index }: { tech: Tech; index: number }) {
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay: index * 0.05,
         ease: [0.22, 1, 0.36, 1]
       }}
-      whileHover={{ 
-        y: -8, 
+      whileHover={{
+        y: -8,
         scale: 1.05,
         transition: { duration: 0.2 }
       }}
     >
-      <Card className="group relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 backdrop-blur-xl h-full flex flex-col items-center justify-center text-center p-4 hover-glow transition-all duration-300">
+      <Card className="group relative overflow-hidden border border-[#6467FF]/20 bg-gradient-to-br from-[#6467FF]/5 via-[#43B2F9]/3 to-[#6467FF]/5 backdrop-blur-xl h-full flex flex-col items-center justify-center text-center p-4 hover-glow transition-all duration-300">
         {/* Animated background glow */}
         <motion.div
           className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
@@ -251,27 +251,27 @@ function TechTile({ tech, index }: { tech: Tech; index: number }) {
           whileHover={{ scale: 1.2 }}
           transition={{ duration: 0.3 }}
         />
-        
+
         {/* Enhanced border glow on hover */}
         <motion.div
-          className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-indigo-500/30 via-violet-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100"
+          className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-[#6467FF]/30 via-[#43B2F9]/30 to-[#6467FF]/30 opacity-0 group-hover:opacity-100"
           style={{ padding: '1px' }}
           initial={{ scale: 1 }}
-          whileHover={{ 
+          whileHover={{
             scale: [1, 1.02, 1],
             opacity: [0, 1, 0.7]
           }}
-          transition={{ 
-            duration: 2, 
+          transition={{
+            duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         >
           <div className="h-full w-full rounded-xl bg-slate-900/50 backdrop-blur-sm" />
         </motion.div>
-        
+
         <div className="relative z-10 space-y-3">
-          <motion.div 
+          <motion.div
             className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-foreground/10 to-foreground/5 border border-foreground/10 flex items-center justify-center relative overflow-hidden"
             whileHover={{ rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.4 }}
@@ -300,15 +300,15 @@ function TechTile({ tech, index }: { tech: Tech; index: number }) {
               }}
             />
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="text-foreground/80 text-sm font-medium"
             initial={{ opacity: 0.7 }}
             whileHover={{ opacity: 1 }}
           >
             {tech.name}
           </motion.div>
-          
+
           {/* Skill level indicator */}
           <motion.div
             className="flex justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"

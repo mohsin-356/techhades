@@ -87,7 +87,7 @@ export default function Testimonials() {
       {/* Map/background layer (replace src with your asset when provided) */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(124,58,237,0.10),transparent_60%)]"/>
+          className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(100,103,255,0.10),transparent_60%)]" />
         <div
           className="absolute inset-0 opacity-[0.06] bg-center bg-cover"
           style={{ backgroundImage: "url('/sectionandlogo.png')" }}
@@ -130,7 +130,7 @@ export default function Testimonials() {
                 transition={{ duration: 0.3, delay: 0.1 }}
                 className="mt-6 flex items-center gap-3"
               >
-                <div className="relative h-14 w-14 rounded-full ring-2 ring-purple-500 overflow-hidden">
+                <div className="relative h-14 w-14 rounded-full ring-2 ring-[#6467FF] overflow-hidden">
                   <Image
                     src={TESTIMONIALS[activeIndex].flagUrl}
                     alt={TESTIMONIALS[activeIndex].country}
@@ -158,13 +158,13 @@ export default function Testimonials() {
             className="relative mx-auto w-full max-w-[600px] h-[400px]"
           >
             {/* Card background with image (75% opacity) */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-800/90 dark:from-slate-950/90 dark:to-slate-900/90 border border-violet-500/30 overflow-hidden backdrop-blur-sm">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-800/90 dark:from-slate-950/90 dark:to-slate-900/90 border border-[#6467FF]/30 overflow-hidden backdrop-blur-sm">
               <div
                 className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-75"
                 style={{ backgroundImage: "url('/components/bgtestimonial.png')" }}
               />
               {/* Glow effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-600/10 via-transparent to-purple-600/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#6467FF]/10 via-transparent to-[#43B2F9]/10" />
             </div>
 
             {/* Flags positioned geographically on the map */}
@@ -255,7 +255,7 @@ export default function Testimonials() {
 
         {/* CTA under testimonials */}
         <div className="mt-12 flex flex-wrap items-center gap-4">
-          <Link href="/contact" className="inline-flex items-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-white shadow-lg hover:opacity-95">
+          <Link href="/contact" className="inline-flex items-center rounded-lg bg-gradient-to-r from-[#6467FF] to-[#43B2F9] px-5 py-3 text-white shadow-lg hover:opacity-95">
             Start your project
           </Link>
           <span className="text-sm text-foreground/60">98% client satisfaction • 500+ projects</span>
@@ -283,7 +283,7 @@ function Avatar({
   index?: number;
 }) {
   const activeSize = isActive ? size * 1.3 : size;
-  
+
   return (
     <motion.div
       className={`absolute ${className || ""} cursor-pointer`}
@@ -297,16 +297,15 @@ function Avatar({
       style={{ zIndex: isActive ? 20 : 10 }}
     >
       <motion.div
-        className={`rounded-full overflow-hidden shadow-lg ${
-          isActive ? "ring-4 ring-purple-500" : "ring-2 ring-white/60"
-        }`}
+        className={`rounded-full overflow-hidden shadow-lg ${isActive ? "ring-4 ring-[#6467FF]" : "ring-2 ring-white/60"
+          }`}
         style={{
           width: size,
           height: size,
         }}
         animate={{
           boxShadow: isActive
-            ? "0 10px 40px rgba(168, 85, 247, 0.5)"
+            ? "0 10px 40px rgba(100, 103, 255, 0.5)"
             : "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >

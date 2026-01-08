@@ -13,12 +13,12 @@ const mobileDevelopmentConfig: ServiceConfig = {
   processTitle: "Our Mobile Development Process",
   processSubtitle: "We deliver high-quality mobile apps through strategic planning, expert development, and rigorous testing",
   steps: [
-    { number: 1, title: "Discovery & Planning", desc: "Understand your app concept, target audience, and business goals. Define features, platforms, and technical requirements." },
-    { number: 2, title: "UI/UX Design", desc: "Create intuitive, mobile-first designs optimized for touch interaction. Design for both iOS and Android guidelines." },
-    { number: 3, title: "Development", desc: "Build using native (Swift, Kotlin) or cross-platform (React Native, Flutter) technologies based on your needs." },
-    { number: 4, title: "Testing & QA", desc: "Comprehensive testing on real devices, performance optimization, and security audits to ensure app quality." },
-    { number: 5, title: "App Store Launch", desc: "Prepare app store listings, handle submissions, and optimize for app store algorithms and discoverability." },
-    { number: 6, title: "Support & Updates", desc: "Ongoing maintenance, bug fixes, feature updates, and performance optimization based on user feedback." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by understanding your app concept, users, and business goals. Through collaborative discussions, we define features, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our design team creates mobile-first wireframes and high-fidelity prototypes that reflect the user journey and optimize touch interactions." },
+    { number: 3, title: "Development & Coding", desc: "We build using latest technologies like React Native, Flutter, Swift, and Kotlin ensuring secure, native-performance apps with clean code architecture." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test functionality, performance, battery usage, and device compatibility using automated and manual testing techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We deploy to App Store and Play Store with proper ASO, compliance checks, and rollout strategies for maximum visibility and downloads." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive maintenance, monitoring, and support packages to keep your app updated, secure, and running efficiently on new OS versions." },
   ],
   projectsHeading: "Recent Mobile Development Projects",
   projectsDescription: "Explore our portfolio of successful mobile applications across iOS and Android platforms",
@@ -32,8 +32,8 @@ export default function MobileDevelopmentPage() {
       config={mobileDevelopmentConfig}
       extraSection={
         <div className="grid lg:grid-cols-2 gap-0">
-          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+          <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
             <img
               src="https://cdn.dribbble.com/userupload/19730654/file/original-23a9368d5081d24e5277c67b35b68059.gif"
               alt="App Development"
@@ -41,7 +41,7 @@ export default function MobileDevelopmentPage() {
             />
           </div>
           <div className="p-8 lg:p-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
               <span className="mr-1">App Development</span>
               <span className="animate-pulse">✨</span>
             </div>
@@ -68,7 +68,7 @@ export default function MobileDevelopmentPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-smartphone w-4 h-4 text-purple-500"
+                    className="lucide lucide-smartphone w-4 h-4 text-[#6467FF]"
                   >
                     <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
                     <path d="M12 18h.01" />
@@ -86,7 +86,7 @@ export default function MobileDevelopmentPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-zap w-4 h-4 text-purple-500"
+                    className="lucide lucide-zap w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
                   </svg>
@@ -103,7 +103,7 @@ export default function MobileDevelopmentPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-users w-4 h-4 text-purple-500"
+                    className="lucide lucide-users w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                     <circle cx="9" cy="7" r="4" />
@@ -123,7 +123,7 @@ export default function MobileDevelopmentPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-cloud w-4 h-4 text-purple-500"
+                    className="lucide lucide-cloud w-4 h-4 text-[#6467FF]"
                   >
                     <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
                   </svg>
@@ -231,7 +231,7 @@ export default function MobileDevelopmentPage() {
               </div>
             </div>
             <div className="flex space-x-3">
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                 App Development
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +249,7 @@ export default function MobileDevelopmentPage() {
                   <path d="m12 5 7 7-7 7" />
                 </svg>
               </button>
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                 View Details
               </button>
             </div>

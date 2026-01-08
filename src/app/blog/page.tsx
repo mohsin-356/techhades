@@ -5,8 +5,19 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, User, ArrowRight, Eye, Heart } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Eye, Heart, Newspaper } from "lucide-react";
+import { MotionSection, MotionDiv } from "@/components/ui/motion";
 import Link from "next/link";
+
+// Helper to format dates consistently (prevents hydration mismatch)
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
 
 const categories = [
   "All",
@@ -160,25 +171,31 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Featured: AlienMatrix Latest updates and news */}
-      <section className="relative pt-24 pb-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-pink-500/10" />
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
-          <div
-            className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-purple-500/20 rounded-full blur-2xl animate-pulse"
-            style={{ animationDelay: "1s" }}
-          />
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#050714] via-[#0B1526] to-[#050714]">
+        <div className="absolute inset-0 -z-10">
+          <div className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(67,178,249,0.15),transparent_60%)]" />
         </div>
 
+        <MotionSection className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+          <MotionDiv variant="fadeInUp" className="text-center max-w-4xl mx-auto">
+            <Badge variant="glow" className="mb-6">
+              <Newspaper className="w-3 h-3 mr-1" />
+              Insights & Updates
+            </Badge>
+            <h1 className="section-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              ALIENMATRIX <span className="heading-accent">BLOG & ARTICLES</span>
+            </h1>
+            <p className="text-xl text-foreground/70 mb-8">
+              Stay updated with the latest trends in AI, Web Development, and Digital Innovation.
+            </p>
+          </MotionDiv>
+        </MotionSection>
+      </div>
+
+      <section className="relative pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-5xl font-display text-foreground mb-8 text-balance"
-          >
-            AlienMatrix <span className="heading-accent">Latest updates and news</span>
-          </motion.h1>
+
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left: Big feature */}
@@ -207,7 +224,7 @@ export default function BlogPage() {
                     </div>
                     <div className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      <span>{new Date(featured.date).toLocaleDateString()}</span>
+                      <span>{formatDate(featured.date)}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
@@ -240,7 +257,7 @@ export default function BlogPage() {
                       <h3 className="text-lg font-semibold mb-2 line-clamp-2">{post.title}</h3>
                       <p className="text-sm text-foreground/70 line-clamp-2 mb-3">{post.excerpt}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-foreground/60">{new Date(post.date).toLocaleDateString()}</span>
+                        <span className="text-xs text-foreground/60">{formatDate(post.date)}</span>
                         <Button asChild size="sm" variant="ghost" className="text-indigo-400 hover:text-indigo-300">
                           <Link href={`/blog/${post.id}`}>Read <ArrowRight className="w-3 h-3 ml-1" /></Link>
                         </Button>
@@ -272,11 +289,10 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap border transition-all ${
-                    activeCategory === cat
-                      ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent"
-                      : "border-foreground/15 text-foreground/80 hover:bg-foreground/5"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap border transition-all ${activeCategory === cat
+                    ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent"
+                    : "border-foreground/15 text-foreground/80 hover:bg-foreground/5"
+                    }`}
                 >
                   {cat}
                 </button>
@@ -297,7 +313,7 @@ export default function BlogPage() {
                   <CardContent className="p-5 flex flex-col">
                     <div className="flex items-center gap-3 text-xs text-foreground/60 mb-3">
                       <span className="flex items-center gap-1"><User className="w-3 h-3" />{post.author}</span>
-                      <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{new Date(post.date).toLocaleDateString()}</span>
+                      <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{formatDate(post.date)}</span>
                       <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2 line-clamp-2">{post.title}</h3>

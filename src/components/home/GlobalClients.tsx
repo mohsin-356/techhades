@@ -43,7 +43,7 @@ export default function GlobalClients() {
     <section className="relative py-16 sm:py-24 overflow-hidden">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(124,58,237,0.08),transparent_60%)]" />
+        <div className="h-full w-full bg-[radial-gradient(1000px_600px_at_50%_0%,rgba(100,103,255,0.08),transparent_60%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,11 +143,12 @@ export default function GlobalClients() {
                     repeat: Infinity,
                     delay: index * 0.2,
                   }}
-                  className="absolute -inset-2 rounded-full bg-purple-500"
+                  className={`absolute -inset-2 rounded-full ${index % 2 === 0 ? "bg-[#6467FF]" : "bg-[#43B2F9]"}`}
+                  style={{ opacity: 0.25 }}
                 />
                 
                 {/* Pin marker */}
-                <div className="relative w-6 h-6 bg-purple-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+                <div className={`relative w-6 h-6 ${index % 2 === 0 ? "bg-[#6467FF]" : "bg-[#43B2F9]"} rounded-full border-2 border-white shadow-[0_0_18px_rgba(100,103,255,0.18)] flex items-center justify-center`}>
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
               </motion.div>

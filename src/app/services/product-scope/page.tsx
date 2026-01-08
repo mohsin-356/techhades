@@ -21,36 +21,12 @@ const productScopeConfig: ServiceConfig = {
   processSubtitle:
     "We turn rough ideas into a clear, actionable product plan your team can execute with confidence.",
   steps: [
-    {
-      number: 1,
-      title: "Discovery & Goals Alignment",
-      desc: "Understand your vision, business goals, and constraints. Align stakeholders on what success looks like.",
-    },
-    {
-      number: 2,
-      title: "User & Market Research",
-      desc: "Analyse target users, market landscape, and competitors to identify opportunities and differentiation.",
-    },
-    {
-      number: 3,
-      title: "Requirements & Feature List",
-      desc: "Translate insights into clear requirements, epics, and features that address real user and business needs.",
-    },
-    {
-      number: 4,
-      title: "Prioritisation & MVP Definition",
-      desc: "Prioritise features into must-have, should-have, and nice-to-have. Define a focused MVP scope.",
-    },
-    {
-      number: 5,
-      title: "Roadmap & Release Planning",
-      desc: "Create a realistic release roadmap with phases, milestones, and timelines for your product journey.",
-    },
-    {
-      number: 6,
-      title: "Documentation & Handover",
-      desc: "Deliver structured documentation, user flows, and acceptance criteria so your team can start building.",
-    },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by aligning stakeholders on vision and constraints. Through collaborative discussions, we define product goals, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our team creates user flow maps and high-fidelity mockups that reflect the user journey and validate feature requirements early." },
+    { number: 3, title: "Development & Coding", desc: "We document technical specifications and architecture plans ensuring a clear, feasible and scalable development path for engineering teams." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously validate requirements against business goals using acceptance criteria and stakeholder review techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We deliver a comprehensive product roadmap, backlog, and release strategy for a structured and successful product launch." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer ongoing product strategy support, analyzing market feedback to refine the roadmap and prioritize future iterations." },
   ],
   projectsHeading: "Recent Product Strategy & Discovery Projects",
   projectsDescription:

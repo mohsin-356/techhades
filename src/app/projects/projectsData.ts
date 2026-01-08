@@ -18,23 +18,6 @@ export interface Project {
 export const allProjects: Project[] = [
 
   {
-    id: "voice-rag-assistant",
-    title: "Voice-Enabled RAG Assistant",
-    cat: "AI/ML",
-    stack: ["Python", "LangChain", "OpenAI", "Whisper AI"],
-    desc: "Talk to your PDF documents using voice.",
-    image: "/projectgifs/websites/motion2Fast_Aspect_ratio_169_high_quality_vector_styleAnimated_0.gif",
-    aboutProject: "An intelligent AI assistant that lets you talk to your PDF documents - ask questions using your voice and get instant spoken answers powered by advanced Retrieval-Augmented Generation technology. Perfect for research papers, manuals, and reports.",
-    problem: "Reading through lengthy PDF documents to find specific information is frustrating and time-consuming. Traditional search (Ctrl+F) only finds exact keywords but doesn't understand context, making it hard to extract key insights quickly.",
-    solution: "We built an AI-powered voice assistant that understands your documents like a human. Simply upload a PDF, ask questions naturally, and get accurate, context-aware answers spoken back to you, powered by RAG technology.",
-    features: [
-      { title: "Voice Recognition", desc: "Advanced speech-to-text handling technical terminology" },
-      { title: "Intelligent PDF Processing", desc: "Extracts text while preserving structure and relationships" },
-      { title: "Semantic Search", desc: "Understands meaning beyond just keyword matching" },
-      { title: "Natural Voice Responses", desc: "High-quality text-to-speech output for answers" }
-    ]
-  },
-  {
     id: "ai-chatbot-mobile-app",
     title: "AI Chatbot Mobile App",
     cat: "Mobile",

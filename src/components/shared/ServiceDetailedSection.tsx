@@ -35,14 +35,13 @@ export default function ServiceDetailedSection({
     badgeText,
 }: ServiceDetailedSectionProps) {
     return (
-        <section className="py-16 sm:py-24 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-zinc-950 border border-white/5 rounded-3xl p-6 sm:p-12 lg:p-16 relative backdrop-blur-sm overflow-hidden">
+        <section className="relative overflow-hidden h-full">
+            <div className="relative h-full rounded-[2.5rem] overflow-hidden border border-[rgba(100,103,255,0.25)] bg-[#0B1526] backdrop-blur-xl shadow-[0_0_40px_rgba(100,103,255,0.15)] p-6 sm:p-10 lg:p-12">
                     {/* Background Glows */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6467FF]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#43B2F9]/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
-                    <div className={`flex flex-col lg:flex-row gap-12 lg:gap-20 items-center ${imagePosition === "left" ? "lg:flex-row-reverse" : ""}`}>
+                    <div className={`flex flex-col 2xl:flex-row gap-10 2xl:gap-12 items-center ${imagePosition === "left" ? "2xl:flex-row-reverse" : ""}`}>
 
                         {/* Content Column */}
                         <div className="flex-1 space-y-8 relative z-10">
@@ -82,26 +81,26 @@ export default function ServiceDetailedSection({
                             </div>
 
                             {/* Features Grid */}
-                            <div className="grid sm:grid-cols-2 gap-4">
+                            <div className="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <h4 className="text-sm font-semibold text-purple-400 mb-4 flex items-center gap-2">
-                                        <span className="w-1 h-4 bg-purple-500 rounded-full" /> FEATURE TAGS
+                                    <h4 className="text-sm font-semibold text-[#6467FF] mb-4 flex items-center gap-2">
+                                        <span className="w-1 h-4 bg-[#6467FF] rounded-full" /> FEATURE TAGS
                                     </h4>
                                     <ul className="space-y-3">
                                         {tags.map((tag, i) => (
                                             <li key={i} className="flex items-center gap-2 text-slate-300 text-sm">
-                                                <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full" />
+                                                <span className="w-1.5 h-1.5 bg-[#43B2F9] rounded-full" />
                                                 {tag}
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 className="text-sm font-semibold text-purple-400 mb-4 opacity-0 sm:opacity-100 hidden sm:block">&nbsp;</h4> {/* Spacer for alignment, hidden on mobile */}
+                                    <h4 className="text-sm font-semibold text-[#6467FF] mb-4 opacity-0 sm:opacity-100 hidden sm:block">&nbsp;</h4> {/* Spacer for alignment, hidden on mobile */}
                                     <ul className="space-y-3">
                                         {features.map((feature, i) => (
                                             <li key={i} className="flex items-center gap-2 text-slate-300 text-sm">
-                                                <CheckCircle2 className="w-4 h-4 text-purple-400" />
+                                                <CheckCircle2 className="w-4 h-4 text-[#6467FF]" />
                                                 {feature}
                                             </li>
                                         ))}
@@ -136,7 +135,7 @@ export default function ServiceDetailedSection({
                                 </div>
 
                                 <div className="flex gap-4">
-                                    <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white rounded-full px-8">
+                                    <Button asChild className="bg-[#6467FF] hover:bg-[#43B2F9] text-white rounded-full px-8">
                                         <Link href={ctaLink}>
                                             {title} <ArrowRight className="w-4 h-4 ml-2" />
                                         </Link>
@@ -153,8 +152,8 @@ export default function ServiceDetailedSection({
 
                         {/* Image/Visual Column */}
                         <div className="flex-1 w-full max-w-lg lg:max-w-none">
-                            <div className="relative aspect-square sm:aspect-[4/3] lg:aspect-square bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/5 p-8 flex items-center justify-center group">
-                                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent opacity-50 group-hover:opacity-70 transition-opacity" />
+                            <div className="relative aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] 2xl:aspect-square bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/5 p-6 sm:p-8 flex items-center justify-center group">
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#43B2F9]/20 via-[#6467FF]/10 to-transparent opacity-50 group-hover:opacity-70 transition-opacity" />
 
                                 {/* Placeholder Illustration Logic - if imageSrc provided use it, otherwise show generic icon/graphic */}
                                 {imageSrc ? (
@@ -167,7 +166,7 @@ export default function ServiceDetailedSection({
                                     </div>
                                 ) : (
                                     <div className="text-center relative z-10">
-                                        <div className="w-32 h-32 mx-auto bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-glow">
+                                        <div className="w-32 h-32 mx-auto bg-gradient-to-br from-[#43B2F9] to-[#6467FF] rounded-full flex items-center justify-center mb-6 shadow-glow">
                                             <span className="text-6xl">✨</span>
                                         </div>
                                         <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
@@ -177,7 +176,6 @@ export default function ServiceDetailedSection({
                         </div>
 
                     </div>
-                </div>
             </div>
         </section>
     );

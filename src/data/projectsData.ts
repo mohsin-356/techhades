@@ -18,23 +18,6 @@ export interface Project {
 export const allProjects: Project[] = [
 
   {
-    id: "voice-rag-assistant",
-    title: "Voice-Enabled RAG Assistant",
-    cat: "AI/ML",
-    stack: ["Python", "LangChain", "OpenAI", "Whisper AI"],
-    desc: "Talk to your PDF documents using voice.",
-    image: "/projectgifs/websites/motion2Fast_Aspect_ratio_169_high_quality_vector_styleAnimated_0.gif",
-    aboutProject: "An intelligent AI assistant that lets you talk to your PDF documents - ask questions using your voice and get instant spoken answers powered by advanced Retrieval-Augmented Generation technology. Perfect for research papers, manuals, and reports.",
-    problem: "Reading through lengthy PDF documents to find specific information is frustrating and time-consuming. Traditional search (Ctrl+F) only finds exact keywords but doesn't understand context, making it hard to extract key insights quickly.",
-    solution: "We built an AI-powered voice assistant that understands your documents like a human. Simply upload a PDF, ask questions naturally, and get accurate, context-aware answers spoken back to you, powered by RAG technology.",
-    features: [
-      { title: "Voice Recognition", desc: "Advanced speech-to-text handling technical terminology" },
-      { title: "Intelligent PDF Processing", desc: "Extracts text while preserving structure and relationships" },
-      { title: "Semantic Search", desc: "Understands meaning beyond just keyword matching" },
-      { title: "Natural Voice Responses", desc: "High-quality text-to-speech output for answers" }
-    ]
-  },
-  {
     id: "ai-chatbot-mobile-app",
     title: "AI Chatbot Mobile App",
     cat: "Mobile",
@@ -512,6 +495,91 @@ export const allProjects: Project[] = [
       { title: "Groups & Clubs", desc: "Dedicated pages with schedules, photos, and join links" },
       { title: "Collections", desc: "Showcase popular games with tags, categories, and difficulty" },
       { title: "CMS Editing", desc: "Editors can update hero sections, cards, and announcements in minutes" }
+    ]
+  },
+  {
+    id: "carbon-jobs-admin",
+    title: "Carbon Jobs — Admin Panel",
+    cat: "Software",
+    stack: ["React", "Node.js", "PostgreSQL"],
+    desc: "Admin dashboard for managing job listings, companies, and approvals.",
+    image: "/projectgifs/softwaresprojects/Carban jobs Admin.gif",
+    aboutProject: "A role-based admin panel built to manage job postings, company profiles, user submissions, and moderation workflows. Designed for speed, clarity, and operational efficiency.",
+    problem: "As job listings scale, manual updates and approvals become inconsistent and slow without a centralized tool.",
+    solution: "We built an admin dashboard with CRUD tools, approval queues, and analytics-style views so teams can manage listings and content with minimal friction.",
+    features: [
+      { title: "Role-Based Access", desc: "Permissions for admins, editors, and reviewers" },
+      { title: "Approval Workflows", desc: "Queue-based moderation for new posts and edits" },
+      { title: "Fast CRUD", desc: "Quick create/edit flows for jobs and companies" },
+      { title: "Audit-Friendly", desc: "Consistent forms and validation for reliable data" }
+    ]
+  },
+  {
+    id: "crypto-matrix",
+    title: "CryptoMatrix",
+    cat: "Software",
+    stack: ["Next.js", "TypeScript", "Node.js"],
+    desc: "Crypto dashboard for tracking markets, portfolios, and alerts.",
+    image: "/projectgifs/softwaresprojects/cryptomatrix.gif",
+    aboutProject: "CryptoMatrix is a product-style dashboard that visualizes market movements, portfolio snapshots, and watchlists in a clean, high-contrast UI.",
+    problem: "Most crypto dashboards overwhelm users with noisy data and poor information hierarchy, making quick decisions difficult.",
+    solution: "We designed a structured layout with focused KPIs, watchlists, and quick navigation so users can monitor key metrics without distraction.",
+    features: [
+      { title: "Market Overview", desc: "Top assets, trending movers, and category snapshots" },
+      { title: "Watchlists", desc: "Track selected coins with fast filters" },
+      { title: "Portfolio View", desc: "Holdings breakdown with clear allocation visuals" },
+      { title: "Alerts", desc: "Configurable price and volatility notifications" }
+    ]
+  },
+  {
+    id: "earth-matrix",
+    title: "EarthMatrix",
+    cat: "Software",
+    stack: ["React", "TypeScript", "APIs"],
+    desc: "Data-rich dashboard experience themed around Earth and sustainability.",
+    image: "/projectgifs/softwaresprojects/EarthMatrix.gif",
+    aboutProject: "EarthMatrix is a dashboard concept focused on presenting complex datasets with strong visual hierarchy and smooth interactions for exploration.",
+    problem: "Large datasets are hard to interpret quickly when charts, filters, and layouts aren’t designed for scanning and comparison.",
+    solution: "We built a UI that prioritizes key metrics, provides intuitive filtering, and uses consistent chart patterns for fast comprehension.",
+    features: [
+      { title: "KPI Panels", desc: "Headline metrics with trends and deltas" },
+      { title: "Filtering", desc: "Quick filters for time ranges and categories" },
+      { title: "Responsive Layout", desc: "Works smoothly across desktop and tablet" },
+      { title: "Visual System", desc: "Consistent charts, spacing, and typography" }
+    ]
+  },
+  {
+    id: "ecom-matrix",
+    title: "EcomMatrix",
+    cat: "Software",
+    stack: ["Next.js", "TypeScript", "Stripe"],
+    desc: "Ecommerce dashboard and management suite for products and orders.",
+    image: "/projectgifs/softwaresprojects/EcomMatrix.gif",
+    aboutProject: "EcomMatrix is a management dashboard designed for ecommerce operators to manage products, orders, customers, and revenue insights from a single interface.",
+    problem: "Operators often juggle multiple tools and spreadsheets to track orders, inventory, and performance.",
+    solution: "We consolidated core workflows into a single dashboard with clear navigation, actionable tables, and revenue-focused reporting.",
+    features: [
+      { title: "Orders & Fulfillment", desc: "Order status management with quick actions" },
+      { title: "Product Management", desc: "Create and update products with validation" },
+      { title: "Customer Insights", desc: "Purchase history and segmentation-ready data" },
+      { title: "Revenue Analytics", desc: "Charts and summaries for performance monitoring" }
+    ]
+  },
+  {
+    id: "foodify",
+    title: "Foodify",
+    cat: "Software",
+    stack: ["React", "Node.js", "MongoDB"],
+    desc: "Food ordering and restaurant management platform experience.",
+    image: "/projectgifs/softwaresprojects/foodify.gif",
+    aboutProject: "Foodify is a full product experience covering discovery, menu browsing, cart flow, and basic restaurant-side management patterns.",
+    problem: "Food apps often suffer from slow discovery, confusing cart flows, and poor status visibility after checkout.",
+    solution: "We created a streamlined browsing-to-checkout UX with clear menu structure, fast cart controls, and status-driven order tracking patterns.",
+    features: [
+      { title: "Menu Browsing", desc: "Category-first menus with add-ons support" },
+      { title: "Cart & Checkout", desc: "Fast edits, promo support, and clean totals" },
+      { title: "Order Tracking", desc: "Status steps from placed to delivered" },
+      { title: "Admin Basics", desc: "Patterns for managing items and availability" }
     ]
   }
 ];

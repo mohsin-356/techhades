@@ -13,12 +13,12 @@ const uiUxDesignConfig: ServiceConfig = {
   processTitle: "Our UI/UX Design Process",
   processSubtitle: "We create user-centered designs that balance aesthetics with functionality and drive conversions",
   steps: [
-    { number: 1, title: "Research & Discovery", desc: "Conduct user research, competitive analysis, and stakeholder interviews to understand needs and pain points." },
-    { number: 2, title: "Wireframing & IA", desc: "Create wireframes and information architecture that map out user flows and define the structure of your product." },
-    { number: 3, title: "Visual Design", desc: "Develop high-fidelity mockups with consistent branding, typography, and color schemes that reflect your brand identity." },
-    { number: 4, title: "Prototyping", desc: "Build interactive prototypes to test user interactions and validate design decisions before development." },
-    { number: 5, title: "Usability Testing", desc: "Conduct user testing sessions to gather feedback, identify issues, and refine the design based on real user behavior." },
-    { number: 6, title: "Design System & Handoff", desc: "Create comprehensive design systems and documentation for seamless developer handoff and future scalability." },
+    { number: 1, title: "Discovery & Planning", desc: "We begin by understanding user needs and business goals. Through collaborative discussions, we define design requirements, timelines, and resources." },
+    { number: 2, title: "Design & Prototyping", desc: "Our design team creates low-fidelity wireframes and interactive prototypes that reflect the user journey and optimize navigation flow." },
+    { number: 3, title: "Development & Coding", desc: "We create pixel-perfect UI assets and design systems using tools like Figma ensuring consistent, accessible and scalable interfaces." },
+    { number: 4, title: "Testing & Quality Assurance", desc: "We rigorously test usability, accessibility, and visual consistency using user testing sessions and heuristic evaluation techniques." },
+    { number: 5, title: "Launch & Deployment", desc: "We deliver comprehensive design systems, component libraries, and style guides for seamless developer handoff and implementation." },
+    { number: 6, title: "Post-Launch Support", desc: "We offer comprehensive design audits and iterative updates based on user feedback to keep your products engaging and effective." },
   ],
   projectsHeading: "Recent UI/UX Design Projects",
   projectsDescription: "Explore our portfolio of beautifully designed digital experiences that drive engagement and conversions",
@@ -33,8 +33,8 @@ export default function UIUXDesignPage() {
       extraSection={
         <div className="relative overflow-hidden rounded-3xl bg-white/80 dark:bg-slate-900 backdrop-blur-sm border border-gray-200 dark:border-slate-700 shadow-lg">
           <div className="grid lg:grid-cols-2 gap-0">
-            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-500/20 dark:to-indigo-500/20" />
+            <div className="relative h-[400px] lg:h-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 dark:from-[#6467FF]/20 dark:to-[#43B2F9]/20" />
               <img
                 src="https://cdn.dribbble.com/users/1288528/screenshots/15063535/media/5b5c7f4a6f4e4e4e4e4e4e4e4e4e4e4e.gif"
                 alt="UI/UX Design"
@@ -42,7 +42,7 @@ export default function UIUXDesignPage() {
               />
             </div>
             <div className="p-8 lg:p-10">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-semibold mb-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6467FF]/10 dark:bg-[#6467FF]/20 text-[#6467FF] dark:text-[#6467FF] text-xs font-semibold mb-4">
                 <span className="mr-1">UI/UX Designing</span>
                 <span className="animate-pulse">✨</span>
               </div>
@@ -69,7 +69,7 @@ export default function UIUXDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-palette w-4 h-4 text-purple-500"
+                      className="lucide lucide-palette w-4 h-4 text-[#6467FF]"
                     >
                       <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor" />
                       <circle cx="17.5" cy="10.5" r="0.5" fill="currentColor" />
@@ -90,7 +90,7 @@ export default function UIUXDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-users w-4 h-4 text-purple-500"
+                      className="lucide lucide-users w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
@@ -110,7 +110,7 @@ export default function UIUXDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-database w-4 h-4 text-purple-500"
+                      className="lucide lucide-database w-4 h-4 text-[#6467FF]"
                     >
                       <ellipse cx="12" cy="5" rx="9" ry="3" />
                       <path d="M3 5V19A9 3 0 0 0 21 19V5" />
@@ -129,7 +129,7 @@ export default function UIUXDesignPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-zap w-4 h-4 text-purple-500"
+                      className="lucide lucide-zap w-4 h-4 text-[#6467FF]"
                     >
                       <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
                     </svg>
@@ -224,7 +224,7 @@ export default function UIUXDesignPage() {
                 </div>
               </div>
               <div className="flex space-x-3">
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] dark:from-purple-500 dark:to-indigo-500 dark:shadow-purple-500/20 dark:hover:shadow-purple-500/30 h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gradient-to-r from-[#6467FF] to-[#43B2F9] text-white shadow-lg shadow-[#6467FF]/30 hover:shadow-xl hover:shadow-[#6467FF]/40 hover:scale-[1.02] active:scale-[0.98] dark:from-[#6467FF] dark:to-[#43B2F9] dark:shadow-[#6467FF]/20 dark:hover:shadow-[#6467FF]/30 h-11 px-6 py-3">
                   UI/UX Designing
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +242,7 @@ export default function UIUXDesignPage() {
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </button>
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-500 shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-white/80 dark:bg-slate-900 backdrop-blur-sm text-[#6467FF] dark:text-[#6467FF] border-2 border-[#6467FF] dark:border-[#6467FF] shadow-md hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] h-11 px-6 py-3">
                   View Details
                 </button>
               </div>

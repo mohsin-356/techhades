@@ -9,7 +9,9 @@ import { GlobalLoaderClient } from "@/components/GlobalLoaderClient";
 import { Toaster } from "@/components/ui/toaster";
 import { CinematicAliens } from "@/components/ui/cinematic-aliens";
 import { AlienGuide } from "@/components/ui/alien-guide";
+import { AlienCursor } from "@/components/ui/alien-cursor";
 import { LiquidGlassFilter } from "@/components/ui/LiquidGlass";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import Script from "next/script";
 
 const inter = Inter({
@@ -32,17 +34,17 @@ const patrickHand = Patrick_Hand({
 
 export const metadata: Metadata = {
   title: {
-    default: "AlienMatrix – Intelligent Digital Experiences",
+    default: "AlienMatrix – engineer intelligence beyond the human matrix",
     template: "%s | AlienMatrix",
   },
   description:
     "We build futuristic websites, apps, AI agents, automations, and smart dashboards for elite brands.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/components/AlienMatrix_Exact.svg",
   },
   metadataBase: new URL("https://example.com"),
   openGraph: {
-    title: "AlienMatrix – Intelligent Digital Experiences",
+    title: "AlienMatrix – engineer intelligence beyond the human matrix",
     description:
       "Modern, animated, and high-performance digital products: Web, Mobile, AI, Automation, and more.",
     url: "https://example.com",
@@ -76,15 +78,18 @@ export default function RootLayout({
       >
 
         <GlobalLoaderClient>
-          <LiquidGlassFilter />
-          <CinematicAliens />
-          <Navbar />
-          <PageTransition>
-            <main className="min-h-dvh pt-20 relative z-10">{children}</main>
-          </PageTransition>
-          <Footer />
-          <Toaster />
-          <AlienGuide />
+          <SmoothScrollProvider>
+            <LiquidGlassFilter />
+            <CinematicAliens />
+            <Navbar />
+            <PageTransition>
+              <main className="min-h-dvh pt-20 relative z-10">{children}</main>
+            </PageTransition>
+            <Footer />
+            <Toaster />
+            <AlienGuide />
+            <AlienCursor />
+          </SmoothScrollProvider>
         </GlobalLoaderClient>
       </body>
     </html>
