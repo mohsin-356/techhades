@@ -1,80 +1,148 @@
 "use client";
 
-import { useState } from "react";
+import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useForm, ValidationError } from "@formspree/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MotionSection, MotionDiv } from "@/components/ui/motion";
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Paperclip } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Paperclip, X } from "lucide-react";
 import { toast } from "sonner";
 import Image from "next/image";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState<string | null>(null);
   const [services, setServices] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
   const [otherText, setOtherText] = useState("");
+  const [servicesError, setServicesError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [fallbackSucceeded, setFallbackSucceeded] = useState(false);
+  const [fallbackSubmitting, setFallbackSubmitting] = useState(false);
+  const [state, formspreeHandleSubmit] = useForm("mvzgelkd");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const MAX_FILES = 10;
+  const MAX_FILE_BYTES = 25 * 1024 * 1024;
+  const MAX_TOTAL_BYTES = 100 * 1024 * 1024;
 
   const SERVICE_OPTIONS = [
-    { value: "custom-software", label: "Custom Software Development" },
-    { value: "web-design-dev", label: "Website Design & Development" },
-    { value: "mobile-app", label: "Mobile App Development" },
-    { value: "ui-ux", label: "UI/UX Design" },
-    { value: "hire-developers", label: "Hire Developers" },
-    { value: "other", label: "Other" },
+    { value: "Custom Software Development", label: "Custom Software Development" },
+    { value: "Website Design & Development", label: "Website Design & Development" },
+    { value: "Mobile App Development", label: "Mobile App Development" },
+    { value: "UI/UX Design", label: "UI/UX Design" },
+    { value: "Hire Developers", label: "Hire Developers" },
+    { value: "Other", label: "Other" },
   ];
 
-  const FLAG_CODES = [
-    "ae", "us", "gb", "sa", "kw", "de", "fr", "it", "ie", "au", "es", "nl", "dk", "pk", "tr", "az", "nz", "ca", "qa", "my", "jp", "fi", "gb-sct"
-  ];
-  const FLAG_POS = [
-    { top: "6%", left: "12%" }, { top: "14%", left: "24%" }, { top: "4%", left: "36%" },
-    { top: "10%", left: "70%" }, { top: "6%", left: "84%" }, { top: "22%", left: "88%" },
-    { top: "30%", left: "90%" }, { top: "44%", left: "86%" }, { top: "62%", left: "80%" },
-    { top: "76%", left: "70%" }, { top: "82%", left: "56%" }, { top: "86%", left: "40%" },
-    { top: "78%", left: "26%" }, { top: "66%", left: "16%" }, { top: "50%", left: "10%" },
-    { top: "34%", left: "8%" }, { top: "22%", left: "16%" }, { top: "28%", left: "76%" },
-    { top: "58%", left: "86%" }, { top: "68%", left: "54%" }, { top: "60%", left: "32%" },
-    { top: "38%", left: "22%" },
-  ];
+  const isOtherSelected = useMemo(() => services.includes("Other"), [services]);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const setSelectedFiles = (next: File[]) => {
+    setFiles(next);
+    const input = fileInputRef.current;
+    if (!input) return;
+    if (next.length === 0) {
+      input.value = "";
+    }
+  };
+
+  const getFormspreeErrorMessage = (): string | null => {
+    const anyErrors = state.errors as any;
+    if (!anyErrors) return null;
+    if (typeof anyErrors === "string") return anyErrors;
+    if (Array.isArray(anyErrors)) return anyErrors[0]?.message || anyErrors[0] || null;
+    if (typeof anyErrors.getFormErrors === "function") {
+      const fe = anyErrors.getFormErrors();
+      if (Array.isArray(fe) && fe.length) return fe[0]?.message || fe[0] || null;
+    }
+    const msg = anyErrors?.message;
+    return typeof msg === "string" ? msg : null;
+  };
+
+  useEffect(() => {
+    if (state.succeeded) {
+      setSubmitError(null);
+      setServicesError(null);
+      setSelectedFiles([]);
+      setFallbackSucceeded(false);
+    }
+  }, [state.succeeded]);
+
+  const getFallbackErrorMessage = async (res: Response): Promise<string> => {
+    try {
+      const data: any = await res.json();
+      const msg =
+        data?.errors?.[0]?.message ||
+        data?.error ||
+        data?.message ||
+        data?.errors?.[0] ||
+        null;
+      if (typeof msg === "string" && msg.trim()) return msg;
+    } catch {
+      // ignore
+    }
+    return `Request failed (${res.status})`;
+  };
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    setStatus("loading");
-    setMessage(null);
-    // Build multipart FormData with services + attachments
-    const postData = new FormData();
-    postData.set("name", String(formData.get("name") || ""));
-    postData.set("email", String(formData.get("email") || ""));
-    postData.set("message", String(formData.get("message") || ""));
-    postData.set("services", JSON.stringify(services.includes("other") && otherText
-      ? [...services.filter(s => s !== "other"), `other:${otherText}`]
-      : services
-    ));
-    files.forEach((f) => postData.append("attachments", f));
+    if (services.length === 0) {
+      setServicesError("Please select at least one service.");
+      return;
+    }
+    setServicesError(null);
+    setSubmitError(null);
+    setFallbackSucceeded(false);
 
-    const res = await fetch("/api/contact", { method: "POST", body: postData });
-    if (res.ok) {
-      setStatus("success");
-      setMessage("Thank you! We'll get back to you shortly.");
+    let ok = false;
+    try {
+      const res = await formspreeHandleSubmit(e);
+      ok = Boolean((res as any)?.response?.ok);
+    } catch {
+      ok = false;
+    }
+
+    if (ok) {
       toast.success("Message sent successfully!", {
         description: "We'll get back to you within 24 hours."
       });
-      form.reset();
       setServices([]);
-      setFiles([]);
+      setSelectedFiles([]);
       setOtherText("");
-    } else {
-      setStatus("error");
-      const { error } = await res.json().catch(() => ({ error: "Something went wrong." }));
-      setMessage(error || "Something went wrong.");
-      toast.error("Failed to send message", {
-        description: error || "Please try again later."
+      setSubmitError(null);
+      return;
+    }
+
+    // Fallback submit (still frontend-only) to surface exact Formspree error messages (esp. file uploads).
+    try {
+      setFallbackSubmitting(true);
+      const fd = new FormData(e.currentTarget);
+      const r = await fetch("https://formspree.io/f/mvzgelkd", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: fd,
       });
+
+      if (!r.ok) {
+        const msg = await getFallbackErrorMessage(r);
+        setSubmitError(msg);
+        return;
+      }
+
+      setFallbackSucceeded(true);
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you within 24 hours.",
+      });
+      setServices([]);
+      setSelectedFiles([]);
+      setOtherText("");
+    } catch {
+      const msg = getFormspreeErrorMessage();
+      setSubmitError(msg || "Something went wrong. Please try again.");
+    } finally {
+      setFallbackSubmitting(false);
     }
   }
   return (
@@ -115,131 +183,225 @@ export default function ContactPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6" id="contact-form">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#94A3B8]">Name</label>
-                        <input
-                          name="name"
-                          className="w-full rounded-lg bg-[rgba(100,103,255,0.08)] border border-[rgba(100,103,255,0.25)] px-4 py-3 outline-none focus:border-[#6467FF] focus:ring-2 focus:ring-[#6467FF]/20 transition-all text-white placeholder:text-[#6B7280]"
-                          placeholder="Your name"
-                          required
-                        />
+                  {state.succeeded || fallbackSucceeded ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="space-y-3"
+                    >
+                      <div className="flex items-center gap-2 text-emerald-500 text-sm">
+                        <CheckCircle className="w-4 h-4" />
+                        Thank you! We&apos;ll get back to you shortly.
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#94A3B8]">Work email</label>
-                        <input
-                          type="email"
-                          name="email"
-                          className="w-full rounded-lg bg-[rgba(100,103,255,0.08)] border border-[rgba(100,103,255,0.25)] px-4 py-3 outline-none focus:border-[#6467FF] focus:ring-2 focus:ring-[#6467FF]/20 transition-all text-white placeholder:text-[#6B7280]"
-                          placeholder="Email address"
-                          required
-                        />
+                      <div className="text-sm text-foreground/70">
+                        We typically reply within 24 hours.
                       </div>
-                    </div>
-
-                    {/* Services checklist */}
-                    <div className="space-y-3">
-                      <label className="text-sm font-medium text-[#94A3B8]">Choose what you need help with<span className="text-red-500">*</span></label>
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {SERVICE_OPTIONS.map((opt) => {
-                          const checked = services.includes(opt.value);
-                          return (
-                            <label key={opt.value} className="flex items-center gap-3 p-3 rounded-lg border border-[rgba(100,103,255,0.25)] hover:bg-[rgba(100,103,255,0.1)] cursor-pointer">
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-foreground/30"
-                                checked={checked}
-                                onChange={(e) => {
-                                  setServices((prev) =>
-                                    e.target.checked ? [...prev, opt.value] : prev.filter((v) => v !== opt.value)
-                                  );
-                                }}
-                              />
-                              <span className="text-sm text-foreground/90">{opt.label}</span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                      {services.includes("other") && (
-                        <input
-                          value={otherText}
-                          onChange={(e) => setOtherText(e.target.value)}
-                          className="mt-2 w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
-                          placeholder="Please specify"
-                        />
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground/80">Tell us about your needs<span className="text-red-500">*</span></label>
-                      <textarea
-                        name="message"
-                        rows={6}
-                        className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all resize-none"
-                        placeholder="Message..."
-                        required
-                      />
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      {/* Attach files */}
-                      <div className="flex items-center gap-3">
-                        <input
-                          id="attachments"
-                          type="file"
-                          multiple
-                          className="hidden"
-                          onChange={(e) => {
-                            const list = Array.from(e.target.files || []);
-                            setFiles(list);
-                          }}
-                        />
-                        <label htmlFor="attachments" className="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-foreground cursor-pointer">
-                          <Paperclip className="w-4 h-4" />
-                          Attach files
-                        </label>
-                        {files.length > 0 && (
-                          <span className="text-xs text-foreground/60">{files.length} file(s) selected</span>
-                        )}
+                    </motion.div>
+                  ) : (
+                    <form
+                      onSubmit={handleSubmit}
+                      className="space-y-6"
+                      id="contact-form"
+                      action="https://formspree.io/f/mvzgelkd"
+                      method="POST"
+                      encType="multipart/form-data"
+                    >
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-[#94A3B8]" htmlFor="contact-name">Name</label>
+                          <input
+                            id="contact-name"
+                            name="name"
+                            className="w-full rounded-lg bg-[rgba(100,103,255,0.08)] border border-[rgba(100,103,255,0.25)] px-4 py-3 outline-none focus:border-[#6467FF] focus:ring-2 focus:ring-[#6467FF]/20 transition-all text-white placeholder:text-[#6B7280]"
+                            placeholder="Your name"
+                            required
+                          />
+                          <ValidationError prefix="Name" field="name" errors={state.errors} />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-[#94A3B8]" htmlFor="contact-email">Work email</label>
+                          <input
+                            id="contact-email"
+                            type="email"
+                            name="email"
+                            className="w-full rounded-lg bg-[rgba(100,103,255,0.08)] border border-[rgba(100,103,255,0.25)] px-4 py-3 outline-none focus:border-[#6467FF] focus:ring-2 focus:ring-[#6467FF]/20 transition-all text-white placeholder:text-[#6B7280]"
+                            placeholder="Email address"
+                            required
+                          />
+                          <ValidationError prefix="Email" field="email" errors={state.errors} />
+                        </div>
                       </div>
 
-                      <Button
-                        type="submit"
-                        disabled={status === "loading"}
-                        variant="primary"
-                        size="lg"
-                        className="min-w-[140px]"
-                      >
-                        {status === "loading" ? (
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                      {/* Services checklist */}
+                      <div className="space-y-3">
+                        <label className="text-sm font-medium text-[#94A3B8]">Choose what you need help with<span className="text-red-500">*</span></label>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          {SERVICE_OPTIONS.map((opt) => {
+                            const checked = services.includes(opt.value);
+                            return (
+                              <label key={opt.value} className="flex items-center gap-3 p-3 rounded-lg border border-[rgba(100,103,255,0.25)] hover:bg-[rgba(100,103,255,0.1)] cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  name="services"
+                                  value={opt.value}
+                                  className="h-4 w-4 rounded border-foreground/30"
+                                  checked={checked}
+                                  onChange={(e) => {
+                                    setServicesError(null);
+                                    setServices((prev) =>
+                                      e.target.checked ? [...prev, opt.value] : prev.filter((v) => v !== opt.value)
+                                    );
+                                  }}
+                                />
+                                <span className="text-sm text-foreground/90">{opt.label}</span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                        {isOtherSelected ? (
+                          <input
+                            name="other_details"
+                            value={otherText}
+                            onChange={(e) => setOtherText(e.target.value)}
+                            className="mt-2 w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+                            placeholder="Please specify"
                           />
                         ) : (
-                          <>
-                            <Send className="w-4 h-4 mr-2" />
-                            Send Message
-                          </>
+                          <input type="hidden" name="other_details" value="" />
                         )}
-                      </Button>
-                    </div>
-                    {message && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className={`flex items-center gap-2 text-sm ${status === "success" ? "text-emerald-500" : "text-red-500"
-                          }`}
-                      >
-                        {status === "success" ? (
-                          <CheckCircle className="w-4 h-4" />
-                        ) : (
+                        {servicesError && (
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="flex items-center gap-2 text-sm text-red-500"
+                          >
+                            <AlertCircle className="w-4 h-4" />
+                            {servicesError}
+                          </motion.div>
+                        )}
+                        <ValidationError prefix="Services" field="services" errors={state.errors} />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-foreground/80" htmlFor="contact-message">Tell us about your needs<span className="text-red-500">*</span></label>
+                        <textarea
+                          id="contact-message"
+                          name="message"
+                          rows={6}
+                          className="w-full rounded-lg bg-foreground/5 border border-foreground/10 px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all resize-none"
+                          placeholder="Message..."
+                          required
+                        />
+                        <ValidationError prefix="Message" field="message" errors={state.errors} />
+                      </div>
+                      <div className="flex items-center justify-between gap-4">
+                        {/* Attach files */}
+                        <div className="flex items-center gap-3">
+                          <input
+                            id="attachments"
+                            type="file"
+                            name="attachment"
+                            multiple
+                            className="hidden"
+                            onChange={(e) => {
+                              const list = Array.from(e.target.files || []);
+                              if (list.length === 0) {
+                                setSelectedFiles([]);
+                                return;
+                              }
+
+                              if (list.length > MAX_FILES) {
+                                toast.error("Too many files", {
+                                  description: `You can upload up to ${MAX_FILES} files per message.`,
+                                });
+                                setSelectedFiles([]);
+                                e.currentTarget.value = "";
+                                return;
+                              }
+
+                              const totalBytes = list.reduce((sum, f) => sum + (f.size || 0), 0);
+                              const tooLarge = list.find((f) => (f.size || 0) > MAX_FILE_BYTES);
+                              if (tooLarge) {
+                                toast.error("File too large", {
+                                  description: "Each file must be 25MB or less.",
+                                });
+                                setSelectedFiles([]);
+                                e.currentTarget.value = "";
+                                return;
+                              }
+
+                              if (totalBytes > MAX_TOTAL_BYTES) {
+                                toast.error("Total upload too large", {
+                                  description: "Total attachments must be 100MB or less.",
+                                });
+                                setSelectedFiles([]);
+                                e.currentTarget.value = "";
+                                return;
+                              }
+
+                              setSelectedFiles(list);
+                            }}
+                            ref={fileInputRef}
+                          />
+                          <label
+                            htmlFor="attachments"
+                            title="Up to 10 files, 25MB each (100MB total)"
+                            className="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-foreground cursor-pointer"
+                          >
+                            <Paperclip className="w-4 h-4" />
+                            Attach files
+                          </label>
+                          {files.length > 0 && (
+                            <span className="inline-flex items-center gap-1 text-xs text-foreground/60">
+                              {files.length} file(s) selected
+                              <button
+                                type="button"
+                                className="inline-flex items-center justify-center rounded hover:bg-foreground/10"
+                                aria-label="Clear selected files"
+                                onClick={() => setSelectedFiles([])}
+                              >
+                                <X className="h-3 w-3" />
+                              </button>
+                            </span>
+                          )}
+                          <span className="sr-only" id="attachments-help">
+                            Up to 10 files. Each file must be 25MB or less. Total attachments must be 100MB or less.
+                          </span>
+                        </div>
+
+                        <Button
+                          type="submit"
+                          disabled={state.submitting || fallbackSubmitting}
+                          variant="primary"
+                          size="lg"
+                          className="min-w-[140px]"
+                        >
+                          {state.submitting || fallbackSubmitting ? (
+                            <motion.div
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                              className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                            />
+                          ) : (
+                            <>
+                              <Send className="w-4 h-4 mr-2" />
+                              Send Message
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                      {(state.errors || submitError) ? (
+                        <motion.div
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="flex items-center gap-2 text-sm text-red-500"
+                        >
                           <AlertCircle className="w-4 h-4" />
-                        )}
-                        {message}
-                      </motion.div>
-                    )}
-                  </form>
+                          {submitError || getFormspreeErrorMessage() || "Something went wrong. Please try again."}
+                        </motion.div>
+                      ) : null}
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </MotionDiv>
