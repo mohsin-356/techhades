@@ -74,7 +74,7 @@ export default function Navbar() {
             <NavPillLink href="/" label="Home" />
             <ServicesDropdownPill />
             <NavPillLink href="/projects" label="Projects" />
-            <NavPillLink href="/blog" label="Blog" />
+            {/* <NavPillLink href="/blog" label="Blog" /> */}
             <NavPillLink href="/about" label="About" />
             <NavPillLink href="/contact" label="Contact" />
           </nav>
@@ -135,9 +135,8 @@ export default function Navbar() {
               <div className="space-y-2">
                 <MobileServicesDropdown />
                 <MobileLink href="/projects" label="Projects" />
-                <MobileLink href="/blog" label="Blog" />
+                {/* <MobileLink href="/blog" label="Blog" /> */}
                 <MobileLink href="/about" label="About" />
-                <MobileLink href="/#brand" label="Brand" />
                 <MobileLink href="/contact" label="Contact" />
               </div>
               <div className="flex justify-center py-2">
@@ -316,7 +315,7 @@ function MobileServicesDropdown() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="px-1 pb-2"
           >
-            <div className="grid grid-cols-1 gap-1">
+            <div className="grid grid-cols-1 gap-1 max-h-[60vh] overflow-y-auto">
               {services.map((service) => (
                 <Link key={service.href} href={service.href} className="group">
                   <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-[rgba(100,103,255,0.1)] transition-colors border border-transparent hover:border-[rgba(67,178,249,0.2)]">

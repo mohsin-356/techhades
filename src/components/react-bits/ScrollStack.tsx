@@ -33,6 +33,7 @@ interface ScrollStackProps {
     rotationAmount?: number;
     blurAmount?: number;
     useWindowScroll?: boolean;
+    enableLenis?: boolean;
     onStackComplete?: () => void;
 }
 
@@ -49,6 +50,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     rotationAmount = 0,
     blurAmount = 0,
     useWindowScroll = false,
+    enableLenis = true,
     onStackComplete
 }) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
@@ -214,6 +216,9 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     }, [updateCardTransforms]);
 
     const setupLenis = useCallback(() => {
+        if (!enableLenis) {
+            return;
+        }
         if (useWindowScroll) {
             const lenis = new Lenis({
                 duration: 1.2,
@@ -267,10 +272,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             lenisRef.current = lenis;
             return lenis;
         }
-    }, [handleScroll, useWindowScroll]);
+    }, [enableLenis, handleScroll, useWindowScroll]);
 
     useLayoutEffect(() => {
         if (!useWindowScroll && !scrollerRef.current) return;
+
+        const getScrollTarget = () => {
+            if (useWindowScroll) return window;
+            return scrollerRef.current;
+        };
 
         const cards = Array.from(
             useWindowScroll
@@ -293,7 +303,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             card.style.webkitPerspective = '1000px';
         });
 
-        setupLenis();
+        if (enableLenis) {
+            setupLenis();
+        } else {
+            const target = getScrollTarget();
+            target?.addEventListener('scroll', handleScroll as any, { passive: true } as any);
+            window.addEventListener('resize', handleScroll as any, { passive: true } as any);
+        }
 
         updateCardTransforms();
 
@@ -303,6 +319,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             }
             if (lenisRef.current) {
                 lenisRef.current.destroy();
+            }
+            if (!enableLenis) {
+                const target = useWindowScroll ? window : scrollerRef.current;
+                target?.removeEventListener('scroll', handleScroll as any);
+                window.removeEventListener('resize', handleScroll as any);
             }
             stackCompletedRef.current = false;
             cardsRef.current = [];
@@ -320,6 +341,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         rotationAmount,
         blurAmount,
         useWindowScroll,
+        enableLenis,
         onStackComplete,
         setupLenis,
         updateCardTransforms

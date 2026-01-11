@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 const AlienLoader = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [loadingText, setLoadingText] = useState("");
+    const [showServices, setShowServices] = useState(false);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -105,8 +106,47 @@ const AlienLoader = () => {
         };
     }, []);
 
+    useEffect(() => {
+        setShowServices(false);
+        const t = setTimeout(() => setShowServices(true), 1400);
+        return () => clearTimeout(t);
+    }, []);
+
+    const serviceCards = [
+        {
+            title: "Web Development",
+            description: "Code from another planet",
+            tags: "Fast & Secure • Scalable"
+        },
+        {
+            title: "UI / UX Design",
+            description: "Designs humans love",
+            tags: "Clean • Modern • Human-Centered"
+        },
+        {
+            title: "Mobile Apps",
+            description: "Built beyond Earth",
+            tags: "Android • iOS • Cross-Platform"
+        },
+        {
+            title: "AI & Automation",
+            description: "Alien-level intelligence",
+            tags: "Smart Systems • Real Results"
+        },
+        {
+            title: "Custom Software",
+            description: "Not made on Earth",
+            tags: "Increase Productivity • Built for Your Vision"
+        },
+        {
+            title: "E-Commerce Solutions",
+            description: "Sell beyond Earth",
+            tags: "Shopify • WordPress • Custom E-Commerce • Payment Gateways"
+        }
+    ];
+
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050714] overflow-hidden">
+        <div className="fixed inset-0 z-50 bg-[#050714] overflow-hidden">
             {/* Canvas Background */}
             <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-30" />
 
@@ -115,91 +155,84 @@ const AlienLoader = () => {
             <div className="absolute inset-0 z-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5" />
 
             {/* Content */}
-            <div className="relative z-20 flex flex-col items-center justify-center px-4">
-                {/* Logo Container with Glitch Effect */}
-                <div className="relative group">
-                    {/* Glitch layers */}
-                    <div className="absolute inset-0 animate-pulse opacity-35 blur-[2px] bg-[rgba(59, 168, 236, 0.48)] rounded-full scale-110" />
+            <div className="absolute inset-0 z-20">
+                <div className="absolute left-1/2 top-[20%] -translate-x-1/2 flex flex-col items-center px-4 w-full">
+                    {/* Logo Container with Glitch Effect */}
+                    <div className="relative group">
+                        {/* Glitch layers */}
+                        <div className="absolute inset-0 animate-pulse opacity-35 blur-[2px] bg-[rgba(59, 168, 236, 0.48)] rounded-full scale-110" />
 
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        className="relative w-32 h-32 md:w-48 md:h-48"
-                    >
-                        {/* Main Image */}
-                        <Image
-                            src="/components/AlienMatrix_logo.png"
-                            alt="AlienMatrix Logo"
-                            fill
-                            className="object-contain drop-shadow-[0_0_10px_rgba(67,178,249,0.35)]"
-                            priority
-                        />
-
-                        {/* Pseudo-glitch overlay (optional visual flair) */}
-                        <div className="absolute inset-0 bg-transparent mix-blend-screen overflow-hidden opacity-0 animate-glitch">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56"
+                        >
+                            {/* Main Image */}
                             <Image
                                 src="/components/AlienMatrix_logo.png"
-                                alt="Glitch"
+                                alt="AlienMatrix Logo"
                                 fill
-                                className="object-contain translate-x-1"
+                                className="object-contain drop-shadow-[0_0_10px_rgba(67,178,249,0.35)]"
+                                priority
                             />
-                        </div>
+
+                            {/* Pseudo-glitch overlay (optional visual flair) */}
+                            <div className="absolute inset-0 bg-transparent mix-blend-screen overflow-hidden opacity-0 animate-glitch">
+                                <Image
+                                    src="/components/AlienMatrix_logo.png"
+                                    alt="Glitch"
+                                    fill
+                                    className="object-contain translate-x-1"
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Loading Text */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
+                        className="mt-8 text-[#43B2F9]/80 font-mono text-sm sm:text-base tracking-[0.25em] uppercase text-center"
+                    >
+                        <span className="type-caret">{loadingText}</span>
                     </motion.div>
                 </div>
 
-                {/* Loading Text */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                    className="mt-8 text-[#43B2F9]/80 font-mono text-sm sm:text-base tracking-[0.25em] uppercase"
-                >
-                    <span className="type-caret">{loadingText}</span>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9, duration: 0.6 }}
-                    className="mt-10 w-full max-w-5xl"
-                >
-                    <div className="text-center text-white/80 font-mono text-xs sm:text-sm tracking-[0.35em] uppercase">
-                        We Offer Services
-                    </div>
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">Web Development</div>
-                            <div className="mt-1 text-white/70 text-sm">Code from another planet 👽</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Fast &amp; Secure • Scalable</div>
+                {showServices && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-x-0 bottom-0 px-4 pb-8"
+                    >
+                        <div className="mx-auto w-full max-w-5xl max-h-[45vh] overflow-y-auto">
+                            <div className="text-center text-white/80 font-mono text-xs sm:text-sm tracking-[0.35em] uppercase">
+                                We Offer Services
+                            </div>
+                            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {serviceCards.map((card, index) => (
+                                    <motion.div
+                                        key={card.title}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            delay: 0.2 + index * 0.15,
+                                            duration: 0.5,
+                                            ease: "easeOut"
+                                        }}
+                                        className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4"
+                                    >
+                                        <div className="text-white font-semibold">{card.title}</div>
+                                        <div className="mt-1 text-white/70 text-sm">{card.description}</div>
+                                        <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">{card.tags}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">UI / UX Design</div>
-                            <div className="mt-1 text-white/70 text-sm">Designs humans love</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Clean • Modern • Human-Centered</div>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">Mobile Apps</div>
-                            <div className="mt-1 text-white/70 text-sm">Built beyond Earth</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Android • iOS • Cross-Platform</div>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">AI &amp; Automation</div>
-                            <div className="mt-1 text-white/70 text-sm">Alien-level intelligence</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Smart Systems • Real Results</div>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">Custom Software</div>
-                            <div className="mt-1 text-white/70 text-sm">Not made on Earth</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Increase Productivity • Built for Your Vision</div>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-[#0B1526]/40 px-5 py-4">
-                            <div className="text-white font-semibold">E-Commerce Solutions</div>
-                            <div className="mt-1 text-white/70 text-sm">Sell beyond Earth 🌍</div>
-                            <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">Shopify • WordPress • Custom E-Commerce • Payment Gateways</div>
-                        </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                )}
             </div>
 
             {/* CSS for custom glitch animations if not using global styles */}

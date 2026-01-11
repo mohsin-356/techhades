@@ -1,9 +1,11 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { useState, useRef } from 'react';
 import StarfieldBackground from './StarfieldBackground';
+import { Button } from '@/components/ui/button';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
@@ -85,25 +87,33 @@ export default function Hero() {
       <div className="relative z-10 w-full min-h-screen mx-auto max-w-[1920px]">
 
         {/* ========== TEXT CONTENT (Absolute Left) ========== */}
-        <div className="relative z-20 flex flex-col justify-center px-4 sm:px-6 lg:px-12 py-24 lg:py-0 w-full lg:w-[45%] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2 h-full pointer-events-none">
+        <div className="relative z-20 flex flex-col justify-center px-4 sm:px-6 lg:px-12 py-24 lg:py-0 w-full lg:w-[50%] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2 h-full pointer-events-none">
           {/* Inner content wrapper with pointer-events-auto to allow text selection/interaction */}
           <div className="pointer-events-auto space-y-6 lg:space-y-8 animate-fadeIn">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-tight text-white text-center lg:text-left">
-              We Build{' '}
               <span className="bg-gradient-to-r from-[#43B2F9] via-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">
-                Intelligent
+                Engineer intelligence
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#43B2F9] via-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">
-                Digital Experiences
+                beyond the human matrix
               </span>
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0 text-center lg:text-left font-light">
               Your partner for Software, Website & App Development along with
               UI/UX Design, AI & Automation, and animations. Bring custom AI
-              into your business processes, on premises or in the cloud.
+              into your business processes.
             </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
+              <Button asChild variant="glow" size="sm" className="min-w-[190px]">
+                <Link href="/contact#contact-form">Start Your Project</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="min-w-[160px]">
+                <Link href="/services">View Our Work</Link>
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -122,7 +132,7 @@ export default function Hero() {
         <div
           className="relative mt-10 w-full flex items-center justify-center px-0 z-10 pointer-events-auto
                      lg:mt-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[40%] xl:w-[45%] 2xl:w-[50%] lg:h-full lg:px-0 lg:flex lg:items-center lg:justify-center
-                     animate-fadeIn animate-delay-1000 animate-duration-1000 animate-ease-in-out animate-fill-forwards animate-iteration-count-infinite animate-infinite"
+                     animate-fadeIn animate-delay-1000 animate-duration-1000 animate-ease-in-out animate-fill-forwards"
           style={{
             boxSizing: 'border-box',
           }}
@@ -144,7 +154,7 @@ export default function Hero() {
             <div className="absolute top-[78%] left-[58%] -translate-x-1/2 -translate-y-1/2 w-[55%] h-[30%] lg:w-[55%] lg:h-[32%] z-0 pointer-events-none opacity-90 mix-blend-screen galaxy-ring" />
 
             {/* Cube positioned to left within canvas using CSS transform */}
-            <div className="relative z-10 cube-wrapper w-full h-full flex items-center justify-center m-0 p-0 transform translate-x-[-2%] sm:translate-x-[-5%] scale-110 sm:scale-120 lg:transform-none lg:scale-90 touch-none">
+            <div className="relative z-10 cube-wrapper w-full h-full flex items-center justify-center m-0 p-0 transform translate-x-[-2%] sm:translate-x-[-5%] scale-110 sm:scale-120 lg:transform-none lg:scale-90">
               <Spline
                 scene="/Blueishcube%20.spline?v=1"
                 onLoad={handleSplineLoad}

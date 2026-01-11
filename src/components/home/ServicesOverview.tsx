@@ -24,7 +24,7 @@ export default function ServicesOverview() {
   };
 
   return (
-    <section className="relative py-16 sm:py-24">
+    <section className="relative py-14 sm:py-24">
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute left-1/2 -top-28 -translate-x-1/2 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-[#6467FF]/10 to-[#43B2F9]/10 blur-3xl opacity-60" />
         <div className="absolute right-[-10%] top-1/3 h-[360px] w-[360px] rounded-full bg-[#43B2F9]/10 blur-3xl" />
@@ -73,7 +73,7 @@ export default function ServicesOverview() {
         </div>
 
         {/* Service Stats */}
-        <div className="flex justify-center items-center gap-8 mt-16 text-sm text-foreground/60">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-8 mt-10 sm:mt-16 text-xs sm:text-sm text-foreground/60 text-center">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#6467FF]"></div>
             <span>500+ Projects Delivered</span>

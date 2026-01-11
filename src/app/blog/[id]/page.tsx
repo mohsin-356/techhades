@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -113,8 +113,28 @@ const blogData = {
     content: `
       <p>Building scalable React applications requires careful planning, architectural decisions, and performance optimization strategies. In this comprehensive guide, we'll explore the best practices that have proven successful in large-scale production environments.</p>
 
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&h=900&fit=crop&crop=center"
+          alt="React application architecture planning"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Scalable React starts with a clear architecture and consistent component boundaries.</figcaption>
+      </figure>
+
       <h2>Component Architecture Fundamentals</h2>
       <p>The foundation of a scalable React application lies in its component architecture. Following proven design patterns ensures maintainability and reusability.</p>
+
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?w=1600&h=900&fit=crop&crop=center"
+          alt="Component-driven development and UI composition"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Component-driven development improves reuse, testability, and team velocity.</figcaption>
+      </figure>
 
       <h3>Atomic Design Principles</h3>
       <ul>
@@ -127,6 +147,16 @@ const blogData = {
 
       <h2>State Management Strategies</h2>
       <p>Choosing the right state management solution is crucial for application scalability and developer experience.</p>
+
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop&crop=center"
+          alt="State management and data flow visualization"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Clear data flow and state boundaries reduce complexity as your app grows.</figcaption>
+      </figure>
 
       <h3>Local State vs Global State</h3>
       <p>Understanding when to use local versus global state is essential:</p>
@@ -146,8 +176,60 @@ const blogData = {
         <li><strong>React Query:</strong> Excellent for server state management and caching</li>
       </ul>
 
+      <h2>State Management Comparison</h2>
+      <p>Choosing the right tool depends on your specific needs. Here's a breakdown of the most popular options:</p>
+      
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Library</th>
+              <th>Best For</th>
+              <th>Complexity</th>
+              <th>Key Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Context API</strong></td>
+              <td>Low-frequency updates</td>
+              <td>Low</td>
+              <td>Built-in, zero bundle size</td>
+            </tr>
+            <tr>
+              <td><strong>Zustand</strong></td>
+              <td>Global client state</td>
+              <td>Low</td>
+              <td>Minimal boilerplate, hooks-based</td>
+            </tr>
+            <tr>
+              <td><strong>Redux Toolkit</strong></td>
+              <td>Complex, large apps</td>
+              <td>High</td>
+              <td>DevTools, rigorous structure</td>
+            </tr>
+            <tr>
+              <td><strong>React Query</strong></td>
+              <td>Server state (API)</td>
+              <td>Medium</td>
+              <td>Caching, deduping, sync</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2>Performance Optimization Techniques</h2>
       <p>Performance optimization should be built into your development process from the beginning.</p>
+
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1600&h=900&fit=crop&crop=center"
+          alt="Performance monitoring and web vitals"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Measure real-user performance (Core Web Vitals) to guide optimizations.</figcaption>
+      </figure>
 
       <h3>Code Splitting and Lazy Loading</h3>
       <p>Reduce initial bundle size by loading components only when needed:</p>
@@ -173,6 +255,16 @@ function App() {
       <h2>Testing and Quality Assurance</h2>
       <p>A robust testing strategy ensures your application remains stable as it scales and evolves.</p>
 
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1600&h=900&fit=crop&crop=center"
+          alt="Automated testing and quality assurance workflows"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Automated testing protects performance and UX as features scale.</figcaption>
+      </figure>
+
       <h3>Testing Pyramid</h3>
       <ul>
         <li><strong>Unit Tests:</strong> Test individual components and functions in isolation</li>
@@ -183,6 +275,16 @@ function App() {
 
       <h2>Production Deployment Strategies</h2>
       <p>Deploying scalable React applications requires careful consideration of build optimization and deployment strategies.</p>
+
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1600&h=900&fit=crop&crop=center"
+          alt="CI/CD pipeline and deployment automation"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Strong build pipelines + caching keep releases fast and stable.</figcaption>
+      </figure>
 
       <h3>Build Optimization</h3>
       <ul>
@@ -282,6 +384,9 @@ export default function BlogPost() {
   const [bookmarked, setBookmarked] = useState(false);
   const [likes, setLikes] = useState(post?.likes ?? 0);
 
+  // Ref for scroll container (center column)
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const processed = useMemo(() => {
     if (!post) return { html: "", toc: [] as TocItem[] };
     return buildContentAndToc(post.content);
@@ -366,20 +471,24 @@ export default function BlogPost() {
   }, []);
 
   useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
     const handleScroll = () => {
-      const winScroll = window.scrollY;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const next = height > 0 ? (winScroll / height) * 100 : 0;
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+      const next = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(next);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (processed.toc.length === 0) return;
+    const container = scrollContainerRef.current;
+    if (processed.toc.length === 0 || !container) return;
 
     const elements = processed.toc
       .map((t) => document.getElementById(t.id))
@@ -395,8 +504,8 @@ export default function BlogPost() {
         if (visible[0]?.target?.id) setActiveHeading(visible[0].target.id);
       },
       {
-        root: null,
-        rootMargin: "-20% 0px -70% 0px",
+        root: container,
+        rootMargin: "-80px 0px -70% 0px",
         threshold: [0.1, 0.5, 1],
       }
     );
@@ -406,12 +515,14 @@ export default function BlogPost() {
   }, [processed.toc]);
 
   const scrollToId = (id: string) => {
+    const container = scrollContainerRef.current;
     const el = document.getElementById(id);
-    if (!el) return;
-    const offset = 110;
-    const rect = el.getBoundingClientRect();
-    const top = rect.top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: "smooth" });
+    if (!el || !container) return;
+    const offset = 80;
+    const containerRect = container.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const scrollTop = container.scrollTop + (elRect.top - containerRect.top) - offset;
+    container.scrollTo({ top: scrollTop, behavior: "smooth" });
   };
 
   const handleCopy = async () => {
@@ -482,7 +593,7 @@ export default function BlogPost() {
     );
   }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
       {jsonLd?.blogPosting ? (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.blogPosting) }} />
       ) : null}
@@ -490,172 +601,130 @@ export default function BlogPost() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.breadcrumbs) }} />
       ) : null}
 
+      {/* Reading Progress Bar - Fixed at top */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-800 z-50">
         <div
-          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-400 transition-all duration-300"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
 
-      {/* Hero Section */}
-      <header className="border-b border-slate-800/50 backdrop-blur-xl bg-slate-900/90 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-4 min-w-0">
-              {/* Back Button */}
-              <button
-                onClick={() => window.history.back()}
-                className="p-2 hover:bg-slate-800 rounded-lg transition group"
-                type="button"
-              >
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition" />
-              </button>
+      {/* 3-Column Layout Container */}
+      <div className="h-full grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] xl:grid-cols-[280px_1fr_340px]">
 
-              <div className="min-w-0">
-                <div className="text-sm text-slate-400">Reading</div>
-                <div className="text-sm text-slate-200 truncate">{formatTimer(readingSeconds)}</div>
+        {/* LEFT SIDEBAR - Table of Contents (Fixed) */}
+        <aside className="hidden lg:flex flex-col h-screen border-r border-slate-800/50 bg-slate-950/50 backdrop-blur-sm">
+          <div className="flex-1 overflow-y-auto p-6 pt-8 custom-scrollbar">
+            <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-xl p-5 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-medium text-xs uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  Contents
+                </h3>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <button onClick={handleCopy} className="p-2 hover:bg-slate-800 rounded-lg transition" type="button">
-                {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
-              </button>
-              <button onClick={handlePrint} className="p-2 hover:bg-slate-800 rounded-lg transition" type="button">
-                <Printer className="w-5 h-5" />
-              </button>
+              <nav className="space-y-1">
+                {hasToc
+                  ? processed.toc.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToId(item.id)}
+                      className={`w-full flex items-start text-left py-2 px-3 rounded-lg transition-all text-sm group ${activeHeading === item.id
+                        ? "bg-blue-500/10 text-blue-400 border-l-2 border-blue-500 font-medium"
+                        : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/50"
+                        }`}
+                      type="button"
+                    >
+                      <span className={`block truncate ${item.level === 3 ? "pl-3 text-xs" : ""}`}>
+                        {item.title}
+                      </span>
+                    </button>
+                  ))
+                  : null}
+              </nav>
+
+              <div className="mt-6 pt-6 border-t border-slate-800/60">
+                <div className="flex items-center justify-between text-[11px] text-slate-500 mb-2 font-medium uppercase tracking-wide">
+                  <span>Reading Progress</span>
+                  <span>{Math.round(scrollProgress)}%</span>
+                </div>
+                <div className="h-1.5 bg-slate-800/60 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500 transition-all duration-300"
+                    style={{ width: `${scrollProgress}%` }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </aside>
 
-      {/* Article Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <aside className="hidden lg:block lg:col-span-3">
-            <div className="sticky top-24 space-y-6">
-              <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 rounded-2xl p-6 shadow-xl">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-semibold text-sm uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" />
-                    Contents
-                  </h3>
-                  <button onClick={() => setShowToc(!showToc)} className="lg:hidden p-1 hover:bg-slate-700 rounded" type="button">
-                    <ChevronDown className={`w-4 h-4 transition-transform ${showToc ? "rotate-180" : ""}`} />
+        {/* CENTER COLUMN - Scrollable Blog Content */}
+        <div
+          ref={scrollContainerRef}
+          className="h-screen overflow-y-auto scroll-smooth custom-scrollbar"
+        >
+          {/* Header Bar - Inside scrollable area */}
+          <header className="border-b border-slate-800/50 backdrop-blur-xl bg-slate-900/90 sticky top-0 z-40">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4 min-w-0">
+                  {/* Back Button */}
+                  <button
+                    onClick={() => window.history.back()}
+                    className="p-2 hover:bg-slate-800 rounded-lg transition group"
+                    type="button"
+                  >
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition" />
                   </button>
-                </div>
 
-                <nav className={`space-y-2 ${showToc ? "block" : "hidden lg:block"}`}>
-                  {hasToc
-                    ? processed.toc.map((item) => (
-                        <button
-                          key={item.id}
-                          onClick={() => scrollToId(item.id)}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all group ${
-                            activeHeading === item.id
-                              ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border border-blue-500/50 shadow-lg shadow-blue-500/10"
-                              : "text-slate-400 hover:text-white hover:bg-slate-700/50"
-                          }`}
-                          type="button"
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <span className={`text-sm font-medium truncate ${item.level === 3 ? "pl-4" : ""}`}>{item.title}</span>
-                          </div>
-                          <span className="text-xs text-slate-500">{item.level === 2 ? "H2" : "H3"}</span>
-                        </button>
-                      ))
-                    : null}
-                </nav>
-
-                <div className="mt-6 pt-6 border-t border-slate-700">
-                  <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                    <span>Progress</span>
-                    <span>{Math.round(scrollProgress)}%</span>
-                  </div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300"
-                      style={{ width: `${scrollProgress}%` }}
-                    />
+                  <div className="min-w-0">
+                    <div className="text-sm text-slate-400">Reading</div>
+                    <div className="text-sm text-slate-200 truncate">{formatTimer(readingSeconds)}</div>
                   </div>
                 </div>
-              </div>
 
-              <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 rounded-2xl p-6 shadow-xl">
-                <h4 className="text-xs uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4" />
-                  Quick Actions
-                </h4>
-                <div className="space-y-2">
-                  <button
-                    onClick={handleLike}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-all ${
-                      liked
-                        ? "bg-red-500/20 text-red-400 border border-red-500/50"
-                        : "hover:bg-slate-700/50 text-slate-400 border border-transparent"
-                    }`}
-                    type="button"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Heart className={`w-4 h-4 ${liked ? "fill-current" : ""}`} />
-                      <span className="text-sm">Like Article</span>
-                    </div>
-                    <span className="text-xs">{likes}</span>
+                <div className="flex items-center gap-2">
+                  <button onClick={handleCopy} className="p-2 hover:bg-slate-800 rounded-lg transition" type="button">
+                    {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
                   </button>
-
-                  <button
-                    onClick={handleBookmark}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all ${
-                      bookmarked
-                        ? "bg-blue-500/20 text-blue-400 border border-blue-500/50"
-                        : "hover:bg-slate-700/50 text-slate-400 border border-transparent"
-                    }`}
-                    type="button"
-                  >
-                    <Bookmark className={`w-4 h-4 ${bookmarked ? "fill-current" : ""}`} />
-                    <span className="text-sm">Save for Later</span>
-                  </button>
-
-                  <button
-                    onClick={handleCopy}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-700/50 text-slate-400 transition border border-transparent hover:border-slate-600"
-                    type="button"
-                  >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                    <span className="text-sm">{copied ? "Link Copied!" : "Copy Link"}</span>
+                  <button onClick={handlePrint} className="p-2 hover:bg-slate-800 rounded-lg transition" type="button">
+                    <Printer className="w-5 h-5" />
                   </button>
                 </div>
               </div>
             </div>
-          </aside>
+          </header>
 
-          <main className="lg:col-span-9 min-w-0">
+          {/* Main Content Area */}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+            {/* Mobile TOC Toggle */}
             {hasToc ? (
-              <div className="lg:hidden bg-slate-800/40 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 mb-6">
+              <div className="lg:hidden bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-xl p-4 mb-6">
                 <button
                   onClick={() => setShowToc(!showToc)}
                   className="w-full flex items-center justify-between gap-3"
                   type="button"
                 >
-                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-200">
+                  <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
                     <BookOpen className="w-4 h-4" />
                     Contents
                   </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showToc ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-4 h-4 transition-transform text-slate-500 ${showToc ? "rotate-180" : ""}`} />
                 </button>
                 {showToc ? (
-                  <div className="mt-4 space-y-2">
+                  <div className="mt-4 space-y-1">
                     {processed.toc.map((item) => (
                       <button
                         key={item.id}
                         onClick={() => scrollToId(item.id)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-left transition-all ${
-                          activeHeading === item.id ? "bg-blue-500/10 text-white" : "text-slate-300 hover:bg-slate-700/40"
-                        }`}
+                        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all ${activeHeading === item.id
+                          ? "bg-blue-500/10 text-blue-400"
+                          : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
+                          }`}
                         type="button"
                       >
                         <span className={`text-sm truncate ${item.level === 3 ? "pl-4" : ""}`}>{item.title}</span>
-                        <span className="text-xs text-slate-500">{item.level === 2 ? "H2" : "H3"}</span>
                       </button>
                     ))}
                   </div>
@@ -663,153 +732,131 @@ export default function BlogPost() {
               </div>
             ) : null}
 
-            <article className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 rounded-3xl overflow-hidden mb-8 shadow-2xl min-w-0">
-              {/* Hero Image */}
-              <div className="relative h-96 overflow-hidden">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
+            {/* Mobile Author & Quick Actions */}
+            <div className="lg:hidden bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-xl p-4 mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/20">
+                  {post.author.charAt(0)}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">{post.author}</div>
+                  <div className="text-xs text-slate-400">{formatDateLong(post.date)} · {post.readTime}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleLike}
+                  className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-all ${liked
+                    ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                    : "hover:bg-slate-800/50 text-slate-400 hover:text-white border border-slate-700/50"
+                    }`}
+                  type="button"
+                >
+                  <Heart className={`w-4 h-4 ${liked ? "fill-current" : ""}`} />
+                  <span className="text-xs">{likes}</span>
+                </button>
+                <button
+                  onClick={handleBookmark}
+                  className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-all ${bookmarked
+                    ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                    : "hover:bg-slate-800/50 text-slate-400 hover:text-white border border-slate-700/50"
+                    }`}
+                  type="button"
+                >
+                  <Bookmark className={`w-4 h-4 ${bookmarked ? "fill-current" : ""}`} />
+                </button>
+                <button
+                  onClick={handleCopy}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-white transition border border-slate-700/50"
+                  type="button"
+                >
+                  {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
 
-                <div className="absolute top-6 left-6 flex flex-wrap gap-2">
-                  <span className="px-4 py-1.5 bg-blue-500/90 backdrop-blur rounded-full text-xs font-semibold flex items-center gap-2">
+            {/* Article */}
+            <article className="bg-[#0B1526]/80 backdrop-blur-md border border-slate-800/50 rounded-2xl overflow-hidden shadow-2xl min-w-0 ring-1 ring-white/5">
+              {/* Hero Image */}
+              <div className="relative h-64 sm:h-80 w-full overflow-hidden group">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1526] via-[#0B1526]/40 to-transparent" />
+
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-blue-500/10 backdrop-blur-md border border-blue-500/20 rounded-full text-xs font-semibold text-blue-300 flex items-center gap-2">
                     <Tag className="w-3 h-3" />
                     {post.category}
                   </span>
-                  {post.tags.slice(0, 2).map((t) => (
-                    <span key={t} className="px-4 py-1.5 bg-purple-500/90 backdrop-blur rounded-full text-xs font-semibold">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur rounded-xl px-4 py-2 border border-slate-700">
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Eye className="w-4 h-4 text-blue-400" />
-                      <span>{post.views.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Heart className="w-4 h-4 text-red-400" />
-                      <span>{likes}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MessageCircle className="w-4 h-4 text-green-400" />
-                      <span>24</span>
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              <div className="p-8 md:p-12">
+              <div className="px-6 py-8 sm:px-10 sm:py-10">
                 {/* Article Header */}
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.15] text-white tracking-tight">
                   {post.title}
                 </h1>
 
-                <p className="text-xl text-slate-300 mb-8 leading-relaxed">{post.excerpt}</p>
-
-                {/* Meta Information */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 mb-8 pb-8 border-b border-slate-700">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    {formatDateLong(post.date)}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    {post.readTime}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    {post.author}
-                  </div>
-                </div>
+                <p className="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed font-light">{post.excerpt}</p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-10 pb-8 border-b border-slate-800/50">
                   {post.tags.map((t) => (
-                    <span key={t} className="px-3 py-1 bg-slate-700/40 border border-slate-600 rounded-full text-xs text-slate-200">
-                      {t}
+                    <span key={t} className="px-3 py-1 bg-slate-800/50 border border-slate-700/50 rounded-full text-[11px] sm:text-xs font-medium text-slate-300 hover:text-white hover:border-slate-600 transition-colors cursor-default">
+                      #{t}
                     </span>
                   ))}
                 </div>
 
-                {/* Social Actions */}
-                <div className="flex items-center justify-between mb-12 p-4 bg-slate-700/30 rounded-xl border border-slate-600">
-                  <span className="text-sm text-slate-400 font-medium">Share this article:</span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={handleLike}
-                      className={`p-2 rounded-lg transition ${
-                        liked ? "text-red-400 bg-red-500/10" : "hover:bg-slate-700/50 text-slate-300"
-                      }`}
-                      type="button"
-                    >
-                      <Heart className={`w-5 h-5 ${liked ? "fill-current" : ""}`} />
-                    </button>
-                    <button
-                      onClick={handleCopy}
-                      className="p-2 hover:bg-purple-500/20 hover:text-purple-400 rounded-lg transition"
-                      type="button"
-                    >
-                      {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
-                    </button>
-                    <button onClick={handlePrint} className="p-2 hover:bg-slate-700/50 rounded-lg transition" type="button">
-                      <Printer className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Article Content */}
-                <div className="prose prose-invert prose-lg max-w-none prose-headings:scroll-mt-28 break-words">
-                  <div
-                    className="prose prose-invert max-w-none
-                      prose-headings:text-white prose-headings:font-bold
-                      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-                      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                      prose-p:text-slate-300 prose-p:leading-relaxed
-                      prose-ul:text-slate-300 prose-li:mb-2
-                      prose-strong:text-white
-                      prose-pre:overflow-x-auto prose-pre:max-w-full
-                      prose-code:break-words"
-                    dangerouslySetInnerHTML={{ __html: processed.html }}
-                  />
-                </div>
-
-                {/* Article Footer */}
-                <div className="mt-12 pt-8 border-t border-slate-700 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                      <User className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">{post.author}</div>
-                      <div className="text-sm text-slate-400">Technical Writer & Developer</div>
-                    </div>
-                  </div>
-                  <Link href="/blog" className="text-sm text-blue-400 hover:text-blue-300 transition">
-                    More Posts
-                  </Link>
-                </div>
+                {/* Blog Content */}
+                <div
+                  className="prose prose-invert prose-lg max-w-none 
+                    prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
+                    prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-slate-800 prose-h2:uppercase prose-h2:tracking-wider prose-h2:text-slate-100
+                    prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-blue-300 prose-h3:font-semibold
+                    prose-h4:text-lg prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-slate-200 prose-h4:font-medium
+                    prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
+                    prose-a:text-blue-400 prose-a:no-underline prose-a:border-b prose-a:border-blue-500/30 hover:prose-a:border-blue-400 prose-a:transition-colors
+                    prose-strong:text-white prose-strong:font-semibold
+                    prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
+                    prose-li:text-slate-300 prose-li:mb-2 prose-li:pl-1
+                    prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300 prose-blockquote:italic prose-blockquote:my-8
+                    prose-code:bg-slate-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-blue-300 prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                    prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl prose-pre:p-4 prose-pre:my-8
+                    prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-slate-800 prose-img:my-12
+                    prose-table:w-full prose-table:my-8 prose-table:border-collapse prose-table:text-sm prose-table:block prose-table:overflow-x-auto
+                    prose-thead:bg-slate-900/50 prose-thead:border-b prose-thead:border-slate-700
+                    prose-th:text-blue-400 prose-th:font-semibold prose-th:p-4 prose-th:text-left prose-th:uppercase prose-th:tracking-wider prose-th:text-xs
+                    prose-td:p-4 prose-td:border-b prose-td:border-slate-800 prose-td:text-slate-300
+                    prose-tr:hover:bg-slate-800/30 prose-tr:transition-colors
+                  "
+                  dangerouslySetInnerHTML={{ __html: processed.html }}
+                />
               </div>
             </article>
 
-            <section className="mb-12">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            {/* Related Articles */}
+            <section className="mt-16">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-white">
                 <TrendingUp className="w-6 h-6 text-blue-400" />
                 Related Articles
               </h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {related.map((p) => (
                   <Link
                     key={p.id}
                     href={`/blog/${p.id}`}
-                    className="group bg-slate-800/40 border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition hover:scale-105"
+                    className="group bg-slate-900/40 border border-slate-800/60 rounded-xl overflow-hidden hover:border-blue-500/50 transition hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/10"
                   >
                     <div className="relative h-40 overflow-hidden">
-                      <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
+                      <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1526] to-transparent" />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold mb-3 group-hover:text-blue-400 transition line-clamp-2">{p.title}</h3>
+                      <h3 className="font-semibold mb-3 text-slate-200 group-hover:text-blue-400 transition line-clamp-2">{p.title}</h3>
                       <div className="flex items-center gap-4 text-xs text-slate-400">
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
@@ -826,59 +873,91 @@ export default function BlogPost() {
               </div>
             </section>
 
-            <section className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <MessageCircle className="w-6 h-6 text-blue-400" />
-                Comments <span className="text-slate-400 text-lg">(24)</span>
-              </h2>
+            {/* Bottom Spacer */}
+            <div className="h-16" />
+          </div>
+        </div>
 
-              <div className="flex gap-4 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex-shrink-0" />
-                <div className="flex-1">
-                  <textarea
-                    placeholder="Share your thoughts on this article..."
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl focus:outline-none focus:border-blue-500 transition resize-none text-slate-200 placeholder-slate-500"
-                    rows={4}
-                  />
-                  <div className="flex justify-end mt-3">
-                    <button
-                      className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/50 transition"
-                      type="button"
-                    >
-                      Post Comment
-                    </button>
+        {/* RIGHT SIDEBAR - Author & Quick Actions (Fixed) */}
+        <aside className="hidden lg:flex flex-col h-screen border-l border-slate-800/50 bg-slate-950/50 backdrop-blur-sm">
+          <div className="flex-1 overflow-y-auto p-6 pt-8 custom-scrollbar">
+            <div className="space-y-6">
+              {/* Author & Meta */}
+              <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-xl p-5 shadow-lg">
+                <div className="flex items-center gap-3 mb-4 pb-4 border-b border-slate-800/60">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/20">
+                    {post.author.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-white">{post.author}</div>
+                    <div className="text-xs text-slate-400">Author</div>
+                  </div>
+                </div>
+
+                <div className="space-y-3 text-xs text-slate-400 mb-2">
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5 opacity-70" /> Published</span>
+                    <span className="text-slate-300">{formatDateLong(post.date)}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 opacity-70" /> Read time</span>
+                    <span className="text-slate-300">{post.readTime}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Eye className="w-3.5 h-3.5 opacity-70" /> Views</span>
+                    <span className="text-slate-300">{post.views.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-6">
-                {[1, 2].map((i) => (
-                  <div key={i} className="flex gap-4 pb-6 border-b border-slate-700 last:border-0">
-                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex-shrink-0" />
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold">Alex Johnson</h4>
-                        <span className="text-xs text-slate-400">2 hours ago</span>
-                      </div>
-                      <p className="text-slate-300 mb-3 leading-relaxed">
-                        Great insights! The section about scalability was particularly helpful. Would love more content on security implementations.
-                      </p>
-                      <div className="flex items-center gap-4 text-sm">
-                        <button className="flex items-center gap-1 text-slate-400 hover:text-blue-400 transition" type="button">
-                          <Heart className="w-4 h-4" />
-                          <span>12</span>
-                        </button>
-                        <button className="text-slate-400 hover:text-blue-400 transition" type="button">
-                          Reply
-                        </button>
-                      </div>
+              {/* Quick Actions */}
+              <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-xl p-5 shadow-lg">
+                <h4 className="text-xs uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2 font-medium">
+                  <TrendingUp className="w-3.5 h-3.5" />
+                  Quick Actions
+                </h4>
+                <div className="space-y-2">
+                  <button
+                    onClick={handleLike}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group ${liked
+                      ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                      : "hover:bg-slate-800/50 text-slate-400 hover:text-white border border-transparent"
+                      }`}
+                    type="button"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Heart className={`w-4 h-4 transition-transform group-hover:scale-110 ${liked ? "fill-current" : ""}`} />
+                      <span className="text-sm font-medium">Like</span>
                     </div>
-                  </div>
-                ))}
+                    <span className="text-xs bg-slate-800/50 px-2 py-0.5 rounded-full text-slate-400 group-hover:text-white">{likes}</span>
+                  </button>
+
+                  <button
+                    onClick={handleBookmark}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group ${bookmarked
+                      ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                      : "hover:bg-slate-800/50 text-slate-400 hover:text-white border border-transparent"
+                      }`}
+                    type="button"
+                  >
+                    <Bookmark className={`w-4 h-4 transition-transform group-hover:scale-110 ${bookmarked ? "fill-current" : ""}`} />
+                    <span className="text-sm font-medium">{bookmarked ? "Saved" : "Save"}</span>
+                  </button>
+
+                  <button
+                    onClick={handleCopy}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-white transition group border border-transparent"
+                    type="button"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 transition-transform group-hover:scale-110" />}
+                    <span className="text-sm font-medium">{copied ? "Copied!" : "Copy Link"}</span>
+                  </button>
+                </div>
               </div>
-            </section>
-          </main>
-        </div>
+            </div>
+          </div>
+        </aside>
+
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 import ServiceDetailedSection from "@/components/shared/ServiceDetailedSection";
 import {
-  ArrowRight, Code, Database, Globe, Server, Smartphone, Cpu, CheckCircle2,
+  Code, Database, Globe, Server, Smartphone, Cpu,
   Monitor, Palette, Layout, Bot, Megaphone, Share2, ShoppingBag, CreditCard,
   Gamepad2, Box, Cloud
 } from "lucide-react";
@@ -10,25 +10,25 @@ export default function ServicesPage() {
   return (
     <div className="bg-[#050714] min-h-screen">
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-center">
         <div className="h-px bg-gradient-to-r from-transparent via-[#6467FF]/50 to-transparent mb-8" />
-        <h2 className="text-4xl sm:text-6xl font-[family:var(--font-display)] text-white mb-4">
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family:var(--font-display)] text-white mb-3 sm:mb-4">
           <span className="bg-gradient-to-r from-[#43B2F9] via-[#6467FF] to-[#43B2F9] bg-clip-text text-transparent">Our Core Services</span>
         </h2>
-        <p className="mt-4 text-[#94A3B8] max-w-3xl mx-auto text-lg leading-relaxed">
-          Comprehensive digital solutions tailored to transform your business with cutting-edge technology and innovative strategies
+        <p className="mt-3 text-[#94A3B8] max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          Digital services built to launch faster, scale smoother, and convert better.
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="grid gap-8 xl:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 xl:grid-cols-2">
 
         {/* 1. Web Development */}
         <ServiceDetailedSection
           badgeText="Website Development"
           title="Web Development"
-          tagline="Website Development According to Your Needs"
-          description="Build powerful, fast, and responsive websites tailored to your business goals. Our expert developers create modern web solutions using cutting-edge technologies to enhance user experience and performance."
+          tagline="Fast, Modern Websites"
+          description="Responsive, SEO-ready websites built for performance and conversions."
           tags={["Custom-Built Solutions", "Fast & Responsive Design", "SEO-Friendly Architecture", "Scalable & Secure Systems"]}
           features={["Next.js SSR & SEO", "Interactive 3D Elements", "CMS Integration", "Global CDN Hosting"]}
           technologies={[
@@ -50,8 +50,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="App Development"
           title="Mobile Apps"
-          tagline="Build Scalable & Engaging Mobile Applications"
-          description="We design and develop modern mobile apps that deliver speed, usability, and security. Whether Android, iOS, or cross-platform, our apps provide a seamless experience that boosts your digital presence."
+          tagline="Scalable Mobile Apps"
+          description="Secure, smooth apps for iOS, Android, and cross-platform builds."
           tags={["Android & iOS Development", "Fast & Optimized Performance", "User-Centric Interface", "Cloud-Integrated Solutions"]}
           features={["Offline Capabilities", "Push Notifications", "Biometric Auth", "Real-time Sync"]}
           technologies={[
@@ -73,8 +73,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="Software Development"
           title="Software Development"
-          tagline="Custom Software Solutions Tailored for Your Business"
-          description="We create efficient, scalable, and secure software systems to automate workflows and improve productivity. Our custom-built solutions ensure your business runs smarter and faster."
+          tagline="Custom Software Systems"
+          description="Automate workflows and scale operations with secure custom software."
           tags={["End-to-End Solutions", "Secure & Reliable Architecture", "Custom Integrations", "Automation & Optimization"]}
           features={["Workflow Automation", "Legacy Migration", "API Development", "Desktop Applications"]}
           technologies={[
@@ -96,8 +96,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="UI/UX Design"
           title="UI/UX Designing"
-          tagline="Designing Intuitive & Aesthetic User Experiences"
-          description="Crafting pixel-perfect designs that blend aesthetics with functionality. We focus on user research, wireframing, and interactive prototyping to create interfaces that users love."
+          tagline="UI/UX That Users Love"
+          description="Clean, intuitive experiences from research to prototypes and design systems."
           tags={["User-Centered Design", "Interactive Prototyping", "Design Systems", "Accessibility Focused"]}
           features={["User Research", "Wireframing", "High-Fidelity Mockups", "Usability Testing"]}
           technologies={[
@@ -112,15 +112,15 @@ export default function ServicesPage() {
           ]}
           ctaLink="/services/ui-ux-design"
           imagePosition="left"
-          imageSrc="https://cdn.dribbble.com/users/1288528/screenshots/15063535/media/5b5c7f4a6f4e4e4e4e4e4e4e4e4e4e4e.gif"
+          imageSrc="https://cdn.dribbble.com/users/1288528/screenshots/15063535/media/5b5c7f4a6f4e4e4e4e4e4e4e4e4e4e.gif"
         />
 
         {/* 5. Ecommerce Development */}
         <ServiceDetailedSection
           badgeText="Ecommerce"
           title="Ecommerce Solutions"
-          tagline="Online Stores & Payments That Convert"
-          description="Build a powerful ecommerce platform that drives sales. From storefront design to payment processing and inventory management, we create seamless shopping experiences."
+          tagline="Stores That Convert"
+          description="High-performing storefronts with secure checkout and smooth operations."
           tags={["Shopify Integration", "Payment Systems", "Custom Storefronts", "Inventory Management"]}
           features={["Secure Checkout", "Order Tracking", "Product Catalog", "Admin Dashboard"]}
           technologies={[
@@ -142,8 +142,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="Game Design"
           title="Game & App Design"
-          tagline="Immersive Game UI & Interactive Experiences"
-          description="Create engaging game interfaces and interactive app experiences. From casual games to complex applications, we design intuitive navigation and HUDs that keep players engaged."
+          tagline="Game UI & Interactions"
+          description="Immersive UI, HUDs, and flows designed to keep users engaged."
           tags={["Game UI/UX", "HUD Design", "Interactive Flow", "Character Concepts"]}
           features={["User Flows", "Asset Creation", "Animation", "Prototyping"]}
           technologies={[
@@ -165,8 +165,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="AI & Automation"
           title="AI & Automation"
-          tagline="Intelligent Solutions for Modern Business Problems"
-          description="Leverage the power of Artificial Intelligence to automate repetitive tasks, gain insights from data, and build smarter applications. From chatbots to predictive analytics, we have you covered."
+          tagline="AI That Saves Time"
+          description="Automate work, extract insights, and ship smarter AI-powered features."
           tags={["Machine Learning", "Process Automation", "NLP Solutions", "Data Analytics"]}
           features={["Custom Chatbots", "Predictive Modeling", "Workflow Automation", "Data Scraping"]}
           technologies={[
@@ -188,8 +188,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="AI/ML Apps"
           title="AI/ML Applications"
-          tagline="Advanced Machine Learning & Data Agents"
-          description="Harness the power of machine learning to solve complex business problems. We build intelligent agents and predictive systems that drive innovation and competitive advantage."
+          tagline="ML Apps & Agents"
+          description="Build models, agents, and pipelines that deliver measurable business impact."
           tags={["Deep Learning", "Intelligent Agents", "Computer Vision", "Big Data"]}
           features={["Model Training", "Neural Networks", "Data Pipelines", "Real-time Inference"]}
           technologies={[
@@ -211,8 +211,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="Cloud Infrastructure"
           title="AWS & Cloud Services"
-          tagline="Scalable Cloud Infrastructure & DevOps"
-          description="Design and implement scalable, secure cloud architecture. From migration to optimization, we ensure your applications run smoothly on AWS, Azure, or GCP."
+          tagline="Cloud & DevOps"
+          description="Reliable cloud setups, migrations, and CI/CD for smooth scale."
           tags={["Cloud Migration", "DevOps Pipelines", "Serverless", "Security"]}
           features={["Auto-scaling", "CI/CD Setup", "Cost Optimization", "Disaster Recovery"]}
           technologies={[
@@ -234,8 +234,8 @@ export default function ServicesPage() {
         <ServiceDetailedSection
           badgeText="Digital Marketing"
           title="Ads and Social Media"
-          tagline="Grow Your Brand Presence & Reach New Customers"
-          description="Strategic digital marketing campaigns that drive engagement and conversions. We handle everything from content creation to ad management across all major social platforms."
+          tagline="Ads & Social Growth"
+          description="Campaigns that increase reach, leads, and conversions across platforms."
           tags={["Targeted Advertising", "Content Strategy", "Brand Growth", "Performance Analytics"]}
           features={["Facebook/IG Ads", "SEO Optimization", "Viral Content", "Community Management"]}
           technologies={[

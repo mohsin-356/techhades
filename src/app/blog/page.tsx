@@ -35,126 +35,34 @@ const blogPosts = [
   {
     id: 1,
     title:
-      "How Do You Choose The Right Generative AI Development Partner?",
+      "The Future of AI in Web Development: Transforming How We Build Digital Experiences",
     excerpt:
-      "Don’t let your AI project fail. Learn the 5 crucial steps to vet and select the right Generative AI development partner.",
-    author: "Mohsin Ali",
-    date: "2024-10-28",
-    readTime: "7 min read",
-    category: "Artificial Intelligence",
+      "Explore how artificial intelligence is revolutionizing web development, from automated code generation to intelligent user interfaces that adapt in real-time.",
+    author: "Alex Rodriguez",
+    date: "2024-10-20",
+    readTime: "8 min read",
+    category: "AI & Technology",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&h=900&fit=crop&crop=center",
-    tags: ["AI", "Partnership", "Strategy"],
-    views: 3247,
-    likes: 156,
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=600&fit=crop&crop=center",
+    tags: ["AI", "Web Development", "Machine Learning", "Future Tech"],
+    views: 1247,
+    likes: 89,
   },
   {
     id: 2,
     title:
-      "Building Your Own AI Like ChatGPT: What You Need To Know",
+      "Building Scalable React Applications: Best Practices and Performance Optimization",
     excerpt:
-      "Should you build a custom ChatGPT alternative or use an API? We compare cost, control and data trade‑offs.",
-    author: "Mohsin Ali",
-    date: "2024-10-23",
-    readTime: "9 min read",
-    category: "Artificial Intelligence",
+      "Learn essential techniques for building React applications that can handle millions of users while maintaining optimal performance and developer experience.",
+    author: "Sarah Chen",
+    date: "2024-10-18",
+    readTime: "12 min read",
+    category: "React Development",
     image:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981d?w=900&h=600&fit=crop&crop=center",
-    tags: ["GenAI", "ChatGPT", "Build vs Buy"],
-    views: 1890,
-    likes: 98,
-  },
-  {
-    id: 3,
-    title:
-      "Build vs. Buy: What’s The Smarter Move For Generative AI?",
-    excerpt:
-      "Break down the trade‑offs on cost, control, data and time when choosing between custom AI vs. APIs.",
-    author: "Mohsin Ali",
-    date: "2024-10-21",
-    readTime: "8 min read",
-    category: "Artificial Intelligence",
-    image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&h=600&fit=crop&crop=center",
-    tags: ["GenAI", "Strategy", "Decision"],
-    views: 1720,
-    likes: 75,
-  },
-  {
-    id: 4,
-    title:
-      "Can Generative AI Really Solve Business Problems Or Is It Just Hype?",
-    excerpt:
-      "A practical guide to separating hype from impact and creating measurable business value.",
-    author: "Mohsin Ali",
-    date: "2024-10-14",
-    readTime: "10 min read",
-    category: "General",
-    image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=900&h=600&fit=crop&crop=center",
-    tags: ["Business", "AI", "Strategy"],
-    views: 2035,
-    likes: 121,
-  },
-  {
-    id: 5,
-    title: "How Can AI Chatbots Help Reduce Healthcare Administration Costs?",
-    excerpt:
-      "Six strategies to automate patient appointments and reduce admin overhead with chatbots.",
-    author: "Mohsin Ali",
-    date: "2024-10-13",
-    readTime: "6 min read",
-    category: "Software Development",
-    image:
-      "https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&h=600&fit=crop&crop=center",
-    tags: ["Healthcare", "Chatbots"],
-    views: 1420,
-    likes: 63,
-  },
-  {
-    id: 6,
-    title: "Design Systems For Scale: From Atoms To Templates",
-    excerpt:
-      "Use Atomic Design to build consistent, scalable UI across large apps and websites.",
-    author: "Team AlienMatrix",
-    date: "2024-09-30",
-    readTime: "11 min read",
-    category: "UI/UX Design",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&h=600&fit=crop&crop=center",
-    tags: ["Design", "System", "Atomic"],
-    views: 980,
-    likes: 54,
-  },
-  {
-    id: 7,
-    title: "Modern Web Performance: 7 Quick Wins",
-    excerpt:
-      "From code‑splitting to image pipelines—practical tips to speed up your site today.",
-    author: "Team AlienMatrix",
-    date: "2024-09-22",
-    readTime: "5 min read",
-    category: "Website Development",
-    image:
-      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=900&h=600&fit=crop&crop=center",
-    tags: ["Web", "Performance"],
-    views: 1210,
-    likes: 44,
-  },
-  {
-    id: 8,
-    title: "Choosing The Right Mobile Stack In 2025",
-    excerpt:
-      "React Native, Flutter or Kotlin/Swift? How to decide for your next app.",
-    author: "Team AlienMatrix",
-    date: "2024-09-12",
-    readTime: "7 min read",
-    category: "App Development",
-    image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&h=600&fit=crop&crop=center",
-    tags: ["Mobile", "React Native", "Flutter"],
-    views: 845,
-    likes: 31,
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop&crop=center",
+    tags: ["React", "Performance", "Scalability", "Best Practices"],
+    views: 2156,
+    likes: 134,
   },
 ];
 
@@ -204,15 +112,15 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               className="lg:col-span-2"
             >
-              <Card className="group relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 hover:border-violet-500/40 transition-all duration-500 h-full shadow-lg">
-                <div className="relative h-72 md:h-[28rem] overflow-hidden">
+              <Card className="group relative overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-500/5 via-cyan-500/3 to-blue-500/5 hover:border-cyan-500/40 transition-all duration-500 h-full shadow-lg">
+                <div className="relative h-60 sm:h-72 md:h-[28rem] overflow-hidden">
                   <img
                     src={featured.image}
                     alt={featured.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <Badge className="absolute top-4 left-4 bg-indigo-500/90 text-white">
+                  <Badge className="absolute top-4 left-4 bg-blue-500/90 text-white">
                     {featured.category}
                   </Badge>
                 </div>
@@ -235,7 +143,7 @@ export default function BlogPage() {
                     {featured.title}
                   </h2>
                   <p className="text-foreground/70 mb-6 line-clamp-3">{featured.excerpt}</p>
-                  <Button asChild variant="ghost" className="text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/10">
+                  <Button asChild variant="ghost" className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10">
                     <Link href={`/blog/${featured.id}`}>
                       Read More <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
@@ -248,17 +156,17 @@ export default function BlogPage() {
             <div className="flex flex-col gap-6">
               {sidePosts.map((post, i) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-                  <Card className="group overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 hover:border-violet-500/40 transition-all duration-500 shadow-lg">
-                    <div className="relative h-40 overflow-hidden">
+                  <Card className="group overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-500/5 via-cyan-500/3 to-blue-500/5 hover:border-cyan-500/40 transition-all duration-500 shadow-lg">
+                    <div className="relative h-36 sm:h-40 overflow-hidden">
                       <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      <Badge className="absolute top-3 left-3 bg-indigo-500/90 text-white text-xs">{post.category}</Badge>
+                      <Badge className="absolute top-3 left-3 bg-blue-500/90 text-white text-xs">{post.category}</Badge>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="text-lg font-semibold mb-2 line-clamp-2">{post.title}</h3>
                       <p className="text-sm text-foreground/70 line-clamp-2 mb-3">{post.excerpt}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-foreground/60">{formatDate(post.date)}</span>
-                        <Button asChild size="sm" variant="ghost" className="text-indigo-400 hover:text-indigo-300">
+                        <Button asChild size="sm" variant="ghost" className="text-cyan-400 hover:text-cyan-300">
                           <Link href={`/blog/${post.id}`}>Read <ArrowRight className="w-3 h-3 ml-1" /></Link>
                         </Button>
                       </div>
@@ -290,7 +198,7 @@ export default function BlogPage() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm whitespace-nowrap border transition-all ${activeCategory === cat
-                    ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent"
+                    ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-transparent"
                     : "border-foreground/15 text-foreground/80 hover:bg-foreground/5"
                     }`}
                 >
@@ -304,11 +212,11 @@ export default function BlogPage() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((post, index) => (
               <motion.div key={post.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}>
-                <Card className="group relative overflow-hidden border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-violet-500/3 to-purple-500/5 hover:border-violet-500/40 transition-all duration-500 h-full">
-                  <div className="relative h-44 overflow-hidden">
+                <Card className="group relative overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-500/5 via-cyan-500/3 to-blue-500/5 hover:border-cyan-500/40 transition-all duration-500 h-full">
+                  <div className="relative h-40 sm:h-44 overflow-hidden">
                     <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <Badge className="absolute top-3 left-3 bg-indigo-500/90 text-white text-xs">{post.category}</Badge>
+                    <Badge className="absolute top-3 left-3 bg-blue-500/90 text-white text-xs">{post.category}</Badge>
                   </div>
                   <CardContent className="p-5 flex flex-col">
                     <div className="flex items-center gap-3 text-xs text-foreground/60 mb-3">
@@ -321,7 +229,7 @@ export default function BlogPage() {
                     <div className="mt-auto flex items-center justify-between text-xs text-foreground/60">
                       <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{post.views.toLocaleString()}</span>
                       <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{post.likes}</span>
-                      <Button asChild size="sm" variant="ghost" className="text-indigo-400 hover:text-indigo-300">
+                      <Button asChild size="sm" variant="ghost" className="text-cyan-400 hover:text-cyan-300">
                         <Link href={`/blog/${post.id}`}>Read More <ArrowRight className="w-3 h-3 ml-1" /></Link>
                       </Button>
                     </div>

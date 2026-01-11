@@ -919,6 +919,30 @@ img {
   opacity: 0.55;
 }
 
+/* Custom thin scrollbar for sidebars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(100, 103, 255, 0.3);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(67, 178, 249, 0.5);
+}
+
+/* Firefox support */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 103, 255, 0.3) transparent;
+}
+
 @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
 
   html,

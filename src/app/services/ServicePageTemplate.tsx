@@ -144,229 +144,97 @@ export default function ServicePageTemplate({
         )}
       </MotionSection>
 
-      {/* Process Timeline - Horizontal Flow */}
-      <MotionSection className="bg-gradient-to-br from-[#050714] via-[#0B1526] to-[#050714] py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <MotionDiv variant="fadeInUp" className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+      {/* Development Process - ReactBits ScrollStack */}
+      <MotionSection className="bg-[#050714] py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#43B2F9]/5 via-transparent to-transparent opacity-40"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#43B2F9]/20 to-transparent"></div>
+          <div className="absolute bottom-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#6467FF]/20 to-transparent"></div>
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <MotionDiv variant="fadeInUp" className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
               {processTitle}
             </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto">{processSubtitle}</p>
+            <p className="text-lg text-[#94A3B8] max-w-3xl mx-auto leading-relaxed">
+              {processSubtitle}
+            </p>
           </MotionDiv>
 
-          {/* Desktop Horizontal Flow */}
-          <div className="hidden lg:flex flex-col items-center relative">
-            {/* Center Brand Text */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <h3 className="text-6xl font-bold text-white/10 tracking-wider">AlienMatrix</h3>
-            </div>
-
-            {/* Horizontal bar with animated gradient and arrows */}
-            <div className="relative w-full flex items-center justify-between mb-12">
-              <div className="absolute top-1/2 left-0 w-full h-2 -translate-y-1/2 z-0">
+          <div className="relative">
+            <div className="hidden lg:block relative">
+              <div className="absolute top-8 left-[8%] right-[8%] h-[2px] bg-[#1E293B]">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF] rounded-full"
+                  className="h-full bg-gradient-to-r from-[#6467FF] via-[#43B2F9] to-[#6467FF]"
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
                   viewport={{ once: true }}
                 />
               </div>
 
-              {/* Step Indicators with Arrows */}
-              <div className="absolute top-1/2 w-full px-4 z-10 -translate-y-1/2">
-                {steps.map((_, index, array) => {
-                  if (index === array.length - 1) return null;
-                  const left = `calc(${((index + 1) / array.length) * 100}% - 8px)`;
-                  return (
-                    <motion.div
-                      key={`arrow-${index}`}
-                      className="absolute"
-                      style={{ left }}
-                      initial={{ opacity: 0, y: -5 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8 + index * 0.15, duration: 0.4 }}
-                      viewport={{ once: true }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M8 1L15 8L8 15"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </motion.div>
-                  );
-                })}
+              <div className="grid grid-cols-6 gap-6 relative z-10">
+                {steps.map((step, index) => (
+                  <motion.div
+                    key={step.number}
+                    className="flex flex-col items-center group"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="relative mb-8">
+                      <div className="w-16 h-16 rounded-full bg-[#0B1526] border-2 border-[#43B2F9] flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(67,178,249,0.3)]">
+                        <span className="text-xl font-bold text-[#43B2F9]">{step.number}</span>
+                      </div>
+                      <div className="absolute inset-0 bg-[#43B2F9]/20 blur-xl rounded-full"></div>
+                    </div>
+
+                    <div className="w-full h-full">
+                      <div className="h-full bg-[#0B1526]/60 backdrop-blur-md border border-[#43B2F9]/30 rounded-2xl p-6 hover:border-[#43B2F9] transition-colors duration-300 flex flex-col items-center text-center group-hover:shadow-[0_0_30px_rgba(67,178,249,0.1)]">
+                        <h3 className="text-lg font-bold text-white mb-3 min-h-[48px] flex items-center justify-center">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-[#94A3B8] leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
-            {/* Process Steps in a Row */}
-            <div className="w-full grid grid-cols-6 gap-6 relative z-20">
-              {steps.map((step, index) => (
+            <div className="lg:hidden space-y-8">
+              {steps.map((step, index, array) => (
                 <motion.div
                   key={step.number}
-                  className="flex flex-col items-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="flex gap-6 relative"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white flex items-center justify-center font-bold text-xl shadow-xl shadow-[#6467FF]/50 mb-4"
-                    initial={{ scale: 0.8 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.4 + index * 0.15 }}
-                    viewport={{ once: true }}
-                  >
-                    {step.number}
-                  </motion.div>
-                  <div className="bg-[#0B1526]/40 backdrop-blur-sm border-2 border-[#6467FF]/50 rounded-lg p-4 h-full w-full">
-                    <h3 className="text-base font-bold text-white mb-2 text-center">{step.title}</h3>
-                    <p className="text-xs text-gray-300 leading-tight text-center">{step.desc}</p>
+                  {index !== array.length - 1 && (
+                    <div className="absolute left-[31px] top-[64px] bottom-[-32px] w-[2px] bg-gradient-to-b from-[#43B2F9]/50 to-transparent"></div>
+                  )}
+
+                  <div className="shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-[#0B1526] border-2 border-[#43B2F9] flex items-center justify-center shadow-[0_0_15px_rgba(67,178,249,0.2)]">
+                      <span className="text-xl font-bold text-[#43B2F9]">{step.number}</span>
+                    </div>
+                  </div>
+
+                  <div className="grow pb-4">
+                    <div className="bg-[#0B1526]/60 backdrop-blur-sm border border-[#43B2F9]/30 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                      <p className="text-[#94A3B8] text-sm leading-relaxed">{step.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Return Arrow */}
-            <motion.div
-              className="mt-12 flex justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <svg
-                width="80"
-                height="40"
-                viewBox="0 0 80 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <motion.path
-                  d="M75 20C75 8 60 5 40 5C20 5 5 8 5 20"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 1.7, duration: 1 }}
-                />
-                <motion.path
-                  d="M15 10L5 20L15 30"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 2.7, duration: 0.4 }}
-                />
-              </svg>
-            </motion.div>
-          </div>
-
-          {/* Mobile Process Flow */}
-          <div className="lg:hidden space-y-8">
-            {steps.map((step, index, array) => (
-              <motion.div
-                key={step.number}
-                className="flex gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-[#6467FF] to-[#43B2F9] text-white flex items-center justify-center font-bold text-xl shadow-lg"
-                  whileInView={{
-                    boxShadow: [
-                      "0 10px 15px -3px rgba(100, 103, 255, 0.3)",
-                      "0 10px 20px -2px rgba(100, 103, 255, 0.6)",
-                      "0 10px 15px -3px rgba(100, 103, 255, 0.3)",
-                    ],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {step.number}
-                </motion.div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-300">{step.desc}</p>
-
-                  {index < array.length - 1 && (
-                    <motion.div
-                      className="flex justify-center mt-4 text-white"
-                      animate={{ y: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                    >
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M12 4L12 16" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                        <path
-                          d="M6 10L12 16L18 10"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Return Arrow for Mobile */}
-            <motion.div
-              className="flex justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <motion.path
-                  d="M30 20C30 25.5228 25.5228 30 20 30C14.4772 30 10 25.5228 10 20C10 14.4772 14.4772 10 20 10"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5, delay: 1 }}
-                />
-                <motion.path
-                  d="M20 10L26 7M20 10L26 13"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 2.5 }}
-                />
-              </svg>
-            </motion.div>
           </div>
         </div>
       </MotionSection>

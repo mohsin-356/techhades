@@ -23,13 +23,19 @@ const StarfieldBackground = ({ className }: { className?: string }) => {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
+        const isSmallScreen = window.matchMedia?.("(max-width: 768px)")?.matches ?? window.innerWidth <= 768;
+        const targetFps = isSmallScreen ? 30 : 60;
+        const frameInterval = 1000 / targetFps;
+        const enableGlow = !isSmallScreen;
+
         // Set canvas size
         let width = window.innerWidth;
         let height = window.innerHeight;
         const resizeCanvas = () => {
             width = window.innerWidth;
             height = window.innerHeight;
-            const dpr = window.devicePixelRatio || 1;
+            const rawDpr = window.devicePixelRatio || 1;
+            const dpr = Math.min(rawDpr, isSmallScreen ? 1.5 : 2);
             canvas.width = Math.floor(width * dpr);
             canvas.height = Math.floor(height * dpr);
             canvas.style.width = `${width}px`;
@@ -41,7 +47,7 @@ const StarfieldBackground = ({ className }: { className?: string }) => {
 
         // Initial stars
         const stars: Star[] = [];
-        const numStars = 2000; // Dense starfield
+        const numStars = isSmallScreen ? 700 : 1600;
         const depth = 2000; // Z-depth
 
         const palette = [
@@ -64,8 +70,15 @@ const StarfieldBackground = ({ className }: { className?: string }) => {
         }
 
         let animationFrameId: number;
+        let lastFrameTime = 0;
 
-        const render = () => {
+        const render = (time: number) => {
+            if (time - lastFrameTime < frameInterval) {
+                animationFrameId = requestAnimationFrame(render);
+                return;
+            }
+            lastFrameTime = time;
+
             ctx.fillStyle = "#030014"; // Deep space background
             ctx.fillRect(0, 0, width, height); // Clear screen
 
@@ -90,7 +103,7 @@ const StarfieldBackground = ({ className }: { className?: string }) => {
                 const safeOpacity = Math.max(0, Math.min(1, star.opacity));
 
                 // Occasional glow for brighter stars
-                if (star.size > 1.2 && safeOpacity > 0.8) {
+                if (enableGlow && star.size > 1.2 && safeOpacity > 0.8) {
                     ctx.shadowBlur = 3;
                     ctx.shadowColor = `rgba(${star.rgb}, 0.7)`;
                 } else {
@@ -110,7 +123,7 @@ const StarfieldBackground = ({ className }: { className?: string }) => {
             animationFrameId = requestAnimationFrame(render);
         };
 
-        render();
+        animationFrameId = requestAnimationFrame(render);
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
