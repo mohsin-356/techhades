@@ -155,8 +155,8 @@ const AlienLoader = () => {
             <div className="absolute inset-0 z-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5" />
 
             {/* Content */}
-            <div className="absolute inset-0 z-20">
-                <div className="absolute left-1/2 top-[20%] -translate-x-1/2 flex flex-col items-center px-4 w-full">
+            <div className="absolute inset-0 z-20 flex flex-col min-h-0">
+                <div className="pt-8 sm:pt-12 md:pt-16 flex flex-col items-center px-4 w-full">
                     {/* Logo Container with Glitch Effect */}
                     <div className="relative group">
                         {/* Glitch layers */}
@@ -166,7 +166,7 @@ const AlienLoader = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56"
+                            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56"
                         >
                             {/* Main Image */}
                             <Image
@@ -205,9 +205,9 @@ const AlienLoader = () => {
                         initial={{ opacity: 0, y: 14 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="absolute inset-x-0 bottom-0 px-4 pb-8"
+                        className="mt-auto px-4 pb-6 sm:pb-8"
                     >
-                        <div className="mx-auto w-full max-w-5xl max-h-[45vh] overflow-y-auto">
+                        <div className="mx-auto w-full max-w-5xl max-h-[38vh] sm:max-h-[45vh] overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                             <div className="text-center text-white/80 font-mono text-xs sm:text-sm tracking-[0.35em] uppercase">
                                 We Offer Services
                             </div>
@@ -226,7 +226,7 @@ const AlienLoader = () => {
                                     >
                                         <div className="text-white font-semibold">{card.title}</div>
                                         <div className="mt-1 text-white/70 text-sm">{card.description}</div>
-                                        <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono">{card.tags}</div>
+                                        <div className="mt-3 text-[#43B2F9]/80 text-xs font-mono break-words">{card.tags}</div>
                                     </motion.div>
                                 ))}
                             </div>

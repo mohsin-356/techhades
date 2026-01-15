@@ -1,32 +1,115 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion, useMotionValue, useSpring } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 
 export function AlienCursor() {
-    const [isVisible, setIsVisible] = useState(false)
-    const [isTextMode, setIsTextMode] = useState(false)
+    const [isDesktop, setIsDesktop] = useState(false)
 
     // Mouse position
-    const mouseX = useMotionValue(-100)
-    const mouseY = useMotionValue(-100)
+    const targetRef = useRef({ x: -100, y: -100 })
+    const currentRef = useRef({ x: -100, y: -100 })
 
     // Smooth catch-up effect (spring physics)
-    const springConfig = { damping: 25, stiffness: 300, mass: 0.5 }
-    const cursorX = useSpring(mouseX, springConfig)
-    const cursorY = useSpring(mouseY, springConfig)
+    const easeRef = useRef(0.35)
+
+    const isVisibleRef = useRef(false)
+    const isTextModeRef = useRef(false)
+
+    const arrowRef = useRef<HTMLDivElement | null>(null)
+    const orbRef = useRef<HTMLDivElement | null>(null)
+
+    const rafRef = useRef<number | null>(null)
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            // Show cursor only when moving mouse
-            if (!isVisible) setIsVisible(true)
+        const mql = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 769px)")
+        const update = () => setIsDesktop(mql.matches)
 
-            mouseX.set(e.clientX)
-            mouseY.set(e.clientY)
+        update()
+        if (mql.addEventListener) mql.addEventListener("change", update)
+        else mql.addListener(update)
+
+        return () => {
+            if (mql.removeEventListener) mql.removeEventListener("change", update)
+            else mql.removeListener(update)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!isDesktop) {
+            if (document.documentElement.dataset.alienCursor) {
+                delete document.documentElement.dataset.alienCursor
+            }
+            return
+        }
+
+        return () => {
+            if (document.documentElement.dataset.alienCursor) {
+                delete document.documentElement.dataset.alienCursor
+            }
+        }
+    }, [isDesktop])
+
+    useEffect(() => {
+        if (!isDesktop) return
+
+        const setActive = () => {
+            if (document.documentElement.dataset.alienCursor !== "on") {
+                document.documentElement.dataset.alienCursor = "on"
+            }
+        }
+
+        const applyOpacity = () => {
+            const show = isVisibleRef.current && !isTextModeRef.current
+            const opacity = show ? "1" : "0"
+            if (arrowRef.current) arrowRef.current.style.opacity = opacity
+            if (orbRef.current) orbRef.current.style.opacity = opacity
+        }
+
+        const tick = () => {
+            const t = targetRef.current
+            const c = currentRef.current
+            const ease = easeRef.current
+
+            c.x += (t.x - c.x) * ease
+            c.y += (t.y - c.y) * ease
+
+            const x = c.x
+            const y = c.y
+
+            if (arrowRef.current) {
+                arrowRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
+            }
+            if (orbRef.current) {
+                orbRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translateY(20%)`
+            }
+
+            rafRef.current = requestAnimationFrame(tick)
+        }
+
+        const ensureRaf = () => {
+            if (rafRef.current == null) {
+                rafRef.current = requestAnimationFrame(tick)
+            }
+        }
+
+        const handlePointerMove = (e: PointerEvent) => {
+            if (!isVisibleRef.current) {
+                isVisibleRef.current = true
+                setActive()
+                applyOpacity()
+            }
+
+            ensureRaf()
+
+            targetRef.current.x = e.clientX
+            targetRef.current.y = e.clientY
 
             const target = e.target as HTMLElement | null
             if (!target) {
-                if (isTextMode) setIsTextMode(false)
+                if (isTextModeRef.current) {
+                    isTextModeRef.current = false
+                    applyOpacity()
+                }
                 return
             }
 
@@ -36,86 +119,88 @@ export function AlienCursor() {
                 )
             )
 
-            if (isOverText !== isTextMode) setIsTextMode(isOverText)
+            if (isOverText !== isTextModeRef.current) {
+                isTextModeRef.current = isOverText
+                setActive()
+                applyOpacity()
+            }
         }
 
         const handleMouseLeave = () => {
-            setIsVisible(false)
+            if (isVisibleRef.current) {
+                isVisibleRef.current = false
+                applyOpacity()
+            }
+
+            if (rafRef.current != null) {
+                cancelAnimationFrame(rafRef.current)
+                rafRef.current = null
+            }
         }
 
         const handleMouseEnter = () => {
-            setIsVisible(true)
+            if (!isVisibleRef.current) {
+                isVisibleRef.current = true
+                setActive()
+                applyOpacity()
+            }
         }
 
-        window.addEventListener("mousemove", handleMouseMove)
+        window.addEventListener("pointermove", handlePointerMove, { passive: true })
         document.addEventListener("mouseleave", handleMouseLeave)
         document.addEventListener("mouseenter", handleMouseEnter)
 
         return () => {
-            window.removeEventListener("mousemove", handleMouseMove)
+            window.removeEventListener("pointermove", handlePointerMove)
             document.removeEventListener("mouseleave", handleMouseLeave)
             document.removeEventListener("mouseenter", handleMouseEnter)
+
+            if (rafRef.current != null) {
+                cancelAnimationFrame(rafRef.current)
+                rafRef.current = null
+            }
         }
-    }, [mouseX, mouseY, isVisible, isTextMode])
-
-    // Don't render on mobile/touch devices (checking width roughly)
-    const [isDesktop, setIsDesktop] = useState(false)
-
-    useEffect(() => {
-        const checkIsDesktop = () => {
-            setIsDesktop(window.innerWidth > 768)
-        }
-
-        checkIsDesktop()
-        window.addEventListener("resize", checkIsDesktop)
-        return () => window.removeEventListener("resize", checkIsDesktop)
-    }, [])
+    }, [isDesktop])
 
     if (!isDesktop) return null
 
     return (
         <>
-            <motion.div
+            <div
+                ref={arrowRef}
                 className="fixed pointer-events-none z-[10000] top-0 left-0 hidden md:block"
                 style={{
-                    x: cursorX,
-                    y: cursorY,
-                    translateX: "0%",
-                    translateY: "0%",
-                    opacity: isVisible && !isTextMode ? 1 : 0,
+                    transform: "translate3d(-100px, -100px, 0)",
+                    willChange: "transform, opacity",
+                    opacity: 0,
                 }}
             >
                 <FigmaArrowCursor />
-            </motion.div>
-            <motion.div
+            </div>
+            <div
+                ref={orbRef}
                 className="fixed pointer-events-none z-[9999] top-0 left-0 hidden md:block"
                 style={{
-                    x: cursorX,
-                    y: cursorY,
-                    translateX: "0%",
-                    translateY: "20%",
-                    opacity: isVisible && !isTextMode ? 1 : 0,
+                    transform: "translate3d(-100px, -100px, 0) translateY(20%)",
+                    willChange: "transform, opacity",
+                    opacity: 0,
                 }}
             >
                 <RotatingCursorImage />
-            </motion.div>
+            </div>
         </>
     )
 }
 
 function RotatingCursorImage() {
     return (
-        <motion.div
-            className="w-16 h-16 relative"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        >
+        <div className="w-16 h-16 relative animate-spin" style={{ animationDuration: "8s" }}>
             <img
                 src="/components/AlienMatrix_Exact.svg"
                 alt="cursor"
                 className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(67,178,249,0.5)]"
             />
-        </motion.div>
+        </div>
     )
 }
 

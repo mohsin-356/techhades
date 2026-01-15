@@ -8,7 +8,7 @@ import {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[#050714] min-h-screen">
+    <div className="bg-[#050714] min-h-screen overflow-x-hidden">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-center">
         <div className="h-px bg-gradient-to-r from-transparent via-[#6467FF]/50 to-transparent mb-8" />

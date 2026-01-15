@@ -50,7 +50,7 @@ export default function AboutPage() {
       label: "International",
       headline: "Reaching Global Heights",
       content:
-        "🌍 Our exceptional work caught international attention. AlienMatrix began partnering with clients from USA, UK, UAE, Canada, and Australia. We adapted to global standards, mastered international collaboration tools, and delivered projects across different time zones. This phase marked our transformation from a local agency to a globally recognized tech partner.",
+        " Our exceptional work caught international attention. AlienMatrix began partnering with clients from USA, UK, UAE, Canada, and Australia. We adapted to global standards, mastered international collaboration tools, and delivered projects across different time zones. This phase marked our transformation from a local agency to a globally recognized tech partner.",
       stats: [
         { label: "Projects Worldwide", value: "350+" },
         { label: "Countries Served", value: "15+" },
@@ -63,7 +63,7 @@ export default function AboutPage() {
       label: "Present",
       headline: "2024 - 500+ Success Stories",
       content:
-        "🚀 Today, AlienMatrix stands as a trusted name in the global tech industry. With 500+ successful projects delivered across Web Development, App Development, Software Engineering, UI/UX Design, AI & Automation, and Digital Marketing, we've partnered with startups, SMEs, and Fortune 500 companies. Our success is built on innovation, dedicated expertise, strategic partnerships, and the trust of clients worldwide.",
+        " Today, AlienMatrix stands as a trusted name in the global tech industry. With 500+ successful projects delivered across Web Development, App Development, Software Engineering, UI/UX Design, AI & Automation, and Digital Marketing, we've partnered with startups, SMEs, and Fortune 500 companies. Our success is built on innovation, dedicated expertise, strategic partnerships, and the trust of clients worldwide.",
       stats: [
         { label: "Projects Completed", value: "500+" },
         { label: "Team Members", value: "50+" },

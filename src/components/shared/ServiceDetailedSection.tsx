@@ -113,7 +113,7 @@ export default function ServiceDetailedSection({
                                 <h4 className="text-sm font-semibold text-emerald-400 mb-4 flex items-center gap-2">
                                     <span className="w-1 h-4 bg-emerald-500 rounded-full" /> TECHNOLOGIES USED
                                 </h4>
-                                <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible">
+                                <div className="flex flex-wrap gap-2 pb-1">
                                     {technologies.map((tech, i) => (
                                         <Badge key={i} variant="secondary" className="bg-slate-900/50 border-white/10 text-slate-300 px-2.5 py-1 text-xs sm:text-sm hover:bg-slate-800 transition-colors whitespace-nowrap">
                                             {tech.icon && <span className="mr-1.5">{tech.icon}</span>}

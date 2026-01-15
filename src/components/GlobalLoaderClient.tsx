@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AlienLoader from "@/components/AlienLoader";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -10,6 +10,31 @@ export function GlobalLoaderClient({ children }: { children: React.ReactNode }) 
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+    const prevBodyOverflowRef = useRef<string>("");
+    const prevBodyPaddingRightRef = useRef<string>("");
+
+    useEffect(() => {
+        const body = document.body;
+        if (!body) return;
+
+        if (isLoading) {
+            prevBodyOverflowRef.current = body.style.overflow;
+            prevBodyPaddingRightRef.current = body.style.paddingRight;
+
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            body.style.overflow = "hidden";
+            if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+        } else {
+            body.style.overflow = prevBodyOverflowRef.current;
+            body.style.paddingRight = prevBodyPaddingRightRef.current;
+        }
+
+        return () => {
+            body.style.overflow = prevBodyOverflowRef.current;
+            body.style.paddingRight = prevBodyPaddingRightRef.current;
+        };
+    }, [isLoading]);
 
     // Initial Load Effect (Run once)
     useEffect(() => {

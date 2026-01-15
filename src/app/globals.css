@@ -945,19 +945,19 @@ img {
 
 @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
 
-  html,
-  body,
-  * {
+  html[data-alien-cursor="on"],
+  html[data-alien-cursor="on"] body,
+  html[data-alien-cursor="on"] * {
     cursor: none;
   }
 
-  input,
-  textarea,
-  select,
-  [contenteditable=""],
-  [contenteditable="true"],
-  [contenteditable="plaintext-only"],
-  [role="textbox"] {
+  html[data-alien-cursor="on"] input,
+  html[data-alien-cursor="on"] textarea,
+  html[data-alien-cursor="on"] select,
+  html[data-alien-cursor="on"] [contenteditable=""],
+  html[data-alien-cursor="on"] [contenteditable="true"],
+  html[data-alien-cursor="on"] [contenteditable="plaintext-only"],
+  html[data-alien-cursor="on"] [role="textbox"] {
     cursor: text;
   }
 }

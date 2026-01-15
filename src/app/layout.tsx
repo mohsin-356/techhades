@@ -9,10 +9,10 @@ import { GlobalLoaderClient } from "@/components/GlobalLoaderClient";
 import { Toaster } from "@/components/ui/toaster";
 import { CinematicAliens } from "@/components/ui/cinematic-aliens";
 import { AlienGuide } from "@/components/ui/alien-guide";
-import { AlienCursor } from "@/components/ui/alien-cursor";
+import AlienCursorIsland from "@/components/ui/AlienCursorIsland";
 import { LiquidGlassFilter } from "@/components/ui/LiquidGlass";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import Script from "next/script";
+import { headers } from "next/headers";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -32,26 +32,56 @@ const patrickHand = Patrick_Hand({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "AlienMatrix – engineer intelligence beyond the human matrix",
-    template: "%s | AlienMatrix",
-  },
-  description:
-    "We build futuristic websites, apps, AI agents, automations, and smart dashboards for elite brands.",
-  icons: {
-    icon: "/components/AlienMatrix_Exact.svg",
-  },
-  metadataBase: new URL("https://example.com"),
-  openGraph: {
-    title: "AlienMatrix – engineer intelligence beyond the human matrix",
-    description:
-      "Modern, animated, and high-performance digital products: Web, Mobile, AI, Automation, and more.",
-    url: "https://example.com",
-    siteName: "AlienMatrix",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const envBase = process.env.NEXT_PUBLIC_SITE_URL;
+  let baseUrl = new URL("https://example.com");
+
+  if (envBase) {
+    baseUrl = new URL(envBase);
+  } else {
+    const h = await headers();
+    const host = h.get("x-forwarded-host") ?? h.get("host");
+    const proto = h.get("x-forwarded-proto") ?? "https";
+    if (host) baseUrl = new URL(`${proto}://${host}`);
+  }
+
+  const title = "AlienMatrix – engineer intelligence beyond the human matrix";
+  const description =
+    "We build futuristic websites, apps, AI agents, automations, and smart dashboards for elite brands.";
+
+  return {
+    title: {
+      default: title,
+      template: "%s | AlienMatrix",
+    },
+    description,
+    keywords: [
+      "AlienMatrix",
+      "Web Development",
+      "App Development",
+      "UI/UX",
+      "AI Automation",
+      "Software Development",
+    ],
+    icons: {
+      icon: "/components/AlienMatrix_Exact.svg",
+    },
+    metadataBase: baseUrl,
+    openGraph: {
+      title,
+      description:
+        "Modern, animated, and high-performance digital products: Web, Mobile, AI, Automation, and more.",
+      url: baseUrl,
+      siteName: "AlienMatrix",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -88,7 +118,7 @@ export default function RootLayout({
             <Footer />
             <Toaster />
             <AlienGuide />
-            <AlienCursor />
+            <AlienCursorIsland />
           </SmoothScrollProvider>
         </GlobalLoaderClient>
       </body>

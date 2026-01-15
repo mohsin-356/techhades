@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MotionDiv, MotionSection } from "@/components/ui/motion";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase } from "lucide-react";
@@ -18,39 +18,12 @@ const categories = [
   { label: "AI/ML Applications", value: "AI/ML" },
 ];
 
-const categoryToFilter: Record<string, string> = {
-  Web: "Web",
-  "Web Development": "Web",
-  Mobile: "Mobile",
-  "Mobile Development": "Mobile",
-  Game: "Game",
-  "Game App Design": "Game",
-  Software: "Software",
-  "Software Development": "Software",
-  AI: "AI",
-  "AI & Automation": "AI & Automation",
-  Ecommerce: "Ecommerce",
-  Design: "Design",
-  "UI/UX Design": "Design",
-  "AI/ML": "AI/ML",
-  "AI/ML Applications": "AI/ML",
-  Cloud: "Cloud",
-  "AWS & Cloud": "Cloud",
-  "Social Media": "Social Media",
-  "Ads & Social Media": "Social Media",
-  Dashboard: "Dashboard",
-};
-
-export default function ProjectsClient() {
-  const [filter, setFilter] = useState("All");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const categoryParam = params.get("category");
-    if (categoryParam && categoryToFilter[categoryParam]) {
-      setFilter(categoryToFilter[categoryParam]);
-    }
-  }, []);
+export default function ProjectsClient({
+  initialFilter = "All",
+}: {
+  initialFilter?: string;
+}) {
+  const [filter, setFilter] = useState(initialFilter);
 
   return (
     <div className="relative">
