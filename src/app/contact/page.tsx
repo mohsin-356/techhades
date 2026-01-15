@@ -420,14 +420,14 @@ export default function ContactPage() {
                         <Mail className="w-5 h-5 text-brand" />
                         <div>
                           <div className="text-sm font-medium">Email</div>
-                          <div className="text-sm text-foreground/70">hello@alienmatrix.com</div>
+                          <div className="text-sm text-foreground/70">alienmatrix0@gmail.com</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
                         <Phone className="w-5 h-5 text-brand" />
                         <div>
                           <div className="text-sm font-medium">WhatsApp</div>
-                          <div className="text-sm text-foreground/70">+00 000 0000</div>
+                          <div className="text-sm text-foreground/70">+923091930544</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors">
